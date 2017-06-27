@@ -90,6 +90,7 @@ server:
         - vim
         - htop
         - subversion
+        - open-vmtools
 users_groups:
     install: '1'
     groups: {  }

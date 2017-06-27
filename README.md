@@ -28,7 +28,17 @@ Second, you'll need to install [Download Vagrant](http://www.vagrantup.com/downl
 
 Third, you need to tell Vagrant about your provider. This generally requires that you [install and configure the appropriate Vagrant plug-in](https://www.vagrantup.com/docs/providers/).  Note that some Vagrant plug-ins (i.e. the VMWare version) must be purchased. 
 
-Once installed, you can [specify set your chosen provider as the default one](https://www.vagrantup.com/docs/providers/default.html), unless you are using VirtualBox, which is the out-of-the-box Vagrant default provider. 
+Once installed, you can [specify set your chosen provider as the default one](https://www.vagrantup.com/docs/providers/default.html) using the VAGRANT_DEFAULT_PROVIDER environment variable (unless you are using VirtualBox, which is the out-of-the-box Vagrant default provider). To find out the names of your available providers, type
+
+	vagrant plugin list
+
+Generally remove the 'vagrant-' prefix to the plugin name and change the hyphen to an underscore, to get the name of the provider to use as the value of the VAGRANT_DEFAULT_PROVIDER variable. For example,
+ 
+	vagrant-vmware-workstation
+ 
+ becomes
+	
+	vmware_workstation
 
 ### Option 2 - Ubuntu Direct ###
 
@@ -36,11 +46,19 @@ Got a dedicated server or virtual machine already running a recent Ubuntu versio
 
 ## Step 2 - Starting Up the Server ##
 
-Assuming that you've properly installed Vagrant with a suitable provider, and pointed Vagrant to your default provider (i.e. using a VAGRANT_DEFAULT_PROVIDER environment variable), then by changing directory into the project directory, you can type:
+At this point, you need to start up a command line terminal with "adminstrative" privileges. Note that for Microsoft Windows, this generally means running the Windows PowerShell "as Administrator".
+
+Assuming that you've properly installed Vagrant with a suitable provider, and pointed Vagrant to your default provider, you can navigate into the project directory, then type:
 
 	vagrant up
 
-to start your server for the first time.
+to start your server for the first time. You can log into the server using:
+
+	vagrant ssh
+
+###Troubleshooting###
+
+
 
 ## Step 3 - Building the iReceptor Site ##
 

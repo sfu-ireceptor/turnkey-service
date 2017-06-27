@@ -6,15 +6,22 @@ If you choose to manually configure your server (not using Vagrant), you can be 
 
 Here are the recommended parameters for the configuration using PuPuppet (web site accessed June 26, 2017).
 
-##Deploy target → Locally##
+##Deploy to Local Host##
 
+* **Provider:** pick your chosen provider from the list: VirtualBox, VMWare Fusion, VMWare Workstation or Parallels
+* **Distro:** pick your distro of Ubuntu (we like and assume here: Ubuntu Xenial 16.04 LTS x64)
 * **Hostname:** ireceptorservice
 * **IP Address:** 192.168.56.113
 * **Add a forwarded port:** 9090-> 80
+* **Shared Folders:** set to 'Default' to be safe (experiment with other options as the spirit moves you)
 
 ##System Packages##
 
-	vim, htop, subversion
+	vim, htop, subversion 
+	
+###VMWare-Specific System Package###
+
+	open-vmtools
 
 ##Users and Groups##
 
