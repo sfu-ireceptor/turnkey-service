@@ -11,18 +11,18 @@ Here are the recommended parameters for the configuration using PuPuppet (web si
 * **Provider:** pick your chosen provider from the list: VirtualBox, VMWare Fusion, VMWare Workstation or Parallels
 * **Distro:** pick your distro of Ubuntu (we like and assume here: Ubuntu Xenial 16.04 LTS x64)
 * **Hostname:** ireceptorservice
-* **IP Address:** 192.168.56.113
+* **IP Address:** 192.168.56.113 (or whatever you wish to have as IP)
+* **Memory:** 512 (probably okay for now)
+* **CPUs:** 1 (probably okay for now)
 * **Add a forwarded port:** 9090-> 80
-* **Shared Folders:** set to 'Default' to be safe (experiment with other options as the spirit moves you)
+* **Shared Folders:** set to a platform-appropriate version, i.e. NFS for Linux or OSX; SMB (CIFS) for Windows, etc.
+
+Note that for SMB/CIFS, you probably need to provide your "local" system user name but the Windows ("Cloud") account password associated with your account, for the mounting of shared hard drives to properly work.
 
 ##System Packages##
 
 	vim, htop, subversion 
 	
-###VMWare-Specific System Package###
-
-	open-vmtools
-
 ##Users and Groups##
 
 Leave empty(?)
@@ -43,9 +43,13 @@ Ignore (or change to suit your site).
 
 Ignore.
 
+##Custom Files##
+
+Ignore.
+
 ##Web Server → Install NGINX##
 
-Uncheck the checkbox (to disable) unless you wish to use NGINX instead of Apache (on your own...)
+Uncheck the checkbox (to disable) unless you wish to use NGINX instead of Apache (on your own...but use the Apache settings noted below)
 
 ##Web Server → Apache##
 

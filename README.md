@@ -39,6 +39,12 @@ Generally remove the 'vagrant-' prefix to the plugin name and change the hyphen 
  becomes
 	
 	vmware_workstation
+	
+For Linux and Mac OSX, you will also need to install the vagrant-bindfs plugin by running the following command: 
+
+	vagrant plugin install vagrant-bindfs
+
+This is used for shared folder management using NFS under those Unix-like operating systems.
 
 ### Option 2 - Ubuntu Direct ###
 
@@ -46,7 +52,7 @@ Got a dedicated server or virtual machine already running a recent Ubuntu versio
 
 ## Step 2 - Starting Up the Server ##
 
-At this point, you need to start up a command line terminal with "adminstrative" privileges. Note that for Microsoft Windows, this generally means running the Windows PowerShell "as Administrator".
+At this point, you need to start up a command line terminal with "adminstrative" privileges. Note that for Microsoft Windows, this generally means running the Windows PowerShell "as Administrator". Also (especially under Windows 10) you will likely need to give your local user account but your Windows "cloud" password associated with your account, to the system during boot up (as prompted) so the guest system can mount shared folders.
 
 Assuming that you've properly installed Vagrant with a suitable provider, and pointed Vagrant to your default provider, you can navigate into the project directory, then type:
 

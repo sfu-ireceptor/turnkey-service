@@ -1,0 +1,9 @@
+vagrantfile:
+    target: local
+    vm:
+        provider:
+            local:
+                chosen_virtualizer: parallels
+        synced_folder:
+            vflsf_e9d1fetqzntj:
+                sync_type: nfs

@@ -6,7 +6,6 @@ vagrantfile:
                 box: puphpet/ubuntu1604-x64
                 box_url: 'false'
                 box_version: '0'
-                chosen_virtualizer: vmware_workstation
                 virtualizers:
                     virtualbox:
                         modifyvm:
@@ -44,15 +43,6 @@ vagrantfile:
                 owner: www-data
                 group: www-data
                 source: ./
-                target: /var/www
-                sync_type: smb
-                smb:
-                    smb_host: ''
-                    smb_username: ''
-                    smb_password: ''
-                    mount_options:
-                        dir_mode: '0775'
-                        file_mode: '0664'
                 rsync:
                     args:
                         - '--verbose'
@@ -90,7 +80,6 @@ server:
         - vim
         - htop
         - subversion
-        - open-vmtools
 users_groups:
     install: '1'
     groups: {  }
@@ -130,16 +119,16 @@ nginx:
     upstreams: {  }
     vhosts:
         nxv_65pw2jf303uy:
-            server_name: awesome.dev
+            server_name: ireceptor.dev
             server_aliases:
-                - www.awesome.dev
-            www_root: /var/www/awesome
+                - www.ireceptor.dev
+            www_root: /var/www/ireceptor
             listen_port: '80'
             client_max_body_size: 1m
             ssl: '0'
             locations:
                 nxvl_29dqrspluljo:
-                    www_root: /var/www/awesome/web
+                    www_root: /var/www/ireceptor/web
                     location: /
                     autoindex: 'off'
                     internal: 'false'
@@ -158,7 +147,7 @@ nginx:
                     proxy: ''
                     proxy_redirect: ''
                 nxvl_gk3mdrs83sp0:
-                    www_root: /var/www/awesome/web
+                    www_root: /var/www/ireceptor/web
                     location: '~ ^/(app_dev|config)\.php(/|$)'
                     autoindex: 'off'
                     internal: 'false'
@@ -177,7 +166,7 @@ nginx:
                     proxy: ''
                     proxy_redirect: ''
                 nxvl_sxzg0jad3abh:
-                    www_root: /var/www/awesome/web
+                    www_root: /var/www/ireceptor/web
                     location: '~ ^/index\.php(/|$)'
                     autoindex: 'off'
                     internal: 'false'
@@ -195,7 +184,7 @@ nginx:
                     proxy: ''
                     proxy_redirect: ''
                 nxvl_77o1hy4td1go:
-                    www_root: /var/www/awesome/web
+                    www_root: /var/www/ireceptor/web
                     location: '~ ^/app\.php(/|$)'
                     autoindex: 'off'
                     internal: 'false'

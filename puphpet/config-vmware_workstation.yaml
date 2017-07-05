@@ -1,0 +1,16 @@
+vagrantfile:
+    target: local
+    vm:
+        provider:
+            local:
+                chosen_virtualizer: vmware_workstation
+        synced_folder:
+            vflsf_e9d1fetqzntj:
+                sync_type: smb
+                smb:
+                    smb_host: ''
+                    smb_username: ''
+                    smb_password: ''
+                    mount_options:
+                        dir_mode: '0775'
+                        file_mode: '0664'
