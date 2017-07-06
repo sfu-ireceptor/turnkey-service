@@ -1,34 +1,6 @@
 vagrantfile:
     target: local
     vm:
-        provider:
-            local:
-                box: puphpet/ubuntu1604-x64
-                box_url: 'false'
-                box_version: '0'
-                virtualizers:
-                    virtualbox:
-                        modifyvm:
-                            natdnshostresolver1: false
-                        showgui: 0
-                    vmware:
-                        numvcpus: 1
-                    parallels:
-                        linked_clone: 0
-                        check_guest_tools: 0
-                        update_guest_tools: 0
-                machines:
-                    vflm_ru0xi14n06oq:
-                        id: ireceptorservice
-                        hostname: ireceptorservice
-                        network:
-                            private_network: 192.168.56.113
-                            forwarded_port:
-                                vflmnfp_sbzw1yrgfodh:
-                                    host: '9090'
-                                    guest: '80'
-                        memory: '512'
-                        cpus: '1'
         provision:
             puppet:
                 manifests_path: puphpet/puppet/manifests
@@ -38,20 +10,6 @@ vagrantfile:
                 options:
                     - '--verbose'
                     - '--hiera_config /vagrant/puphpet/puppet/hiera.yaml'
-        synced_folder:
-            vflsf_e9d1fetqzntj:
-                owner: www-data
-                group: www-data
-                source: ./
-                rsync:
-                    args:
-                        - '--verbose'
-                        - '--archive'
-                        - '-z'
-                    exclude:
-                        - .vagrant/
-                        - .git/
-                    auto: 'true'
         usable_port_range:
             start: 10200
             stop: 10500
