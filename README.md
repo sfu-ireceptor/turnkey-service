@@ -52,7 +52,9 @@ Got a dedicated server or virtual machine already running a recent Ubuntu versio
 
 ## Step 2 - Starting Up the Server ##
 
-At this point, you need to start up a command line terminal with "adminstrative" privileges. Note that for Microsoft Windows, this generally means running the Windows PowerShell "as Administrator". Also (especially under Windows 10) you will likely need to give your local user account but your Windows "cloud" password associated with your account, to the system during boot up (as prompted) so the guest system can mount shared folders.
+At this point, you need to start up a command line terminal with "administrative" privileges. 
+
+Note that for Microsoft Windows, this generally means running the Windows PowerShell "as Administrator". Also (strangely enough, especially under Windows 10) you will likely need to give your local user account name, but your Windows "cloud" password, associated with your account, to the system during boot up (as prompted) so the guest system can mount shared folders.
 
 Assuming that you've properly installed Vagrant with a suitable provider, and pointed Vagrant to your default provider, you can navigate into the project directory, then type:
 
@@ -62,11 +64,29 @@ to start your server for the first time. You can log into the server using:
 
 	vagrant ssh
 
-###Troubleshooting###
+Under Windows, you may not have Unix-like ssh. However, the vagrant ssh command will tell you what credentials to use, and you can plug these directly into a Windows ssh client like Putty, to access the image.
 
+You should also now also see a default web page visible at http://localhost:9090. This instructs you to configure your virtual host...
 
+### Configuring the Virtual Host ###
+
+On OSX and Linux, this is configured at /etc/hosts, on Windows it is configured at C:\Windows\System32\drivers\etc\hosts.
+ 
+Add a line with the IP address of this server and all vhosts you chose. For example, if the IP address is 192.168.56.113, and you chose vhost 'ireceptor_service.dev', you will want to enter the following:
+
+	192.168.56.113 ireceptor_service.dev
+
+If you forgot the IP address you chose, check the config file at puphpet/config.yaml. 
 
 ## Step 3 - Building the iReceptor Site ##
+
+### Project Database ###
+
+MySQL provisioned via vagrant is set up with a user 'root' with password '!mmun010gy'. This can be changed in the config.yaml file under the 'puphpet' project folder. 
+
+
+
+
 
 * Configuration
 * Dependencies: 
