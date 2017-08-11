@@ -72,13 +72,21 @@ You should also now also see a default web page visible at http://localhost:9090
 
 On OSX and Linux, this is configured at /etc/hosts, on Windows it is configured at C:\Windows\System32\drivers\etc\hosts.
  
-Add a line with the IP address of this server and all vhosts you chose. For example, if the IP address is 192.168.56.113, and you chose vhost 'ireceptor_service.dev', you will want to enter the following:
+Add a line with the IP address of this server and all vhosts you chose. For example, if the IP address is 192.168.56.113, and you chose vhost 'ireceptor-service.dev', you will want to enter the following:
 
-	192.168.56.113 ireceptor_service.dev
+	192.168.56.113 ireceptor-service.dev
 
-If you forgot the IP address you chose, check the config file at puphpet/config.yaml. 
+If you forgot the IP address you chose, check the config file at puphpet/config.yaml.
+
+Once resetting the vhost, you should be able to go
+
+	http://ireceptor-service.dev:9090
+
+and not see the default web page seen previously, but perhaps, an empty directory index.  If not, try restarting your browser. Although, in principle, you don't need to restart your host computer, sometimes it helps.
 
 ## Step 3 - Building the iReceptor Site ##
+
+
 
 ### Project Database ###
 
