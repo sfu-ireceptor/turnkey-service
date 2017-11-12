@@ -1,0 +1,7 @@
+[submodule "ireceptor_api"]
+	path = api
+	url = git@github.com:sfu-ireceptor/api.git
+
+[submodule "ireceptor_database"]
+	path = database
+	url = git@github.com:sfu-ireceptor/repository-mongodb.git
