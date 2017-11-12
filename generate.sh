@@ -28,6 +28,9 @@ CLIENT_API_PACKAGE="$CLIENT_BASE_PACKAGE.api"
 SERVER_OUTPUT_DIR="server"
 CLIENT_OUTPUT_DIR="client"
 
+# Codegen types
+SERVER_CODE_TYPE=spring
+CLIENT_CODE_TYPE=java
 
 #############################
 ###        Methods        ###
@@ -132,14 +135,14 @@ fi
 if [ "$COMMAND" = client ]; then
 	ensureValidIgnoreFile "$CLIENT_OUTPUT_DIR"
 	
-	java -jar .codegen/swagger-codegen-cli.jar generate -i $SPECIFICATION_FILE_PATH -l java -o $CLIENT_OUTPUT_DIR --model-package $CLIENT_MODEL_PACKAGE --api-package $CLIENT_API_PACKAGE --additional-properties basePackage=$CLIENT_BASE_PACKAGE,configPackage=$CLIENT_CONFIG_PACKAGE
+	java -jar .codegen/swagger-codegen-cli.jar generate -i $SPECIFICATION_FILE_PATH -l $CLIENT_CODE_TYPE -o $CLIENT_OUTPUT_DIR --model-package $CLIENT_MODEL_PACKAGE --api-package $CLIENT_API_PACKAGE --additional-properties basePackage=$CLIENT_BASE_PACKAGE,configPackage=$CLIENT_CONFIG_PACKAGE
 
 	exit 0
 
 elif [ "$COMMAND" = server ]; then
 	ensureValidIgnoreFile "$SERVER_OUTPUT_DIR"
 	
-	java -jar .codegen/swagger-codegen-cli.jar generate -i $SPECIFICATION_FILE_PATH -l spring -o $SERVER_OUTPUT_DIR --model-package $SERVER_MODEL_PACKAGE --api-package $SERVER_API_PACKAGE --additional-properties basePackage=$SERVER_BASE_PACKAGE,configPackage=$SERVER_CONFIG_PACKAGE
+	java -jar .codegen/swagger-codegen-cli.jar generate -i $SPECIFICATION_FILE_PATH -l $SERVER_CODE_TYPE -o $SERVER_OUTPUT_DIR --model-package $SERVER_MODEL_PACKAGE --api-package $SERVER_API_PACKAGE --additional-properties basePackage=$SERVER_BASE_PACKAGE,configPackage=$SERVER_CONFIG_PACKAGE
 
 	exit 0
 
