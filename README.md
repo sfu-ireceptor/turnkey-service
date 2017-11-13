@@ -45,7 +45,7 @@ One possible disadvantage is that some organizations discourage the use of Docke
 
 **Installation of Docker**
 
-If you choose to run the dockerized versions of the applications, you'll obviously need to [install Docker first] (https://docs.docker.com/engine/installation/).
+If you choose to run the dockerized versions of the applications, you'll obviously need to [install Docker first](https://docs.docker.com/engine/installation/).
 
 **Configuring repository-mongodb**
 
