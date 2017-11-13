@@ -8,7 +8,7 @@ This project is the source code of a "turnkey" package for the installation, con
 
 The design of this turnkey is deeply inspired and largely adapted from the excellent VDJServer iReceptor Node package developed by Scott Christley of the VDJServer project at the University of Texas Southwestern University.
 
-##Dependencies
+## Dependencies ##
 
 The 'turnkey-service' project is currently composed of 2 separate submodules and a set of docker compose directives:
 
@@ -25,7 +25,7 @@ The turnkey package is designed using a layered technology stack to facilitate d
 
 T.B.A.
 
-##Configuration Procedure
+## Configuration Procedure ##
 
 All configuration procedures are the same for dockerized and non-dockerized versions of these apps.
 
@@ -49,22 +49,22 @@ Make sure not to accidently commit the dbsetup file with usernames and
 passwords into the git repository.
 
 ```
-# Modify dbsetup.js with appropriate settings
+### Modify dbsetup.js with appropriate settings ###
 cd repository-mongodb
 cp dbsetup.defaults dbsetup.js
 emacs dbsetup.js
 
-# Start up temporary mongo service, note mapping of mongo data directory and dbsetup
+### Start up temporary mongo service, note mapping of mongo data directory and dbsetup ###
 docker run -v /disk/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
 
-# Run setup script
+### Run setup script ###
 docker exec -it irdn-mongo mongo admin /dbsetup/dbsetup.js
 
-# Stop mongo and get rid of name
+### Stop mongo and get rid of name ###
 docker stop irdn-mongo
 docker rm irdn-mongo
 
-# Edit docker-compose.yml and put in mapping of mongo data directory
+### Edit docker-compose.yml and put in mapping of mongo data directory###
 ```
 
 **Configuring service-js-mongodb**
@@ -96,15 +96,15 @@ sudo systemctl enable docker
 sudo systemctl enable ireceptor-repository
 ```
 
-##Deployment Procedure
+##Deployment Procedure##
 
-###SSL
+###SSL###
 
 The iReceptor-Repository does not handle SSL certificates directly, and is
 currently configured to run HTTP internally on port 8080. It must be
 deployed behind a reverse proxy in order to allow SSL connections.
 
-###Dockerized instances (ir-dev, ir-staging, production)
+###Dockerized instances (ir-dev, ir-staging, production)###
 
 Dockerized instances may be started/stopped/restarted using the
 supplied systemd script: host/systemd/ireceptor-repository.service.
@@ -163,11 +163,11 @@ docker-compose -f docker-compose.yml -f docker-compose.prod-override.yml build
 docker-compose -f docker-compose.yml -f docker-compose.prod-override.yml up
 `
 
-##How to run tests
+##How to run tests##
 
 T.B.A.
 
-##Development Setup
+##Development Setup##
 
 You will need to clone down the parent project and all submodules in order to set up a local instance of ireceptor.
 
@@ -191,7 +191,7 @@ $ git submodule foreach git pull
 * Code review
 * Other guidelines
 
-##Development Guidelines
+##Development Guidelines##
 
 **Code Style**
 
@@ -211,7 +211,7 @@ $ git submodule foreach git pull
 
  * New development and features should be done on branches that are cloned from the **develop** branch, and then merged into this branch when completed. Likewise, new release candidates should be branched from **develop**, and then merged into **master** once they have been tested/verified. Once a release branch is ready for production, it should be merged into **master** and tagged appropriately. Every deployment onto production should be tagged following semantic versioning 2.0.0 standards: <http://semver.org/>.
 
-### Who do I talk to? ###
+# Who do I talk to? #
 
 * Maintainer of this project is Dr. Richard Bruskiewich (richard *AT* starinformatics *DOT* com), technical subcontractor to the iReceptor project hosted by Simon Fraser University.
 * Principal Investigator of the iReceptor project is Dr. Felix Breden (breden *AT* sfu.ca) of Simon Fraser University 
