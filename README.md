@@ -126,7 +126,7 @@ e.g. ( your container id's will differ...):
 $ sudo docker ps
 CONTAINER ID        IMAGE                        COMMAND                CREATED             STATUS              PORTS                                      NAMES
 fdc7c3119366        ireceptorweb_nginx:latest    "/root/nginx-config-   32 minutes ago      Up 32 minutes       0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp   irserverweb_nginx_1
-adfecbce3e55        ireceptorweb_vdjapi:latest   "/bin/sh -c '/usr/bi   32 minutes ago      Up 32 minutes       8443/tcp                                   irserverweb_irapi_1
+adfecbce3e55        ireceptorweb_irapi:latest   "/bin/sh -c '/usr/bi   32 minutes ago      Up 32 minutes       8443/tcp                                   irserverweb_irapi_1
 
 sudo docker-compose down ireceptor-repository
 ```

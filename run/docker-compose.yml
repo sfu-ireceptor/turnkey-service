@@ -15,9 +15,9 @@ services:
             - default
         command: mongod --auth
 
-    irdn-ireceptor-api:
+    irdn-api:
         build: ./../../service-js-mongodb
-        container_name: irdn-ireceptor-api
+        container_name: irdn-api
         env_file: ./../../service-js-mongodb/.env
         ports:
             - "8080:8080"
