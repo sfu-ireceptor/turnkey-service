@@ -48,18 +48,19 @@ One possible disadvantage is that some organizations discourage the use of Docke
 You will need to clone down this project and all submodules onto your Linux machine in order to set up a local instance of an ireceptor data source node.
 
 ```
-# Clone project using SSH
-$ git clone git@github.com:sfu-ireceptor/turnkey-service.git 
+# Clone the project. Note that as of mid-November, the Docker version of 
+# the Turnkey is in the docker-turnkey branch (may soon revert the 'master')
 
-# OR clone with HTTPS
-$ git clone https://github.com/sfu-ireceptor/turnkey-service.git 
+# Clone project using SSH...
+$ git clone --branch docker-turnkey git@github.com:sfu-ireceptor/turnkey-service.git
+
+# ...OR clone with HTTPS
+$ git clone --branch docker-turnkey https://github.com/sfu-ireceptor/turnkey-service.git 
 
 cd turnkey-service
 
-# Clone submodules
+# Initialize the submodules. This command should also checkout the current relevant code for each submodule
 $ git submodule update --init
-$ git submodule foreach git checkout master
-$ git submodule foreach git pull
 ```
 then follow remaining configuration steps listed here below.
 
