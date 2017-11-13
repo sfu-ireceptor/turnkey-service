@@ -45,7 +45,9 @@ One possible disadvantage is that some organizations discourage the use of Docke
 
 **Installation of Docker**
 
-If you choose to run the dockerized versions of the applications, you'll obviously need to [install Docker first](https://docs.docker.com/engine/installation/) in your target operating environment (bare metal server or virtual machine running Linux).  From this point onward, it is assumed that you have your Docker engine installed in your Linux operating system and can run the Docker Compose configurations as described below,
+If you choose to run the dockerized versions of the applications, you'll obviously need to [install Docker first](https://docs.docker.com/engine/installation/) in your target operating environment (bare metal server or virtual machine running Linux).  
+
+From this point onward, it is assumed that you are logged an active command shell session within whichever Linux server environment you are running, and have your Docker engine installed, so you can further configure the application components on your server (as specified below) and run the Docker Compose to fire up the system.
 
 **Configuring repository-mongodb**
 
