@@ -6,7 +6,7 @@ iReceptor is a data management system and scientific gateway for mining “Next 
 
 This project is the source code of a "turnkey" package for the installation, configuration and data loading of a small to medium sized standalone iReceptor data source node. This turnkey configuration runs the API and simple database on a single node.
 
-The design of this turnkey is deeply inspired and largely adapted from the excellent VDJServer iReceptor Node package developed by Scott Christley of the VDJServer project at the University of Texas Southwestern University.
+The design of this turnkey is deeply inspired and largely adapted from the excellent VDJServer iReceptor Node package developed by **Scott Christley** of the **VDJServer** project at the **University of Texas Southwestern University**.
 
 ## Dependencies ##
 
@@ -45,7 +45,7 @@ One possible disadvantage is that some organizations discourage the use of Docke
 
 **Installation of Docker**
 
-If you choose to run the dockerized versions of the applications, you'll obviously need to [install Docker first](https://docs.docker.com/engine/installation/).
+If you choose to run the dockerized versions of the applications, you'll obviously need to [install Docker first](https://docs.docker.com/engine/installation/) in your target operating environment (bare metal server or virtual machine running Linux).  From this point onward, it is assumed that you have your Docker engine installed in your Linux operating system and can run the Docker Compose configurations as described below,
 
 **Configuring repository-mongodb**
 
