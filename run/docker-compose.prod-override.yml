@@ -1,0 +1,12 @@
+# iReceptor Node Docker Orchestration
+
+version: '2'
+
+services:
+    irdn-mongo:
+#        logging:
+#            driver: "syslog"
+
+    irdn-ireceptor-api:
+#        logging:
+#            driver: "syslog"
