@@ -43,6 +43,26 @@ One possible disadvantage is that some organizations discourage the use of Docke
 
 ## Configuration Procedure ##
 
+**Code Setup**
+
+You will need to clone down this project and all submodules onto your Linux machine in order to set up a local instance of an ireceptor data source node.
+
+```
+# Clone project using SSH
+$ git clone git@github.com:sfu-ireceptor/turnkey-service.git 
+
+# OR clone with HTTPS
+$ git clone https://github.com/sfu-ireceptor/turnkey-service.git 
+
+cd turnkey-service
+
+# Clone submodules
+$ git submodule update --init
+$ git submodule foreach git checkout master
+$ git submodule foreach git pull
+```
+then follow remaining configuration steps listed here below.
+
 **Installation of Docker**
 
 If you choose to run the dockerized versions of the applications, you'll obviously need to [install Docker first](https://docs.docker.com/engine/installation/) in your target operating environment (bare metal server or virtual machine running Linux).  
@@ -186,24 +206,6 @@ docker-compose -f docker-compose.yml -f docker-compose.prod-override.yml up
 **How to run tests**
 
 T.B.A.
-
-**Development Setup**
-
-You will need to clone down the parent project and all submodules in order to set up a local instance of ireceptor.
-
-```
-# Clone project
-$ git clone git@github.com:sfu-ireceptor/turnkey-service.git ireceptor-turnkey-service
-
-cd ireceptor-turnkey-service
-
-# Clone submodules
-$ git submodule update --init
-$ git submodule foreach git checkout master
-$ git submodule foreach git pull
-
-# Follow configuration steps listed above in the "Configuration Procedure" section of this document
-```
 
 **Updating the project database or service submodules to a specified Git branch**
 
