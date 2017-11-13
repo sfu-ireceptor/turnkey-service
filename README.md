@@ -176,18 +176,40 @@ T.B.A.
 You will need to clone down the parent project and all submodules in order to set up a local instance of ireceptor.
 
 ```
-- Clone project
+# Clone project
 $ git clone git@github.com:sfu-ireceptor/turnkey-service.git ireceptor-turnkey-service
 
 cd ireceptor-turnkey-service
 
-- Clone submodules
+# Clone submodules
 $ git submodule update --init
 $ git submodule foreach git checkout master
 $ git submodule foreach git pull
 
-- Follow configuration steps listed above in the "Configuration Procedure" section of this document
+# Follow configuration steps listed above in the "Configuration Procedure" section of this document
 ```
+
+**Updating the project database or service submodules to a specified Git branch**
+
+If you want to move the repository-mongodb or service-js-mongodb submodules to a particular new branch or tag:
+
+```
+cd submodule_directory # e.g. service-js-mongodb
+git checkout new_branch_or_tag
+cd ..
+git add submodule_directory
+git commit -m "moved submodule to new_branch_or_tag"
+git push
+```
+
+Then, another developer who wants to have submodule_directory changed to that tag, does this:
+
+```
+git pull
+git submodule update
+
+```
+git pull changes which commit their submodule directory points to.  git submodule update actually merges in the new code.
 
 # Contribution guidelines #
 
