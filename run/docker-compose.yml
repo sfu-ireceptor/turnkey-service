@@ -4,21 +4,23 @@ version: '2'
 
 services:
     irdn-mongo:
-        build: ./../../repository-mongodb
+        build: ./../repository-mongodb
         container_name: irdn-mongo
         expose:
             - "27017"
         image: ireceptor/repository-mongo
         volumes:
-            - /icat/mongodb:/data/db
+            # It is assumed here that the directory 
+            # /opt/ireceptor/mongodb already exists
+            - /opt/ireceptor/mongodb:/data/db
         networks:
             - default
         command: mongod --auth
 
     irdn-api:
-        build: ./../../service-js-mongodb
+        build: ./../service-js-mongodb
         container_name: irdn-api
-        env_file: ./../../service-js-mongodb/.env
+        env_file: ./../service-js-mongodb/.env
         ports:
             - "8080:8080"
         image: ireceptor/service-js-mongodb

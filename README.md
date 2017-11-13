@@ -39,7 +39,9 @@ Your second decision is *how* to run the software.
 
 Both approaches have advantages and disadvantages. For the uninitiated, Docker is a light weight virtualization and provisioning technology for robustly running applications in relative isolation from one another. See [the Docker website](https://www.docker.com/) for further details. The main advantage of Docker is that we ensure that all the execution dependencies for the application are properly configured for you with a Docker Compose configuration we provide here (details below).  
 
-One possible disadvantage is that some organizations discourage the use of Docker because of peculiar security issues (see also the Deployment Procedure section below). In such cases, you should perhaps contact your institution's IT department for appropriate guidance. Here, we give you the formula for using Docker to run the application. However, note that all configuration procedures are the same for dockerized and non-dockerized versions of the application and its submodules.
+One possible disadvantage is that some organizations discourage the use of Docker because of peculiar security issues (see also the Deployment Procedure section below). In such cases, you should perhaps contact your institution's IT department for appropriate guidance. Here, we give you the formula for using Docker to run the application. 
+
+However, note that all configuration procedures are the same for dockerized and non-dockerized versions of the application and its submodules.
 
 ## Configuration Procedure ##
 
@@ -70,6 +72,32 @@ If you choose to run the dockerized versions of the applications, you'll obvious
 
 From this point onward, it is assumed that you are logged an active command shell session within whichever Linux server environment you are running, and have your Docker engine installed, so you can further configure the application components on your server (as specified below) and run the Docker Compose to fire up the system.
 
+**Configuring and Building your Docker Containers**
+
+Docker-compose
+
+```
+ $ sudo docker-compose -f run/docker-compose.yml build
+```
+
+**Building Docker Images**
+
+Simply cloning the project and installing Docker does not automatically build Docker images to run. Rather, you
+need to explicitly create them as follows:
+
+```
+ $ sudo docker-compose -f run/docker-compose.yml build
+```
+
+If you wish to customize your docker images, then you can create a docker-compose-mysite.yml file 
+and instead use it to overlay the default configuration file, as follows:
+
+```
+ $ sudo docker-compose -f run/docker-compose.yml -f /path/to/my/docker-compose-mysite.yml build
+```
+
+Note that should regenerate these images whenever the underlying submodule code or environment (.ENV) paramters change.
+
 **Configuring repository-mongodb**
 
 The default docker-compose setup starts mongo with authentication on,
@@ -95,7 +123,8 @@ cd repository-mongodb
 cp dbsetup.defaults dbsetup.js
 emacs dbsetup.js
 
-# Start up temporary mongo service, note mapping of mongo data directory and dbsetup 
+# Start up temporary mongo service, note mapping of mongo data directory and dbsetup
+# Set the /disk/mongodb to suit your needs 
 docker run -v /disk/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
 
 # Run setup script 
