@@ -49,22 +49,22 @@ Make sure not to accidently commit the dbsetup file with usernames and
 passwords into the git repository.
 
 ```
-## Modify dbsetup.js with appropriate settings
+# Modify dbsetup.js with appropriate settings
 cd repository-mongodb
 cp dbsetup.defaults dbsetup.js
 emacs dbsetup.js
 
-## Start up temporary mongo service, note mapping of mongo data directory and dbsetup 
+# Start up temporary mongo service, note mapping of mongo data directory and dbsetup 
 docker run -v /disk/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
 
-## Run setup script 
+# Run setup script 
 docker exec -it irdn-mongo mongo admin /dbsetup/dbsetup.js
 
-## Stop mongo and get rid of name 
+# Stop mongo and get rid of name 
 docker stop irdn-mongo
 docker rm irdn-mongo
 
-## Edit docker-compose.yml and put in mapping of mongo data directory
+# Edit docker-compose.yml and put in mapping of mongo data directory
 ```
 
 **Configuring service-js-mongodb**
@@ -161,7 +161,7 @@ Example of using the production overlayed config:
 docker-compose -f docker-compose.yml -f docker-compose.prod-override.yml build
 
 docker-compose -f docker-compose.yml -f docker-compose.prod-override.yml up
-`
+```
 
 **How to run tests**
 
