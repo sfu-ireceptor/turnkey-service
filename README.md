@@ -119,16 +119,16 @@ In most cases, a simple restart command is sufficient to bring up
 ireceptor-repository. The restart command will attempt to stop all
 running docker-compose instances, and it is generally
 successful. However, if it encounters any problems then you can just
-stop instances manually and try it again, 
-e.g. ( your container id's will differ...):
+stop instances manually and try it again. Use the docker process listing
+comand to find out the name of your running docker processes
+then turn them off, i.e.
 
 ```
 $ sudo docker ps
-CONTAINER ID        IMAGE                        COMMAND                CREATED             STATUS              PORTS                                      NAMES
-fdc7c3119366        ireceptorweb_nginx:latest    "/root/nginx-config-   32 minutes ago      Up 32 minutes       0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp   irserverweb_nginx_1
-adfecbce3e55        ireceptorweb_irapi:latest   "/bin/sh -c '/usr/bi   32 minutes ago      Up 32 minutes       8443/tcp                                   irserverweb_irapi_1
+...
 
-sudo docker-compose down ireceptor-repository
+sudo docker-compose down irdn-api
+sudo docker-compose down irdn-mongo
 ```
 
 It is also important to note that the systemd ireceptor-repository

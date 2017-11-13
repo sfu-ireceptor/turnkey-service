@@ -1,6 +1,6 @@
-[submodule "ireceptor-database"]
-	path = database
+[submodule "repository-mongodb"]
+	path = repository-mongodb
 	url = https://github.com/sfu-ireceptor/repository-mongodb
-[submodule "ireceptor-service"]
-	path = service
+[submodule "service-js-mongodb"]
+	path = service-js-mongodb
 	url = https://github.com/sfu-ireceptor/service-js-mongodb.git
