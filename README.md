@@ -13,7 +13,7 @@ The design of this turnkey is deeply inspired and largely adapted from the excel
 The 'turnkey-service' project is currently composed of 2 separate submodules and a set of docker compose directives:
 
  * [repository-mongodb](https://github.com/sfu-ireceptor/repository-mongodb): The Mongo database.
- * [service-js-mongodb](https://github.com/sfu-ireceptor/service-js-mongodb): iReceptor API service with JavaScript implementation for MongoDB repository. You may wish to confirm which branch of this project contains the implementation of the iReceptor data source API you wish to use (normally 'master' is the default release, although 'develop' may contain the latest implementation. As of mid-November 2017, we are have pointed the master repository to 'develop')
+ * [service-js-mongodb](https://github.com/sfu-ireceptor/service-js-mongodb): iReceptor API service with JavaScript implementation for MongoDB repository. You may wish to confirm which branch of this project contains the implementation of the iReceptor data source API you wish to use (normally 'master' is the default release, although 'develop' may contain the latest implementation. As of mid-November 2017, we are have pointed the 'docker-turnkey' branch repository to the 'develop' branch)
 
 ## Version ## 
 
@@ -35,11 +35,17 @@ Your second decision is *how* to run the software.
 
 1) Running the application directly in the operating system or 
 
-2) (recommended) running within a Docker container.
+2) (recommended) running within a Docker container. 
 
-Both approaches have advantages and disadvantages. The main advantage of Docker is that we ensure that all the execution dependencies for the application are properly configured for you with a Docker Compose configuration we provide here (details below).  One possible disadvantage is that some organizations discourage the use of Docker. In such cases, you should perhaps contact your institution's IT department for appropriate guidance. Here, we give you the formula for using Docker to run the application. However, note that all configuration procedures are the same for dockerized and non-dockerized versions of the application and its submodules.
+Both approaches have advantages and disadvantages. For the uninitiated, Docker is a light weight virtualization and provisioning technology for robustly running applications in relative isolation from one another. See [the Docker website](https://www.docker.com/) for further details. The main advantage of Docker is that we ensure that all the execution dependencies for the application are properly configured for you with a Docker Compose configuration we provide here (details below).  
+
+One possible disadvantage is that some organizations discourage the use of Docker because of peculiar security issues (see also the Deployment Procedure section below). In such cases, you should perhaps contact your institution's IT department for appropriate guidance. Here, we give you the formula for using Docker to run the application. However, note that all configuration procedures are the same for dockerized and non-dockerized versions of the application and its submodules.
 
 ## Configuration Procedure ##
+
+**Installation of Docker**
+
+If you choose to run the dockerized versions of the applications, you'll obviously need to [install Docker first] (https://docs.docker.com/engine/installation/).
 
 **Configuring repository-mongodb**
 
