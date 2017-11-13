@@ -49,22 +49,22 @@ Make sure not to accidently commit the dbsetup file with usernames and
 passwords into the git repository.
 
 ```
-### Modify dbsetup.js with appropriate settings ###
+## Modify dbsetup.js with appropriate settings
 cd repository-mongodb
 cp dbsetup.defaults dbsetup.js
 emacs dbsetup.js
 
-### Start up temporary mongo service, note mapping of mongo data directory and dbsetup ###
+## Start up temporary mongo service, note mapping of mongo data directory and dbsetup 
 docker run -v /disk/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
 
-### Run setup script ###
+## Run setup script 
 docker exec -it irdn-mongo mongo admin /dbsetup/dbsetup.js
 
-### Stop mongo and get rid of name ###
+## Stop mongo and get rid of name 
 docker stop irdn-mongo
 docker rm irdn-mongo
 
-### Edit docker-compose.yml and put in mapping of mongo data directory###
+## Edit docker-compose.yml and put in mapping of mongo data directory
 ```
 
 **Configuring service-js-mongodb**
@@ -96,15 +96,15 @@ sudo systemctl enable docker
 sudo systemctl enable ireceptor-repository
 ```
 
-##Deployment Procedure##
+**Deployment Procedure**
 
-###SSL###
+***SSL***
 
 The iReceptor-Repository does not handle SSL certificates directly, and is
 currently configured to run HTTP internally on port 8080. It must be
 deployed behind a reverse proxy in order to allow SSL connections.
 
-###Dockerized instances (ir-dev, ir-staging, production)###
+**Dockerized instances (ir-dev, ir-staging, production)**
 
 Dockerized instances may be started/stopped/restarted using the
 supplied systemd script: host/systemd/ireceptor-repository.service.
@@ -163,11 +163,11 @@ docker-compose -f docker-compose.yml -f docker-compose.prod-override.yml build
 docker-compose -f docker-compose.yml -f docker-compose.prod-override.yml up
 `
 
-##How to run tests##
+**How to run tests**
 
 T.B.A.
 
-##Development Setup##
+**Development Setup**
 
 You will need to clone down the parent project and all submodules in order to set up a local instance of ireceptor.
 
@@ -185,15 +185,15 @@ $ git submodule foreach git pull
 - Follow configuration steps listed above in the "Configuration Procedure" section of this document
 ```
 
-### Contribution guidelines ###
+** Contribution guidelines **
 
 * Writing tests
 * Code review
 * Other guidelines
 
-##Development Guidelines##
+** Development Guidelines **
 
-**Code Style**
+*** Code Style ***
 
  * Code should roughly follow Google Javascript Style Guide conventions: <https://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml>.
 
