@@ -185,15 +185,15 @@ $ git submodule foreach git pull
 - Follow configuration steps listed above in the "Configuration Procedure" section of this document
 ```
 
-** Contribution guidelines **
+# Contribution guidelines #
 
 * Writing tests
 * Code review
 * Other guidelines
 
-** Development Guidelines **
+## Development Guidelines ##
 
-*** Code Style ***
+**Code Style**
 
  * Code should roughly follow Google Javascript Style Guide conventions: <https://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml>.
 
