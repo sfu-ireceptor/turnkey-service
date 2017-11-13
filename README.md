@@ -13,7 +13,7 @@ The design of this turnkey is deeply inspired and largely adapted from the excel
 The 'turnkey-service' project is currently composed of 2 separate submodules and a set of docker compose directives:
 
  * [repository-mongodb](https://github.com/sfu-ireceptor/repository-mongodb): The Mongo database.
- * [service-js-mongodb](https://github.com/sfu-ireceptor/service-js-mongodb): iReceptor API service with JavaScript implementation for MongoDB repository.
+ * [service-js-mongodb](https://github.com/sfu-ireceptor/service-js-mongodb): iReceptor API service with JavaScript implementation for MongoDB repository. You may wish to confirm which branch of this project contains the implementation of the iReceptor data source API you wish to use (normally 'master' is the default release, although 'develop' may contain the latest implementation. As of mid-November 2017, we are have pointed the master repository to 'develop')
 
 ## Version ## 
 
@@ -21,17 +21,25 @@ The 'turnkey-service' project is currently composed of 2 separate submodules and
 
 ## Overview of Installation ##
 
-The following installation instructions assume a Linux operating system as the target operating environment for the iReceptor turnkey. Beyond that, core configuration instructions are applicable for any suitable recent-release Linux system. There are several options for running the turnkey:
+The following installation instructions assume a Linux operating system as the target operating environment for the iReceptor turnkey. Beyond that, core configuration instructions are applicable for any suitable recent-release Linux system. There are several options for running the turnkey.
 
-1) Directly on a Linux "bare metal" server or within a Linux Virtual Machine (e.g. VMWare, Parallels, VirtualBox, Amazon Web Services, etc.)
+The first decision you need to make is where (on what Linux server) to run the application. Your choices generally are:
 
-2) Running the application directly in the operating system or (recommended) running within a Docker container.
+1) Directly on a Linux "bare metal" server
+ 
+2) Within a suitably configured Linux Virtual Machine (e.g. VMWare, Parallels, VirtualBox, Amazon Web Services, etc.)
 
-For Docker, this project provides a Docker Compose configuration (details below).
+Your choice of Linux operating system is not too critical except that the specific details on how to configure the system may differ between Linux flavors. For the moment, as of November 2017, we are working here with a recent 'latest' release (i.e. 16.04) of Ubuntu server.
+
+Your second decision is *how* to run the software.
+
+1) Running the application directly in the operating system or 
+
+2) (recommended) running within a Docker container.
+
+Both approaches have advantages and disadvantages. The main advantage of Docker is that we ensure that all the execution dependencies for the application are properly configured for you with a Docker Compose configuration we provide here (details below).  One possible disadvantage is that some organizations discourage the use of Docker. In such cases, you should perhaps contact your institution's IT department for appropriate guidance. Here, we give you the formula for using Docker to run the application. However, note that all configuration procedures are the same for dockerized and non-dockerized versions of the application and its submodules.
 
 ## Configuration Procedure ##
-
-All configuration procedures are the same for dockerized and non-dockerized versions of these apps.
 
 **Configuring repository-mongodb**
 
