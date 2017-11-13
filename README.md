@@ -21,9 +21,13 @@ The 'turnkey-service' project is currently composed of 2 separate submodules and
 
 ## Overview of Installation ##
 
-The turnkey package is designed using a layered technology stack to facilitate deployment but also, provide some flexibility.
+The following installation instructions assume a Linux operating system as the target operating environment for the iReceptor turnkey. Beyond that, core configuration instructions are applicable for any suitable recent-release Linux system. There are several options for running the turnkey:
 
-T.B.A.
+1) Directly on a Linux "bare metal" server or within a Linux Virtual Machine (e.g. VMWare, Parallels, VirtualBox, Amazon Web Services, etc.)
+
+2) Running the application directly in the operating system or (recommended) running within a Docker container.
+
+For Docker, this project provides a Docker Compose configuration (details below).
 
 ## Configuration Procedure ##
 
