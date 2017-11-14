@@ -210,10 +210,11 @@ file assumes that the turnkey code is located under /opt/ireceptor/turnkey-servi
 You should fix this path or make a symbolic link to the real location of the code on your system.
 
 ```
-sudo cp host/systemd/ireceptor.service /etc/systemd/systems/ireceptor.service
+cd ..  # ensure that you are back in the root project directory
+sudo cp host/systemd/ireceptor.service /etc/systemd/system/ireceptor.service
 sudo systemctl daemon-reload
 sudo systemctl enable docker
-sudo systemctl enable ireceptor-repository
+sudo systemctl enable ireceptor
 ```
 
 **Deployment Procedure**
@@ -227,16 +228,16 @@ deployed behind a reverse proxy in order to allow SSL connections.
 **Dockerized instances (ir-dev, ir-staging, production)**
 
 Dockerized instances may be started/stopped/restarted using the
-supplied systemd script: host/systemd/ireceptor-repository.service.
+supplied systemd script *host/systemd/ireceptor.service*.
 It can be accessed as follows:
 
 ```
-$ sudo systemctl <ACTION> ireceptor-repository
+$ sudo systemctl <ACTION> ireceptor
 # <ACTION> can be either: stop, start, or restart
 ```
 
 In most cases, a simple restart command is sufficient to bring up
-ireceptor-repository. The restart command will attempt to stop all
+ireceptor. The restart command will attempt to stop all
 running docker-compose instances, and it is generally
 successful. However, if it encounters any problems then you can just
 stop instances manually and try it again. Use the docker process listing
@@ -251,22 +252,23 @@ sudo docker-compose down irdn-api
 sudo docker-compose down irdn-mongo
 ```
 
-It is also important to note that the systemd ireceptor-repository
+It is also important to note that the systemd ireceptor
 command will not rebuild new container instances. If you need to
 build/rebuild a new set of containers, then you will need to start the
-command manually as follows:
+command manually from within the project subdirectory as follows:
 
 ```
- $ sudo docker-compose build
+ $ sudo docker-compose -f run/docker-compose.yml build
 ```
 
 After your build has completed, you can then use systemd to deploy it:
 
 ```
-$ sudo systemctl restart ireceptor-repository
+$ sudo systemctl restart ireceptor
 ```
 
-Systemd will only restart a running service if the "restart" command is used; remember that using the "start" command twice will not redeploy any containers.
+Systemd will only restart a running service if the "restart" command is used; 
+remember that using the "start" command twice will not redeploy any containers.
 
 
 **Docker Compose Files**
