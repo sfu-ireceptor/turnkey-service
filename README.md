@@ -177,6 +177,7 @@ Note that should (re-)build your Docker images whenever the underlying submodule
 
 After building your Docker images, you can proceed to initialize your Mongodb database.
 
+```
 # Start up temporary mongo service, note mapping of mongo data directory and dbsetup
 # Set the /disk/mongodb to suit your needs 
 docker run -v /opt/ireceptor/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
