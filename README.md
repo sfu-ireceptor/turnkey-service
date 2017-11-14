@@ -72,18 +72,26 @@ If you choose to run the dockerized versions of the applications, you'll obvious
 
 From this point onward, it is assumed that you are logged an active command shell session within whichever Linux server environment you are running, and have your Docker engine installed, so you can further configure the application components on your server (as specified below) and run the Docker Compose to fire up the system.
 
+**Configuring service-js-mongodb**
+
+There is one '.env' configuration file that needs to be set up before the Docker image can be built. 
+
+```
+cd service-js-mongodb
+cp .env.defaults .env
+emacs .env
+```
+
 **Configuring and Building your Docker Containers**
 
-Docker-compose
-
-```
- $ sudo docker-compose -f run/docker-compose.yml build
-```
-
-**Building Docker Images**
-
 Simply cloning the project and installing Docker does not automatically build Docker images to run. Rather, you
-need to explicitly create them as follows:
+need to explicitly create them using a suitable docker-compose.yml specification.  A default file is provided in the 'run' subdirectory. However, note that this file assumes that you've already created a directory for your MongoDb database in the following manner (and location):
+
+```
+$ mkdir -p /opt/ireceptor/mongodb
+```
+
+Assuming that you have done this, then you can run the following command:
 
 ```
  $ sudo docker-compose -f run/docker-compose.yml build
@@ -96,7 +104,18 @@ and instead use it to overlay the default configuration file, as follows:
  $ sudo docker-compose -f run/docker-compose.yml -f /path/to/my/docker-compose-mysite.yml build
 ```
 
-Note that should regenerate these images whenever the underlying submodule code or environment (.ENV) paramters change.
+For example, you can change the location of your MongoDb database by putting the following into your docker-compose-mysite.yml file:
+
+```
+version: '2'
+
+services:
+    irdn-mongo:
+        volumes:
+            - /path/to/my/ireceptor/mongodb:/data/db
+```
+
+Note that should (re-)build your Docker images whenever the underlying submodule code or environment (.ENV) parameters change, or you wish to make docker-compose level changes to their configuration.
 
 **Configuring repository-mongodb**
 
@@ -135,17 +154,6 @@ docker stop irdn-mongo
 docker rm irdn-mongo
 
 # Edit docker-compose.yml and put in mapping of mongo data directory
-```
-
-**Configuring service-js-mongodb**
-
-There is one configuration file that needs to be set up to run the
-API. It can be copied from its default template.
-
-```
-cd service-js-mongodb
-cp .env.defaults .env
-emacs .env
 ```
 
 **Configuring systemd**
