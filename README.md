@@ -82,6 +82,54 @@ cp .env.defaults .env
 emacs .env
 ```
 
+Note the paramters you set here will be propagated to the *dbsetup.js* file in the next section, as
+noted by the inline comments in  the *.env.defaults* file.
+
+```
+# if your docker-compose build specifies a network, 
+# then the HOST here can simply be your MongoDb docker 
+# container name (as defined in the docker-compose.yml 
+# file for the repository-mongodb build, i.e. 'irdn-mongo')
+MONGODB_HOST= 
+
+# Pick your database name, same as the 'dbname' in the 
+# dbsetup.js file in your repository-mongodb submodule
+MONGODB_DB=
+
+# These values should be set to the 'guestAccount' and
+# 'guestSecret' values respectively, as defined in the 
+# dbsetup.js file in your repository-mongodb submodule
+MONGODB_USER=
+MONGODB_SECRET=
+```
+
+**Configuring repository-mongodb**
+
+The default docker-compose setup starts mongo with authentication on,
+and no users exists in the default image. To setup the database, need
+to decide:
+
+* Where mongo will store its files on host disk. (e.g. /disk/mongodb)
+
+* Name of database in mongo where collections will be stored. As noted
+  above, this should be set to the same value as MONGODB_DB.
+
+* Name and password for mongo service account. This account will have
+  admin privileges for managing mongo.
+
+* Name and password for guest account. This account will only have
+  read access on the database for performing queries. As noted above
+  these should be set to the same values at MONGODB_USER and MONGODB_SECRET.
+
+Make sure not to accidently commit the dbsetup file with usernames and
+passwords into the git repository.
+
+```
+# Modify dbsetup.js with appropriate settings
+cd repository-mongodb
+cp dbsetup.defaults dbsetup.js
+emacs dbsetup.js
+
 **Configuring and Building your Docker Containers**
 
 Simply cloning the project and installing Docker does not automatically build Docker images to run. Rather, you
@@ -117,30 +165,7 @@ services:
 
 Note that should (re-)build your Docker images whenever the underlying submodule code or environment (.ENV) parameters change, or you wish to make docker-compose level changes to their configuration.
 
-**Configuring repository-mongodb**
-
-The default docker-compose setup starts mongo with authentication on,
-and no users exists in the default image. To setup the database, need
-to decide:
-
-* Where mongo will store its files on host disk. (e.g. /disk/mongodb)
-
-* Name of database in mongo where collections will be stored.
-
-* Name and password for mongo service account. This account will have
-  admin privileges for managing mongo.
-
-* Name and password for guest account. This account will only have
-  read access on the database for performing queries.
-
-Make sure not to accidently commit the dbsetup file with usernames and
-passwords into the git repository.
-
-```
-# Modify dbsetup.js with appropriate settings
-cd repository-mongodb
-cp dbsetup.defaults dbsetup.js
-emacs dbsetup.js
+**Initializing the repository-mongodb Docker instance**
 
 # Start up temporary mongo service, note mapping of mongo data directory and dbsetup
 # Set the /disk/mongodb to suit your needs 
