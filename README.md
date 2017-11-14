@@ -145,10 +145,13 @@ for your MongoDb database in the following manner (and location):
 $ mkdir -p /opt/ireceptor/mongodb
 ```
 
-Assuming that you have done this, then you can run the following command:
+Assuming that you have done this, then you can run the following command
+(depending on how your Docker engine is configured, you may need to run
+it as 'sudo')
 
 ```
- $ sudo docker-compose -f run/docker-compose.yml build
+ $ cd ..  # make sure you are back in the root project directory
+ $ docker-compose -f run/docker-compose.yml build
 ```
 
 If you wish to customize your docker images, then you can create an overlay
@@ -156,7 +159,7 @@ docker-compose-mysite.yml file and use it to override the default
 configuration file during the build, as follows:
 
 ```
- $ sudo docker-compose -f run/docker-compose.yml -f /path/to/my/docker-compose-mysite.yml build
+ $ docker-compose -f run/docker-compose.yml -f /path/to/my/docker-compose-mysite.yml build
 ```
 
 For example, you can change the location of your MongoDb database by putting the following into your docker-compose-mysite.yml file:
@@ -178,19 +181,26 @@ Note that should (re-)build your Docker images whenever the underlying submodule
 After building your Docker images, you can proceed to initialize your Mongodb database.
 
 ```
-# Start up temporary mongo service, note mapping of mongo data directory and dbsetup
-# Set the /disk/mongodb to suit your needs 
-docker run -v /opt/ireceptor/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
+# Making sure that you are back in the repository-mongo submodule folder,
+# Start up temporary mongo service (run as a docker background process).
+# Note the mapping of mongo data directory and dbsetup.  You may set the 
+# /opt/ireceptor/mongodb to suit your needs, but it should be the same 
+# value as recorded in the docker-compose.yml file used to make the image.
+ 
+$ cd repository-mongo
+$ docker run -d --rm -v /opt/ireceptor/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
 
-# Run setup script 
-docker exec -it irdn-mongo mongo admin /dbsetup/dbsetup.js
+# Run setup script
 
-# Stop mongo and get rid of name 
-docker stop irdn-mongo
-docker rm irdn-mongo
+$ docker exec -it irdn-mongo mongo admin /dbsetup/dbsetup.js
 
-# Edit docker-compose.yml and put in mapping of mongo data directory
+# Stop the temporary mongo servicd (note: --rm flag above ensures that the container is also removed)
+$ docker stop irdn-mongo
+
 ```
+
+The /opt/ireceptor/mongodb (or your specified) database directory should now 
+contain an initialized Mongo database, ready for use by your system.
 
 **Configuring systemd**
 
