@@ -179,14 +179,13 @@ Note that should (re-)build your Docker images whenever the underlying submodule
 **Initializing the repository-mongodb Docker instance**
 
 After building your Docker images, you can proceed to initialize your Mongodb database.
+Making sure that you are back in the repository-mongo submodule folder
+Start up temporary mongo service (run as a docker background process).
+Note the mapping of mongo data directory and dbsetup.  You may set the 
+/opt/ireceptor/mongodb to suit your needs, but it should be the same 
+value as recorded in the docker-compose.yml file used to make the image.
 
 ```
-# Making sure that you are back in the repository-mongo submodule folder,
-# Start up temporary mongo service (run as a docker background process).
-# Note the mapping of mongo data directory and dbsetup.  You may set the 
-# /opt/ireceptor/mongodb to suit your needs, but it should be the same 
-# value as recorded in the docker-compose.yml file used to make the image.
- 
 $ cd repository-mongo
 $ docker run -d --rm -v /opt/ireceptor/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
 
@@ -204,19 +203,16 @@ contain an initialized Mongo database, ready for use by your system.
 
 **Configuring systemd**
 
-You will need to set up the 'ireceptor-repository' systemd service file
-on your host machine in order to have the infrastructure automatically
-restart when the host machine reboots. Note that the ireceptor-repository.service
-file assumes that the turnkey code is located under /opt/ireceptor-repository. 
-You should fix this path to the real location of the code on your system.
+You will need to set up the 'ireceptor' systemd service file
+on your Linux machine running Docker, in order to have the infrastructure automatically
+restart when the machine reboots. Note that the *ireceptor.service*
+file assumes that the turnkey code is located under /opt/ireceptor/turnkey-service. 
+You should fix this path or make a symbolic link to the real location of the code on your system.
 
 ```
-sudo cp host/systemd/ireceptor-repository.service /etc/systemd/systems/ireceptor-repository.service
-
+sudo cp host/systemd/ireceptor.service /etc/systemd/systems/ireceptor.service
 sudo systemctl daemon-reload
-
 sudo systemctl enable docker
-
 sudo systemctl enable ireceptor-repository
 ```
 

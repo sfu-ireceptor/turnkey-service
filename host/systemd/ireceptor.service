@@ -1,0 +1,15 @@
+[Unit]
+Description=iReceptor Repository Services
+Documentation=https://github.com/sfu-ireceptor/turnkey-service
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+ExecStartPre=/usr/local/bin/docker-compose -f /opt/ireceptor/turnkey-service/docker-compose/run/docker-compose.yml -f /opt/ireceptor/turnkey-service/docker-compose/run/docker-compose.prod-override.yml stop
+ExecStartPre=/usr/local/bin/docker-compose -f /opt/ireceptor/turnkey-service/docker-compose/run/docker-compose.yml -f /opt/ireceptor/turnkey-service/docker-compose/run/docker-compose.prod-override.yml rm --force
+ExecStart=/usr/local/bin/docker-compose -f /opt/ireceptor/turnkey-service/docker-compose/run/docker-compose.yml -f /opt/ireceptor/turnkey-service/docker-compose/run/docker-compose.prod-override.yml up
+ExecStop=/usr/local/bin/docker-compose -f /opt/ireceptor/turnkey-service/docker-compose/run/docker-compose.yml -f /opt/ireceptor/turnkey-service/docker-compose/run/docker-compose.prod-override.yml down
+
+[Install]
+WantedBy=multi-user.target
