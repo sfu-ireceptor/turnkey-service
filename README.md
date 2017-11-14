@@ -121,19 +121,25 @@ to decide:
   read access on the database for performing queries. As noted above
   these should be set to the same values at MONGODB_USER and MONGODB_SECRET.
 
-Make sure not to accidently commit the dbsetup file with usernames and
-passwords into the git repository.
-
 ```
 # Modify dbsetup.js with appropriate settings
 cd repository-mongodb
 cp dbsetup.defaults dbsetup.js
 emacs dbsetup.js
+```
+
+Make sure not to accidently commit the dbsetup file with usernames and
+passwords into the git repository (Note that *dbsetup.js* is included
+in the .gitignore to protect against this...).
 
 **Configuring and Building your Docker Containers**
 
-Simply cloning the project and installing Docker does not automatically build Docker images to run. Rather, you
-need to explicitly create them using a suitable docker-compose.yml specification.  A default file is provided in the 'run' subdirectory. However, note that this file assumes that you've already created a directory for your MongoDb database in the following manner (and location):
+Simply cloning the project,  installing Docker and applying the above 
+configuration detailsdoes not automatically build Docker images to run. 
+Rather, you need to explicitly create them using a suitable docker-compose.yml 
+specification.  A default file is provided in the 'run' subdirectory. 
+However, note that this file assumes that you've already created a directory 
+for your MongoDb database in the following manner (and location):
 
 ```
 $ mkdir -p /opt/ireceptor/mongodb
@@ -145,8 +151,9 @@ Assuming that you have done this, then you can run the following command:
  $ sudo docker-compose -f run/docker-compose.yml build
 ```
 
-If you wish to customize your docker images, then you can create a docker-compose-mysite.yml file 
-and instead use it to overlay the default configuration file, as follows:
+If you wish to customize your docker images, then you can create an overlay
+docker-compose-mysite.yml file and use it to override the default 
+configuration file during the build, as follows:
 
 ```
  $ sudo docker-compose -f run/docker-compose.yml -f /path/to/my/docker-compose-mysite.yml build
@@ -163,13 +170,16 @@ services:
             - /path/to/my/ireceptor/mongodb:/data/db
 ```
 
-Note that should (re-)build your Docker images whenever the underlying submodule code or environment (.ENV) parameters change, or you wish to make docker-compose level changes to their configuration.
+Note that should (re-)build your Docker images whenever the underlying submodule code or environment 
+(*.env*) parameters change, or you wish to make docker-compose level changes to their configuration.
 
 **Initializing the repository-mongodb Docker instance**
 
+After building your Docker images, you can proceed to initialize your Mongodb database.
+
 # Start up temporary mongo service, note mapping of mongo data directory and dbsetup
 # Set the /disk/mongodb to suit your needs 
-docker run -v /disk/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
+docker run -v /opt/ireceptor/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
 
 # Run setup script 
 docker exec -it irdn-mongo mongo admin /dbsetup/dbsetup.js
