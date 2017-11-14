@@ -4,3 +4,6 @@
 [submodule "service-js-mongodb"]
 	path = service-js-mongodb
 	url = https://github.com/sfu-ireceptor/service-js-mongodb.git
+[submodule "dataloading"]
+	path = dataloading
+	url = https://github.com/sfu-ireceptor/dataloading-mongo.git
