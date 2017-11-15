@@ -33,6 +33,10 @@ services:
         ports:
             - "8888:8888"
         image: ireceptor/notebook
+        environment:
+            - NB_UID=${UID}
+        volumes:
+            - ./../dataloading:/home/jovyan/work
         networks:
             - default
 
