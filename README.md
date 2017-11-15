@@ -272,6 +272,19 @@ $ sudo systemctl restart ireceptor
 Systemd will only restart a running service if the "restart" command is used; 
 remember that using the "start" command twice will not redeploy any containers.
 
+# Loading Data into the Node #
+
+When the turnkey node is running, one of the Docker containers which is running is a Jupyter Notebook 
+designed to facilitate data loading into the node's MongoDb database. This Notebook may be accessed
+using a web browser; however, the default is for the notebook to be protected by an authentication token.
+To see the full local link for this token, you need to look inside the log file of the Jupyter container.
+This is easily done as follows:
+
+```
+$ docker logs irdn-notebook  # where 'irdn-notebook' is the default name of the Jupyter Notebook
+```
+Clicking on this link should give you the notebook home page with README and a *work* directory with data loading scripts.
+The README outlines the data loading procedure.
 
 **Docker Compose Files**
 
