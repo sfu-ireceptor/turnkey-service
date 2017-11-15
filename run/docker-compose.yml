@@ -36,7 +36,7 @@ services:
         environment:
             - NB_UID=${UID}
         volumes:
-            - ./../dataloading:/home/jovyan/work
+            - ./../dataloading/notebooks:/home/jovyan/work
         networks:
             - default
 
