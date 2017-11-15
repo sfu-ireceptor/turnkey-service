@@ -68,7 +68,9 @@ then follow remaining configuration steps listed here below.
 
 **Installation of Docker**
 
-If you choose to run the dockerized versions of the applications, you'll obviously need to [install Docker first](https://docs.docker.com/engine/installation/) in your target Linux operating environment (bare metal server or virtual machine running Linux).  You will then also need to [install Docker Compose](https://docs.docker.com/compose/install/) alongside Docker on your target Linux operating environment. 
+If you choose to run the dockerized versions of the applications, you'll obviously need to [install Docker first](https://docs.docker.com/engine/installation/) in your target Linux operating environment (bare metal server or virtual machine running Linux).  You will then also need to [install Docker Compose](https://docs.docker.com/compose/install/) alongside Docker on your target Linux operating environment.
+
+Note that depending on how Docker is installed, you may need to run docker (and docker-compose) as 'sudo'. The docker (and docker-compose) commands run below don't assume this but prefix each commans with 'sudo' insofar needed.
 
 From this point onward, it is assumed that you are logged an active command shell session within whichever Linux server environment you are running, and have your Docker engine installed, so you can further configure the application components on your server (as specified below) and run the Docker Compose to fire up the system.
 
@@ -245,11 +247,11 @@ comand to find out the name of your running docker processes
 then turn them off, i.e.
 
 ```
-$ sudo docker ps
+$ docker ps
 ...
 
-sudo docker-compose down irdn-api
-sudo docker-compose down irdn-mongo
+$ docker-compose down irdn-api
+$ docker-compose down irdn-mongo
 ```
 
 It is also important to note that the systemd ireceptor
@@ -258,7 +260,7 @@ build/rebuild a new set of containers, then you will need to start the
 command manually from within the project subdirectory as follows:
 
 ```
- $ sudo docker-compose -f run/docker-compose.yml build
+ $ docker-compose -f run/docker-compose.yml build
 ```
 
 After your build has completed, you can then use systemd to deploy it:
@@ -277,12 +279,11 @@ There are two docker-compose files: one for general use ("docker-compose.yml"), 
 
 Using the production config will send all log information to syslog.
 
-Example of using the production overlayed config:
+Example of using the production overlayed config (run from the root project directory):
 
 ```
-docker-compose -f docker-compose.yml -f docker-compose.prod-override.yml build
-
-docker-compose -f docker-compose.yml -f docker-compose.prod-override.yml up
+docker-compose -f run/docker-compose.yml -f docker-compose.prod-override.yml build
+docker-compose -f run/ocker-compose.yml -f run/docker-compose.prod-override.yml up
 ```
 
 **How to run tests**
@@ -310,6 +311,17 @@ git submodule update
 
 ```
 git pull changes which commit their submodule directory points to.  git submodule update actually merges in the new code.
+
+Note that after you complete the update of the code tree, you'll need to rebuild your Docker images 
+and restart any Docker containers you have running, that is (run from the root project directory):
+
+```
+$ docker-compose -f run/docker-compose.yml build
+$ sudo systemctl restart ireceptor
+
+```
+
+or the equivalent build with any overlay docker-compose configuration files (see above)
 
 # Contribution guidelines #
 
