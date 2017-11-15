@@ -27,6 +27,15 @@ services:
         networks:
             - default
 
+    irdn-notebook:
+        build: ./../dataloading
+        container_name: irdn-notebook
+        ports:
+            - "8888:8888"
+        image: ireceptor/notebook
+        networks:
+            - default
+
 networks:
     default:
         driver: bridge
