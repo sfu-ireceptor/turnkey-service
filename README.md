@@ -272,6 +272,24 @@ $ sudo systemctl restart ireceptor
 Systemd will only restart a running service if the "restart" command is used; 
 remember that using the "start" command twice will not redeploy any containers.
 
+# Testing Database Access in the Node #
+
+Assuming that you have (re)started the database, you can test access to it using the following command:
+
+```
+docker exec -it irdn-mongo mongo --authenticationDatabase admin dbname -u serviceAccount -p servicePassword
+```
+ 
+Where your *serviceAccount* and *servicePassword* are as you set them above in the *dbsetup.js* configuration file.
+
+That will give you a command line access to mongo. Assuming this succeeds, you can then try a simple command like
+
+```
+db.getName()
+```
+
+If you have a functional node database, you can proceed with loading in some (test) data.
+
 # Loading Data into the Node #
 
 When the turnkey node is running, one of the Docker containers which is running is a Jupyter Notebook 
