@@ -1,10 +1,8 @@
 # Turnkey Package for an iReceptor Data Source Node #
 
-iReceptor is a data management system and scientific gateway for mining “Next Generation” sequence data from immune responses. The iReceptor data management system is a distributed network of data source nodes complying with the [iReceptor public web service application programming interface (API) specification](https://github.com/sfu-ireceptor/api).  The iReceptor data management system is intended to be an AIRR-compliant data repository.
+[iReceptor](http://ireceptor.org) is a data management system and scientific gateway for mining newly available Next Generation sequence data of Acquired Immunity Receptor Repertoires (AIRR). The iReceptor data management system is designed to be a distributed network of data source nodes implementing a common data access Application Programming Interface (API) specification.  The iReceptor data management system is expected to become one public reference implementation of a AIRR-compliant data repository. 
 
-## What is this repository for? ##
-
-This project is the source code of a "turnkey" package for the installation, configuration and data loading of a small to medium sized standalone iReceptor data source node. This turnkey configuration runs the API and simple database on a single node.
+This repository contains the software package of a "turnkey" package for the installation, configuration and data loading of a small to medium sized iReceptor data source node running a simple database within a single node. With respect to the iReceptor API, the turnkey package specifically implements the ["AIRR Compliance" branch of the iReceptor public web service API](https://github.com/sfu-ireceptor/api/tree/AIRR-compliance).
 
 The design of this turnkey is deeply inspired and largely adapted from the excellent VDJServer iReceptor Node package developed by **Scott Christley** of the **VDJServer** project at the **University of Texas Southwestern University**.
 
