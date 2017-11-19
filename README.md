@@ -17,7 +17,7 @@ The 'turnkey-service' project is currently composed of 2 separate submodules and
 
 0.0.1
 
-## Overview of Installation ##
+## First Decision: Where and how will you run the iReceptor node? ##
 
 The following installation instructions assume a Linux operating system as the target operating environment for the iReceptor turnkey. Beyond that, core configuration instructions are applicable for any suitable recent-release Linux system. There are several options for running the turnkey.
 
@@ -111,7 +111,7 @@ The default docker-compose setup starts mongo with authentication on,
 and no users exists in the default image. To setup the database, need
 to decide:
 
-* Where mongo will store its files on host disk. (e.g. /disk/mongodb)
+* Where mongo will store its files on host disk. (e.g. /opt/ireceptor/mongodb)
 
 * Name of database in mongo where collections will be stored. As noted
   above, this should be set to the same value as MONGODB_DB.
@@ -148,8 +148,6 @@ $ mkdir -p /opt/ireceptor/mongodb
 ```
 
 Assuming that you have done this, then you can run the following command
-(depending on how your Docker engine is configured, you may need to run
-it as 'sudo')
 
 ```
  $ cd ..  # make sure you are back in the root project directory
@@ -212,7 +210,10 @@ file assumes that the turnkey code is located under /opt/ireceptor/turnkey-servi
 You should fix this path or make a symbolic link to the real location of the code on your system.
 
 ```
-cd ..  # ensure that you are back in the root project directory
+# symbolic link (if necessary) to your local git clone directory for the turnkey-service code
+cd /opt/ireceptor
+ln -s /path/to/your/turnkey-service .
+cd turnkey-service
 sudo cp host/systemd/ireceptor.service /etc/systemd/system/ireceptor.service
 sudo systemctl daemon-reload
 sudo systemctl enable docker
@@ -226,6 +227,10 @@ sudo systemctl enable ireceptor
 The iReceptor-Repository does not handle SSL certificates directly, and is
 currently configured to run HTTP internally on port 8080. It must be
 deployed behind a reverse proxy in order to allow SSL connections.
+
+We don't (yet) tell you how to do this (here). 
+For now, please consult with your local system administrator or
+suitable documentation about your web server platform of choice (e.g. Apache, NGINX, etc).
 
 **Dockerized instances (ir-dev, ir-staging, production)**
 
@@ -243,7 +248,7 @@ ireceptor. The restart command will attempt to stop all
 running docker-compose instances, and it is generally
 successful. However, if it encounters any problems then you can just
 stop instances manually and try it again. Use the docker process listing
-comand to find out the name of your running docker processes
+command to find out the name of your running docker processes
 then turn them off, i.e.
 
 ```
@@ -255,9 +260,12 @@ $ sudo docker-compose down irdn-mongo
 ```
 
 It is also important to note that the systemd ireceptor
-command will not rebuild new container instances. If you need to
-build/rebuild a new set of containers, then you will need to start the
-command manually from within the project subdirectory as follows:
+command will not rebuild new container instances. 
+If you have followed this turnkey recipe, you should already have
+a set of docker containers to use. However, if you change your 
+codebase, deployment configuration, etc. and therefore, need to
+build/rebuild a new set of containers, then (once again) you will need 
+to run the build command manually from within the project subdirectory, as follows:
 
 ```
  $ sudo docker-compose -f run/docker-compose.yml build
@@ -272,12 +280,19 @@ $ sudo systemctl restart ireceptor
 Systemd will only restart a running service if the "restart" command is used; 
 remember that using the "start" command twice will not redeploy any containers.
 
+Once again, after restarting the service, you should see a set of docker containers 
+running in your Linux environment, by running the docker process viewing command:
+
+```
+$ sudo docker ps
+```
+
 # Testing Database Access in the Node #
 
 Assuming that you have (re)started the database, you can test access to it using the following command:
 
 ```
-docker exec -it irdn-mongo mongo --authenticationDatabase admin dbname -u serviceAccount -p servicePassword
+$ sudo docker exec -it irdn-mongo mongo --authenticationDatabase admin dbname -u serviceAccount -p servicePassword
 ```
  
 Where your *serviceAccount* and *servicePassword* are as you set them above in the *dbsetup.js* configuration file.
@@ -285,7 +300,8 @@ Where your *serviceAccount* and *servicePassword* are as you set them above in t
 That will give you a command line access to mongo. Assuming this succeeds, you can then try a simple command like
 
 ```
-db.getName()
+dbs
+exit
 ```
 
 If you have a functional node database, you can proceed with loading in some (test) data.
@@ -319,7 +335,8 @@ docker-compose -f run/ocker-compose.yml -f run/docker-compose.prod-override.yml 
 
 **How to run tests**
 
-T.B.A.
+At the moment, we don't yet have a formal test suite for testing your node. Your best option
+for now is to review the API docs and compose suitable API calls using your browser.
 
 **Updating the project database or service submodules to a specified Git branch**
 
