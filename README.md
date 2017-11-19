@@ -60,15 +60,17 @@ $ git clone --branch docker-turnkey https://github.com/sfu-ireceptor/turnkey-ser
 cd turnkey-service
 
 # Initialize the submodules. This command should also checkout the current relevant code for each submodule
-$ git submodule update --init
+$ git submodule update --recursive --init
 ```
 then follow remaining configuration steps listed here below.
 
 **Installation of Docker**
 
-If you choose to run the dockerized versions of the applications, you'll obviously need to [install Docker first](https://docs.docker.com/engine/installation/) in your target Linux operating environment (bare metal server or virtual machine running Linux).  You will then also need to [install Docker Compose](https://docs.docker.com/compose/install/) alongside Docker on your target Linux operating environment.
+If you choose to run the dockerized versions of the applications, you'll obviously need to [install Docker first](https://docs.docker.com/engine/installation/) in your target Linux operating environment (bare metal server or virtual machine running Linux).  For our installations, we typically use Ubuntu Linux, for which there is an [Ubuntu-specific docker installation using the repository](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository). For other installations, please find instructions specific to your choice of Linux variant, on the Docker site.
 
-Note that depending on how Docker is installed, you may need to run docker (and docker-compose) as 'sudo'. The docker (and docker-compose) commands run below don't assume this but prefix each commans with 'sudo' insofar needed.
+You will then also need to [install Docker Compose](https://docs.docker.com/compose/install/) alongside Docker on your target Linux operating environment.
+
+Note that under Ubuntu, you need to run docker (and docker-compose) as 'sudo'. 
 
 From this point onward, it is assumed that you are logged an active command shell session within whichever Linux server environment you are running, and have your Docker engine installed, so you can further configure the application components on your server (as specified below) and run the Docker Compose to fire up the system.
 
@@ -151,7 +153,7 @@ it as 'sudo')
 
 ```
  $ cd ..  # make sure you are back in the root project directory
- $ docker-compose -f run/docker-compose.yml build
+ $ sudo docker-compose -f run/docker-compose.yml build
 ```
 
 If you wish to customize your docker images, then you can create an overlay
@@ -159,7 +161,7 @@ docker-compose-mysite.yml file and use it to override the default
 configuration file during the build, as follows:
 
 ```
- $ docker-compose -f run/docker-compose.yml -f /path/to/my/docker-compose-mysite.yml build
+ $ sudo docker-compose -f run/docker-compose.yml -f /path/to/my/docker-compose-mysite.yml build
 ```
 
 For example, you can change the location of your MongoDb database by putting the following into your docker-compose-mysite.yml file:
@@ -187,14 +189,14 @@ value as recorded in the docker-compose.yml file used to make the image.
 
 ```
 $ cd repository-mongo
-$ docker run -d --rm -v /opt/ireceptor/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
+$ sudo docker run -d --rm -v /opt/ireceptor/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
 
 # Run setup script
 
-$ docker exec -it irdn-mongo mongo admin /dbsetup/dbsetup.js
+$ sudo docker exec -it irdn-mongo mongo admin /dbsetup/dbsetup.js
 
 # Stop the temporary mongo servicd (note: --rm flag above ensures that the container is also removed)
-$ docker stop irdn-mongo
+$ sudo docker stop irdn-mongo
 
 ```
 
@@ -245,11 +247,11 @@ comand to find out the name of your running docker processes
 then turn them off, i.e.
 
 ```
-$ docker ps
+$ sudo docker ps
 ...
 
-$ docker-compose down irdn-api
-$ docker-compose down irdn-mongo
+$ sudo docker-compose down irdn-api
+$ sudo docker-compose down irdn-mongo
 ```
 
 It is also important to note that the systemd ireceptor
@@ -258,7 +260,7 @@ build/rebuild a new set of containers, then you will need to start the
 command manually from within the project subdirectory as follows:
 
 ```
- $ docker-compose -f run/docker-compose.yml build
+ $ sudo docker-compose -f run/docker-compose.yml build
 ```
 
 After your build has completed, you can then use systemd to deploy it:
@@ -297,7 +299,7 @@ To see the full local link for this token, you need to look inside the log file 
 This is easily done as follows:
 
 ```
-$ docker logs irdn-notebook  # where 'irdn-notebook' is the default name of the Jupyter Notebook
+$ sudo docker logs irdn-notebook  # where 'irdn-notebook' is the default name of the Jupyter Notebook
 ```
 Clicking on this link should give you the notebook home page with README and a *work* directory with data loading scripts.
 The README outlines the data loading procedure.
@@ -345,7 +347,7 @@ Note that after you complete the update of the code tree, you'll need to rebuild
 and restart any Docker containers you have running, that is (run from the root project directory):
 
 ```
-$ docker-compose -f run/docker-compose.yml build
+$ sudo docker-compose -f run/docker-compose.yml build
 $ sudo systemctl restart ireceptor
 
 ```
