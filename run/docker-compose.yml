@@ -33,12 +33,12 @@ services:
         networks:
             - default
 
-    #irdn-notebook:
-    #    build: ./../dataloading
-    #    container_name: irdn-notebook
-    #    ports:
-    #        - "8888:8888"
-    #    image: ireceptor/notebook
+    irdn-notebook:
+        build: ./../dataloading
+        container_name: irdn-notebook
+        ports:
+            - "8888:8888"
+        image: ireceptor/notebook
         environment:
             - NB_UID=${UID}
         volumes:
