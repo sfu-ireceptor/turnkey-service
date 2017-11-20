@@ -12,6 +12,12 @@ services:
         	# One would rather need to set up a
         	# 'ports' forward port mapping to do that
             - "27017"
+        ports:
+            # For the first iteration of data loading
+            # we directly expose the Mongodb port; however
+            # TODO: to make a proper project 'admin' application 
+            # implemented as a Docker web application for data loading? 
+            - "27017:27017"
         image: ireceptor/repository-mongo
         volumes:
             # It is assumed here that the directory 
@@ -31,12 +37,12 @@ services:
         networks:
             - default
 
-    irdn-notebook:
-        build: ./../dataloading
-        container_name: irdn-notebook
-        ports:
-            - "8888:8888"
-        image: ireceptor/notebook
+    #irdn-notebook:
+    #    build: ./../dataloading
+    #    container_name: irdn-notebook
+    #    ports:
+    #        - "8888:8888"
+    #    image: ireceptor/notebook
         environment:
             - NB_UID=${UID}
         volumes:
