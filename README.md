@@ -8,10 +8,11 @@ The design of this turnkey is deeply inspired and largely adapted from the excel
 
 ## Dependencies ##
 
-The 'turnkey-service' project is currently composed of 2 separate submodules and a set of docker compose directives:
+The 'turnkey-service' project is currently composed of three separate submodules and a set of docker compose directives:
 
  * [repository-mongodb](https://github.com/sfu-ireceptor/repository-mongodb): The Mongo database.
  * [service-js-mongodb](https://github.com/sfu-ireceptor/service-js-mongodb): iReceptor API service with JavaScript implementation for MongoDB repository. You may wish to confirm which branch of this project contains the implementation of the iReceptor data source API you wish to use (normally 'master' is the default release, although 'develop' may contain the latest implementation. As of mid-November 2017, we are have pointed the 'docker-turnkey' branch repository to the 'develop' branch)
+ * [dataloading-mongodb](https://github.com/sfu-ireceptor/dataloading-mongodb): A submodule with scripts, some test data and documented procedures for iReceptor node data loading.
 
 ## Version ## 
 
