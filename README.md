@@ -65,7 +65,16 @@ then follow remaining configuration steps listed here below.
 
 **Installation of Docker**
 
-If you choose to run the dockerized versions of the applications, you'll obviously need to [install Docker first](https://docs.docker.com/engine/installation/) in your target Linux operating environment (bare metal server or virtual machine running Linux).  For our installations, we typically use Ubuntu Linux, for which there is an [Ubuntu-specific docker installation using the repository](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository). For other installations, please find instructions specific to your choice of Linux variant, on the Docker site.
+If you choose to run the dockerized versions of the applications, you'll obviously need to [install Docker first](https://docs.docker.com/engine/installation/) in your target Linux operating environment (bare metal server or virtual machine running Linux).
+
+For our installations, we typically use Ubuntu Linux, for which there is an [Ubuntu-specific docker installation using the repository](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository).
+Note that you should have 'curl' installed first before installing Docker:
+
+```
+sudo apt-get install curl
+```
+
+For other installations, please find instructions specific to your choice of Linux variant, on the Docker site.
 
 You will then also need to [install Docker Compose](https://docs.docker.com/compose/install/) alongside Docker on your target Linux operating environment.
 
@@ -143,7 +152,7 @@ However, note that this file assumes that you've already created a directory
 for your MongoDb database in the following manner (and location):
 
 ```
-$ mkdir -p /opt/ireceptor/mongodb
+$ sudo mkdir -p /opt/ireceptor/mongodb
 ```
 
 Assuming that you have done this, then you can run the following command
@@ -211,7 +220,7 @@ You should fix this path or make a symbolic link to the real location of the cod
 ```
 # symbolic link (if necessary) to your local git clone directory for the turnkey-service code
 cd /opt/ireceptor
-ln -s /path/to/your/turnkey-service .
+sudo ln -s /path/to/your/turnkey-service .
 cd turnkey-service
 sudo cp host/systemd/ireceptor.service /etc/systemd/system/ireceptor.service
 sudo systemctl daemon-reload
@@ -291,15 +300,15 @@ $ sudo docker ps
 Assuming that you have (re)started the database, you can test access to it using the following command:
 
 ```
-$ sudo docker exec -it irdn-mongo mongo --authenticationDatabase admin dbname -u serviceAccount -p servicePassword
+$ sudo docker exec -it irdn-mongo mongo --authenticationDatabase admin dbname -u serviceAccount -p serviceSecret
 ```
  
-Where your *serviceAccount* and *servicePassword* are as you set them above in the *dbsetup.js* configuration file.
+Where your *serviceAccount* and *serviceSecret* are as you set them above in the *dbsetup.js* configuration file.
 
 That will give you a command line access to mongo. Assuming this succeeds, you can then try a simple command like
 
 ```
-dbs
+show dbs
 exit
 ```
 
