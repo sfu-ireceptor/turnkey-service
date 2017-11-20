@@ -6,11 +6,7 @@ services:
     irdn-mongo:
         build: ./../repository-mongodb
         container_name: irdn-mongo
-        expose:
-        	# By default, MongoDb is not visible 
-        	# outside of the default 'bridge' network
-        	# One would rather need to set up a
-        	# 'ports' forward port mapping to do that
+        expose: 
             - "27017"
         ports:
             # For the first iteration of data loading
