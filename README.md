@@ -6,6 +6,8 @@ This repository contains the software package of a "turnkey" package for the ins
 
 The design of this turnkey is deeply inspired and largely adapted from the excellent VDJServer iReceptor Node package developed by **Scott Christley** of the **VDJServer** project at the **University of Texas Southwestern University**.
 
+Here we give an overview of iReceptor node configuration and operation. It is assumed that you type in these commands and run them within a Linux terminal (the '$' designates the command line prompt... yours may look different!).
+
 ## Dependencies ##
 
 The 'turnkey-service' project is currently composed of three separate submodules and a set of docker compose directives:
