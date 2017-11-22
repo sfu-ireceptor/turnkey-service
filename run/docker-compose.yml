@@ -33,18 +33,21 @@ services:
         networks:
             - default
 
-    irdn-notebook:
-        build: ./../dataloading
-        container_name: irdn-notebook
-        ports:
-            - "8888:8888"
-        image: ireceptor/notebook
-        environment:
-            - NB_UID=${UID}
-        volumes:
-            - ./../dataloading/notebooks:/home/jovyan/work
-        networks:
-            - default
+    # 
+    # Use of Jupyter Notebook for data loading tasks is deprecated for now
+    #
+    # irdn-notebook:
+    #    build: ./../dataloading
+    #    container_name: irdn-notebook
+    #    ports:
+    #        - "8888:8888"
+    #    image: ireceptor/notebook
+    #    environment:
+    #        - NB_UID=${UID}
+    #    volumes:
+    #        - ./../dataloading/notebooks:/home/jovyan/work
+    #    networks:
+    #        - default
 
 networks:
     default:
