@@ -1,0 +1,54 @@
+# iReceptor Node Docker Orchestration
+
+version: '2'
+
+services:
+    irdn-mongo:
+        build: ./../repository-mongodb
+        container_name: irdn-mongo
+        expose: 
+            - "27017"
+        ports:
+            # For the first iteration of data loading
+            # we directly expose the Mongodb port; however
+            # TODO: to make a proper project 'admin' application 
+            # implemented as a Docker web application for data loading? 
+            - "27017:27017"
+        image: ireceptor/repository-mongo
+        volumes:
+            # It is assumed here that the directory 
+            # /opt/ireceptor/mongodb already exists
+            - /opt/ireceptor/mongodb:/data/db
+        networks:
+            - default
+        command: mongod --auth
+
+    irdn-api:
+        build: ./../service-js-mongodb
+        container_name: irdn-api
+        env_file: ./../service-js-mongodb/.env
+        ports:
+            - "8080:8080"
+        image: ireceptor/service-js-mongodb
+        networks:
+            - default
+
+    # 
+    # Use of Jupyter Notebook for data loading tasks is deprecated for now
+    #
+    # irdn-notebook:
+    #    build: ./../dataloading
+    #    container_name: irdn-notebook
+    #    ports:
+    #        - "8888:8888"
+    #    image: ireceptor/notebook
+    #    environment:
+    #        - NB_UID=${UID}
+    #    volumes:
+    #        - ./../dataloading/notebooks:/home/jovyan/work
+    #    networks:
+    #        - default
+
+networks:
+    default:
+        driver: bridge
