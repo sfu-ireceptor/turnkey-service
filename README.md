@@ -306,7 +306,7 @@ Assuming that you have (re)started the database, you can test access to it using
 $ sudo docker exec -it irdn-mongo mongo --authenticationDatabase admin dbname -u serviceAccount -p serviceSecret
 ```
  
-Where your *serviceAccount* and *serviceSecret* are as you set them above in the *dbsetup.js* configuration file.
+Where the *dbname*, *serviceAccount* and *serviceSecret* are as you set them above in the *dbsetup.js* configuration file (e.g. dbname is probably 'ireceptor').
 
 That will give you a command line access to mongo. Assuming this succeeds, you can then try a simple command like
 
