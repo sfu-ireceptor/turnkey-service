@@ -1,0 +1,78 @@
+
+
+On Fri, Sep 15, 2017 at 1:51 PM, Scott Christley <Scott.Christley@utsouthwestern.edu> wrote:
+
+Thanks Richard, okay yeah, whether it’s a vagrant strategy or a docker strategy or both, 
+there still is always a bunch of things that need to be done on the host. For example, 
+you still need to install vagrant/docker itself on the machine, you need to figure out
+ how the service will get automatically started at boot time (or restarted if 
+ the process goes down), and security settings like usernames and passwords should 
+ reside on the host and not in the docker image. Another example, VDJServer installs 
+ a nginx on the host and sets up the SSL security stuff for nginx on the host. 
+ I was told they went this route because managing HTTPS within docker was a hassle, 
+ plus you don’t want your security info in any docker image, especially as they are public.
+ 
+Anyways, your points at the meeting about Windows and Mac are still valid, 
+the vagrant/docker strategy helps but it’s not 100%. I’m not sure that tossing 
+the vagrant strategy is necessary, especially if the others on the 
+iReceptor team are comfortable with it, docker throws in a new skill set for them.
+ 
+Note that I’ve often had trouble getting HPC to support docker. TACC will allow 
+it in VMs (VDJServer hosts all run on VMs provided by TACC). We worked with 
+San Diego Supercomputer Center and their VMs wouldn’t even allow docker. 
+And docker is never allowed on the actual supercomputer cluster, because of 
+its root requirements, so Singularity (http://singularity.lbl.gov) is what 
+HPC centers seem to push. I’m not sure what ComputeCanada allows but 
+I guess if they allow you to install your own VM software then it seems you can 
+put docker either within it or alongside it.
+ 
+So I think I’m okay at the moment with implementing parallel strategies. 
+Maybe for example it’s easier to have vagrant on the machine and then use 
+docker inside the VM, instead of installing docker directly on the host. 
+That way you can insure a consistent linux environment even if its Mac or Windows.
+ 
+Cheers
+Scott
+ 
+ 
+ 
+
+On Thu, Sep 21, 2017 at 8:22 AM, Scott Christley <Scott.Christley@utsouthwestern.edu> wrote:
+Hey Richard,
+ 
+Thanks for the update. Glad to hear your project is going well!
+ 
+I too have limited time I can devote, so I’ve been taking the shortest path to get what I need to get implemented for VDJServer without becoming too embedded within the iReceptor team. Instead of working directly on the turnkey system (I don’t want to get involved in puhphet, VMs and etc.), I created a deployment repository for VDJServer which pulls various pieces together.
+ 
+https://bitbucket.org/vdjserver/vdjserver-repository/src
+ 
+Hopefully this will provide a use case for you to look at later on. I don’t have any specific tasks for you, though I may bounce some ideas now and then.
+ 
+Cheers
+Scott
+
+
+On Thu, Sep 21, 2017 at 9:55 AM, Scott Christley <Scott.Christley@utsouthwestern.edu> wrote:
+The individual modules (mongodb, API service) are setup with Docker, the whole service is put together using docker-compose
+ 
+https://bitbucket.org/vdjserver/vdjserver-repository/src/5fd53fae27d614bcd37200f6d351b4cc955100e4/docker-compose/run/docker-compose.yml?at=master&fileviewer=file-view-default
+ 
+Note that this assumes everything running on a single node which is what I’m doing for VDJServer. I’m not getting into sharding/replication with Mongo yet as I don’t have the compute resources atm.
+ 
+Scott
+
+On Thu, Nov 2, 2017 at 8:02 AM, Scott Christley <Scott.Christley@utsouthwestern.edu> wrote:
+Hi Richard,
+ 
+There is the repository for mongo. I’ve done very little beyond the standard docker image, mainly just added some documentation to setup authentication. As far as I know, the iReceptor team isn’t using it.
+ 
+There is also the service-js-mongodb repository which is the JavaScript implementation for the API, it is using swagger middleware, so Brian and I have spent a bit of time to clean up the API. The code in there is somewhat VDJServer specific because the data model for mongo is fluid. I’m sure the data I’m putting in doesn’t exactly match the iReceptor’s data in their mongo. I’m still working on the implementation. It should be possible to make it more general though.
+ 
+I’m pulling those repositories into a VDJServer repository which composes everything together.
+ 
+https://bitbucket.org/vdjserver/vdjserver-repository
+ 
+Right now I’ve written some scripts to import data into mongo, but I have them in a private repository. Those scripts take the VDJServer metadata and “flattens” it so that it matches the API (to make the queries simpler).
+ 
+Cheers
+Scott
