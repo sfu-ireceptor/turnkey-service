@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>SyntaxError: Unexpected token u in JSON at position 1<br> &nbsp; &nbsp;at JSON.parse (&lt;anonymous&gt;)<br> &nbsp; &nbsp;at /service-js-mongodb/ireceptor-node/api/controllers/sequences.js:59:33<br> &nbsp; &nbsp;at Array.forEach (&lt;anonymous&gt;)<br> &nbsp; &nbsp;at constructQuery (/service-js-mongodb/ireceptor-node/api/controllers/sequences.js:31:44)<br> &nbsp; &nbsp;at querySequenceSummary (/service-js-mongodb/ireceptor-node/api/controllers/sequences.js:160:17)<br> &nbsp; &nbsp;at postSequenceSummary (/service-js-mongodb/ireceptor-node/api/controllers/sequences.js:350:5)<br> &nbsp; &nbsp;at swagger_router (/service-js-mongodb/ireceptor-node/node_modules/swagger-node-runner/fittings/swagger_router.js:104:13)<br> &nbsp; &nbsp;at Runner.&lt;anonymous&gt; (/service-js-mongodb/ireceptor-node/node_modules/bagpipes/lib/bagpipes.js:171:7)<br> &nbsp; &nbsp;at bound (domain.js:301:14)<br> &nbsp; &nbsp;at Runner.runBound (domain.js:314:12)</pre>
+</body>
+</html>
