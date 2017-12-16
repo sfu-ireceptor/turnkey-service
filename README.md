@@ -319,8 +319,8 @@ If you have a functional node database, you can proceed with loading in some (te
 
 # Loading Data into the Node #
 
-This project links into a 'dataloader' submodule which is currently under active development
-and has a README which will be further elaborated as the submodule evolves.
+This project links into a ['dataloader' submodule](https://github.com/sfu-ireceptor/dataloading-mongo)
+which is currently under active development and has a README providing details about available data loading scripts.
 
 **Docker Compose Files**
 
