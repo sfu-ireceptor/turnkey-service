@@ -216,6 +216,8 @@ Assuming that you have done this, then you can run the following command
  $ sudo docker-compose -f run/docker-compose.yml build
 ```
 
+This command make take some time to execute, as it is downloading and build your docker containers.
+
 If you wish to customize your docker images, then you can create an overlay
 docker-compose-mysite.yml file and use it to override the default 
 configuration file during the build, as follows:
@@ -282,9 +284,7 @@ sudo systemctl enable docker
 sudo systemctl enable ireceptor
 ```
 
-**Deployment Procedure**
-
-***SSL***
+**SSL**
 
 The iReceptor-Repository does not handle SSL certificates directly, and is
 currently configured to run HTTP internally on port 8080. It must be
@@ -294,7 +294,9 @@ We don't (yet) tell you how to do this (here).
 For now, please consult with your local system administrator or
 suitable documentation about your web server platform of choice (e.g. Apache, NGINX, etc).
 
-**Dockerized instances (ir-dev, ir-staging, production)**
+## Deployment Procedure ##
+
+**Managing dockerized instances**
 
 Dockerized instances may be started/stopped/restarted using the
 supplied systemd script *host/systemd/ireceptor.service*.
@@ -306,7 +308,19 @@ $ sudo systemctl <ACTION> ireceptor
 ```
 
 In most cases, a simple restart command is sufficient to bring up
-ireceptor. The restart command will attempt to stop all
+ireceptor.
+
+```
+$ sudo systemctl restart ireceptor
+```
+
+To confirm that this worked and the docker containers are indeed running, you can run the following command:
+
+```
+$ sudo docker ps
+```
+
+The restart command will attempt to stop all
 running docker-compose instances, and it is generally
 successful. However, if it encounters any problems then you can just
 stop instances manually and try it again. Use the docker process listing
@@ -348,6 +362,8 @@ running in your Linux environment, by running the docker process viewing command
 ```
 $ sudo docker ps
 ```
+
+
 
 # Testing Database Access in the Node #
 
@@ -394,6 +410,7 @@ docker-compose -f run/ocker-compose.yml -f run/docker-compose.prod-override.yml 
 
 At the moment, we don't yet have a formal test suite for testing your node. Your best option
 for now is to review the API docs and compose suitable API calls using your browser.
+
 
 **Updating the project database or service submodules to a specified Git branch**
 
