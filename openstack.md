@@ -42,4 +42,4 @@ If your key was created with a passphrase (recommended) then you will be prompte
 
 ## Continue configuring your Turnkey system
 
-At this point, you have a basic VM running Ubuntu for which you can continue the [installation process for the Turnkey system](README.md).
+At this point, you have a basic VM running Ubuntu for which you can continue the [installation process for the Turnkey system](README.md#configuration-procedure).
