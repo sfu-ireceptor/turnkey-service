@@ -339,6 +339,8 @@ $ sudo docker-compose down irdn-api
 $ sudo docker-compose down irdn-mongo
 ```
 
+**Changing the configuration and using a new codebase**
+
 It is also important to note that the systemd ireceptor
 command will not rebuild new container instances. 
 If you have followed this turnkey recipe, you should already have
@@ -367,11 +369,18 @@ running in your Linux environment, by running the docker process viewing command
 $ sudo docker ps
 ```
 
+# Testing the Turnkey Repository #
 
+**Testing Database Access in the Node**
 
-# Testing Database Access in the Node #
+Assuming that you have (re)started the containers that manage the database, you should have a Mongo container running.
 
-Assuming that you have (re)started the database, you can test access to it using the following command:
+```
+ubuntu@ireceptor-turnkey:/opt/ireceptor/turnkey-service$ sudo docker ps | grep irdn-mongo
+ff26aab34970        ireceptor/repository-mongo     "docker-entrypoint..."   28 minutes ago      Up 28 minutes       0.0.0.0:27017->27017/tcp   irdn-mongo
+```
+
+You can test access to the Mongo repository using the following command:
 
 ```
 $ sudo docker exec -it irdn-mongo mongo --authenticationDatabase admin dbname -u serviceAccount -p serviceSecret
@@ -379,14 +388,46 @@ $ sudo docker exec -it irdn-mongo mongo --authenticationDatabase admin dbname -u
  
 Where the *dbname*, *serviceAccount* and *serviceSecret* are as you set them above in the *dbsetup.js* configuration file (e.g. dbname is probably 'ireceptor').
 
-That will give you a command line access to mongo. Assuming this succeeds, you can then try a simple command like
+That will give you a command line access to mongo. Assuming this succeeds, you can then try simple commands like
 
 ```
-show dbs
-exit
+> db.getName()
+ireceptor
+> db.stats()
+{
+        "db" : "ireceptor",
+        "collections" : 0,
+        "views" : 0,
+        "objects" : 0,
+        "avgObjSize" : 0,
+        "dataSize" : 0,
+        "storageSize" : 0,
+        "numExtents" : 0,
+        "indexes" : 0,
+        "indexSize" : 0,
+        "fileSize" : 0,
+        "fsUsedSize" : 0,
+        "fsTotalSize" : 0,
+        "ok" : 1
+}
+> exit
 ```
 
-If you have a functional node database, you can proceed with loading in some (test) data.
+**Testing the iReceptor Web Service**
+
+You should also have a docker container running the iReceptor web service. 
+
+```
+$ sudo docker ps | grep irdn-api
+sudo: unable to resolve host ireceptor-turnkey-test-2
+c4f87f0749a5        ireceptor/service-js-mongodb   "node --harmony /s..."   30 minutes ago      Up 30 minutes       0.0.0.0:8080->8080/tcp     irdn-api
+```
+
+In order to confirm that the iReceptor Repository Service is running, issue the following command:
+
+```
+$ curl -X POST -H "accept: application/json" -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/v2/samples"
+```
 
 # Loading Data into the Node #
 
