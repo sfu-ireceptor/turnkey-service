@@ -95,7 +95,7 @@ cp .env.defaults .env
 emacs .env
 ```
 
-Note the paramters you set here will be propagated to the *dbsetup.js* file in the next section, as
+Note the parameters you set here will be propagated to the *dbsetup.js* file in the next section, as
 noted by the inline comments in  the *.env.defaults* file.
 
 ```
@@ -112,8 +112,8 @@ MONGODB_DB=
 # These values should be set to the 'guestAccount' and
 # 'guestSecret' values respectively, as defined in the 
 # dbsetup.js file in your repository-mongodb submodule
-MONGODB_USER=
-MONGODB_SECRET=
+MONGODB_GUEST_USER=
+MONGODB_GUEST_PASSWORD=
 ```
 
 **Configuring repository-mongodb**
@@ -204,7 +204,7 @@ $ sudo docker run -d --rm -v /opt/ireceptor/mongodb:/data/db -v $PWD:/dbsetup --
 
 $ sudo docker exec -it irdn-mongo mongo admin /dbsetup/dbsetup.js
 
-# Stop the temporary mongo servicd (note: --rm flag above ensures that the container is also removed)
+# Stop the temporary mongo service daemon (note: --rm flag above ensures that the container is also removed)
 $ sudo docker stop irdn-mongo
 
 ```
@@ -321,6 +321,10 @@ If you have a functional node database, you can proceed with loading in some (te
 
 This project links into a ['dataloader' submodule](https://github.com/sfu-ireceptor/dataloading-mongo)
 which is currently under active development and has a README providing details about available data loading scripts.
+
+Note that data loading is a "service" user operation hence you should use the "service" user plus secret set in dbsetup.js (above).
+Note that the environment variables "MONGODB_SERVICE_USER" and "MONGODB_SERVICE_SECRET" may be set to these values
+for convenience in data loading (these are the default credentials read from the environment).
 
 **Docker Compose Files**
 
