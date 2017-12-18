@@ -314,10 +314,14 @@ ireceptor.
 $ sudo systemctl restart ireceptor
 ```
 
-To confirm that this worked and the docker containers are indeed running, you can run the following command:
+To confirm that this worked and the docker containers are indeed running,
+you can run the following command:
 
 ```
-$ sudo docker ps
+ubuntu@ireceptor-turnkey:/opt/ireceptor/turnkey-service$ sudo docker ps
+CONTAINER ID        IMAGE                          COMMAND                  CREATED             STATUS              PORTS                      NAMES
+c4f87f0749a5        ireceptor/service-js-mongodb   "node --harmony /s..."   5 minutes ago       Up 5 minutes        0.0.0.0:8080->8080/tcp     irdn-api
+ff26aab34970        ireceptor/repository-mongo     "docker-entrypoint..."   5 minutes ago       Up 5 minutes        0.0.0.0:27017->27017/tcp   irdn-mongo
 ```
 
 The restart command will attempt to stop all
