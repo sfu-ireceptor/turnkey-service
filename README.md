@@ -164,7 +164,7 @@ MONGODB_DB=
 # 'guestSecret' values respectively, as defined in the 
 # dbsetup.js file in your repository-mongodb submodule
 MONGODB_GUEST_USER=
-MONGODB_GUEST_PASSWORD=
+MONGODB_GUEST_SECRET=
 ```
 
 **Configuring repository-mongodb**
@@ -183,7 +183,7 @@ to decide:
 
 * Name and password for guest account. This account will only have
   read access on the database for performing queries. As noted above
-  these should be set to the same values at MONGODB_USER and MONGODB_SECRET.
+  these should be set to the same values at MONGODB_GUEST_USER and MONGODB_GUEST_SECRET.
 
 ```
 # Modify dbsetup.js with appropriate settings
