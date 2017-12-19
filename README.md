@@ -75,17 +75,17 @@ For our installations, we typically use Ubuntu Linux, for which there is an [Ubu
 Note that you should have 'curl' installed first before installing Docker:
 
 ```
-sudo apt-get install curl
+$ sudo apt-get install curl
 ```
 
 For other installations, please find instructions specific to your choice of Linux variant, on the Docker site.
 
-**Testing docker**
+**Testing Docker**
 
 In order to ensure that docker is working correctly, run the following command:
 
 ```
-ubuntu@ireceptor-turnkey:~/turnkey-service$ sudo docker run hello-world
+$ sudo docker run hello-world
 ```
 
 This should result in the following output:
@@ -128,7 +128,7 @@ Note that under Ubuntu, you need to run docker (and docker-compose) as 'sudo'.
 
 In order to ensure Docker Compose is working correctly, issue the following command:
 ```
-ubuntu@ireceptor-turnkey:~/turnkey-service$ docker-compose --version
+$ docker-compose --version
 docker-compose version 1.17.0, build ac53b73
 ```
 
@@ -318,7 +318,7 @@ To confirm that this worked and the docker containers are indeed running,
 you can run the following command:
 
 ```
-ubuntu@ireceptor-turnkey:/opt/ireceptor/turnkey-service$ sudo docker ps
+$ sudo docker ps
 CONTAINER ID        IMAGE                          COMMAND                  CREATED             STATUS              PORTS                      NAMES
 c4f87f0749a5        ireceptor/service-js-mongodb   "node --harmony /s..."   5 minutes ago       Up 5 minutes        0.0.0.0:8080->8080/tcp     irdn-api
 ff26aab34970        ireceptor/repository-mongo     "docker-entrypoint..."   5 minutes ago       Up 5 minutes        0.0.0.0:27017->27017/tcp   irdn-mongo
@@ -376,7 +376,7 @@ $ sudo docker ps
 Assuming that you have (re)started the containers that manage the database, you should have a Mongo container running.
 
 ```
-ubuntu@ireceptor-turnkey:/opt/ireceptor/turnkey-service$ sudo docker ps | grep irdn-mongo
+$ sudo docker ps | grep irdn-mongo
 ff26aab34970        ireceptor/repository-mongo     "docker-entrypoint..."   28 minutes ago      Up 28 minutes       0.0.0.0:27017->27017/tcp   irdn-mongo
 ```
 
