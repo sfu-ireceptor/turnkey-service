@@ -263,7 +263,15 @@ $ sudo docker stop irdn-mongo
 ```
 
 The /opt/ireceptor/mongodb (or your specified) database directory should now 
-contain an initialized Mongo database, ready for use by your system.
+contain an initialized Mongo database, ready for use by your system. The contents of the directory should be something like the following.
+
+```
+$ ls /opt/ireceptor/mongodb/
+collection-0-8341968993270290234.wt  diagnostic.data                 index-6-8341968993270290234.wt  _mdb_catalog.wt  WiredTiger         WiredTiger.wt
+collection-2-8341968993270290234.wt  index-1-8341968993270290234.wt  index-8-8341968993270290234.wt  mongod.lock      WiredTigerLAS.wt
+collection-4-8341968993270290234.wt  index-3-8341968993270290234.wt  index-9-8341968993270290234.wt  sizeStorer.wt    WiredTiger.lock
+collection-7-8341968993270290234.wt  index-5-8341968993270290234.wt  journal                         storage.bson     WiredTiger.turtle
+111
 
 **Configuring systemd**
 
