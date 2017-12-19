@@ -438,6 +438,8 @@ Note that data loading is a "service" user operation hence you should use the "s
 Note that the environment variables "MONGODB_SERVICE_USER" and "MONGODB_SERVICE_SECRET" may be set to these values
 for convenience in data loading (these are the default credentials read from the environment).
 
+# Managing the software environment #
+
 **Docker Compose Files**
 
 There are two docker-compose files: one for general use ("docker-compose.yml"), and one that has been adjusted for use in a production environment ("docker-compose.prod-override.yml"). These files are meant to be overlayed and used together in a production environment: https://docs.docker.com/compose/extends/#different-environments
