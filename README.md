@@ -187,7 +187,7 @@ to decide:
 
 ```
 # Modify dbsetup.js with appropriate settings
-cd repository-mongodb
+cd ../repository-mongodb
 cp dbsetup.defaults dbsetup.js
 emacs dbsetup.js
 ```
