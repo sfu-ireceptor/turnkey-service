@@ -522,5 +522,5 @@ or the equivalent build with any overlay docker-compose configuration files (see
 
 * Maintainer of this project is Dr. Richard Bruskiewich (richard *AT* starinformatics *DOT* com), technical subcontractor to the iReceptor project hosted by Simon Fraser University.
 * Principal Investigator of the iReceptor project is Dr. Felix Breden (breden *AT* sfu.ca) of Simon Fraser University 
-* The iReceptor development team may also be contacted directly via ireceptor-team *AT* sfu.ca.
+* The iReceptor development team may also be contacted directly via support *AT* ireceptor.org.
 
