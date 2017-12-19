@@ -284,7 +284,10 @@ You should fix this path or make a symbolic link to the real location of the cod
 ```
 # symbolic link (if necessary) to your local git clone directory for the turnkey-service code
 cd /opt/ireceptor
-sudo ln -s /path/to/your/turnkey-service .
+# The following assumes that your GIT clone of the turnkey-service repository
+# is in ~ubuntu/turnkey-service. If not, replace ~ubuntu/turnkey-service with 
+# the path where you cloned the turnkey-service repository.
+sudo ln -s ~ubuntu/turnkey-service .
 cd turnkey-service
 sudo cp host/systemd/ireceptor.service /etc/systemd/system/ireceptor.service
 sudo systemctl daemon-reload
