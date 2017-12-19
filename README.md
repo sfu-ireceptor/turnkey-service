@@ -250,7 +250,7 @@ Note the mapping of mongo data directory and dbsetup.  You may set the
 value as recorded in the docker-compose.yml file used to make the image.
 
 ```
-$ cd repository-mongo
+$ cd repository-mongodb
 $ sudo docker run -d --rm -v /opt/ireceptor/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
 
 # Run setup script
