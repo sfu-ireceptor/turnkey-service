@@ -455,6 +455,10 @@ In order to confirm that the iReceptor Repository Service is running, issue the 
 $ curl -X POST -H "accept: application/json" -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/v2/samples"
 ```
 
+This only gives back an empty array **[ ]** as a result, you say?  
+
+Don't fret. We haven't loaded any data yet! We look at the task of data loading in the very next section.
+
 # Loading Data into the Node #
 
 This project links into a ['dataloader' submodule](https://github.com/sfu-ireceptor/dataloading-mongo)
