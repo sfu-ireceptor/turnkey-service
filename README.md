@@ -52,7 +52,7 @@ However, note that all configuration procedures are the same for dockerized and 
 You will need to clone down this project and all submodules onto your Linux machine in order to set up a local instance of an ireceptor data source node. You have two Github access options:
 
 1. [Configure, connect and clone the project using SSH](https://help.github.com/articles/connecting-to-github-with-ssh/)
-2. [Configure, connect and clone the project using HTTPS](https://help.github.com/articles/cloning-a-repository/))
+2. [Configure, connect and clone the project using HTTPS](https://help.github.com/articles/cloning-a-repository/)
 
 Once you have configured your selected access option, then you do the following:
 
