@@ -367,19 +367,19 @@ $ sudo docker-compose down irdn-mongo
 
 **Changing the configuration and using a new codebase**
 
-It is also important to note that the systemd ireceptor
-command will not rebuild new container instances. 
-If you have followed this turnkey recipe, you should already have
-a set of docker containers to use. However, if you change your 
-codebase, deployment configuration, etc. and therefore, need to
-build/rebuild a new set of containers, then (once again) you will need 
-to run the build command manually from within the project subdirectory, as follows:
+If you have followed this turnkey recipe, you should already have 
+a set of docker containers to use.  However, if you change your codebase, 
+deployment configuration, etc. it is important to note that the ireceptor systemd
+command will not automatically rebuild new container instances. 
+You'll have to do this yourself, as the need arises, that is
+build/rebuild a new set of containers, then (once again) run the 
+build command manually from within the project subdirectory, as follows:
 
 ```
  $ sudo docker-compose -f run/docker-compose.yml build
 ```
 
-After your build has completed, you can then use systemd to deploy it:
+After your build has completed, you can then use systemd to re-deploy it:
 
 ```
 $ sudo systemctl restart ireceptor
