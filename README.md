@@ -132,8 +132,9 @@ Note that under Ubuntu, you need to run docker (and docker-compose) as 'sudo'.
 In order to ensure Docker Compose is working correctly, issue the following command:
 ```
 $ docker-compose --version
-docker-compose version 1.17.0, build ac53b73
+docker-compose version 1.18.0, build 8dd22a9
 ```
+Note that your particular version and build number may be different than what is shown here. We don't currently expect that docker-compose version differences should have a significant impact on the build, but if in doubt, refer to the release notes of the docker-compose site for advice.
 
 **Configuring the iReceptor Turnkey system**
 
