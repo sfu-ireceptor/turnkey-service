@@ -461,11 +461,10 @@ Don't fret. We haven't loaded any data yet! We look at the task of data loading 
 
 # Loading Data into the Node #
 
-This project links into a ['dataloader' submodule](https://github.com/sfu-ireceptor/dataloading-mongo)
-which is currently under active development and has a README providing details about available data loading scripts.
+This project directly links into a ['dataloader-mongo' submodule](https://github.com/sfu-ireceptor/dataloading-mongo)
+which is currently under active development and has a README providing details documenting available data loading scripts.
 
-Note that data loading is a "service" user operation hence you should use the "service" user plus secret set in dbsetup.js (above).
-Note that the environment variables "MONGODB_SERVICE_USER" and "MONGODB_SERVICE_SECRET" may be set to these values
+The data loading is a "service" user operation hence you should use the "service" user plus secret set in dbsetup.js (above). Note that the environment variables "MONGODB_SERVICE_USER" and "MONGODB_SERVICE_SECRET" may be set to these values
 for convenience in data loading (these are the default credentials read from the environment).
 
 # Managing the software environment #
@@ -483,11 +482,12 @@ docker-compose -f run/docker-compose.yml -f docker-compose.prod-override.yml bui
 docker-compose -f run/ocker-compose.yml -f run/docker-compose.prod-override.yml up
 ```
 
-**How to run tests**
+**How to Run Tests**
 
-At the moment, we don't yet have a formal test suite for testing your node. Your best option
-for now is to review the API docs and compose suitable API calls using your browser.
-
+At the moment, we don't yet have a single formal test suite for testing your node. Your best option
+for the moment is to review the API docs and compose suitable API calls using your browser.
+We to plan to review this issue and develop a formal testing protocol 
+for the turnkey, as time and resources permit.
 
 **Updating the project database or service submodules to a specified Git branch**
 
@@ -524,9 +524,14 @@ or the equivalent build with any overlay docker-compose configuration files (see
 
 # Contribution guidelines #
 
-* Writing tests
-* Code review
-* Other guidelines
+This project generally follows the 'Git Workflow" in which a 'master' branch and 'develop' branch are formally
+maintained but that all all contributions to the project generally need to be offered as pull requests to 'develop'.
+
+Further project guidelies will be presented here as 
+
+* Writing tests - TBA
+* Code review - TBA
+* Other guidelines - TBA
 
 ## Development Guidelines ##
 
