@@ -45,6 +45,16 @@ One possible disadvantage is that some organizations discourage the use of Docke
 
 However, note that all configuration procedures are the same for dockerized and non-dockerized versions of the application and its submodules.
 
+## Don't Worry... Be Happy... ##
+
+When using a cloud instance, you *may* see a funny error crop up as the first line of output, every time you execute a terminal command, something like:
+
+```
+sudo: unable to resolve host <your-local-host-name> 
+```
+
+This nuisance error of cloud instance misconfiguration may be safely ignored as harmless to the task at hand...
+
 ## Configuration Procedure ##
 
 **Code Setup**
