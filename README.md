@@ -147,6 +147,7 @@ There is one '.env' configuration file that needs to be set up before the Docker
 ```
 cd service-js-mongodb
 cp .env.defaults .env
+# Use emacs or your favorite file editor (note: may need to be installed by apt-get in a new image...)
 emacs .env
 ```
 
