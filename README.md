@@ -54,10 +54,10 @@ You will need to clone down this project and all submodules onto your Linux mach
 ```
 # Clone the project.
 
-# Clone project using SSH...
+# Clone project using SSH (Note that you will need to [configure your Linux system with an SSH key](https://help.github.com/articles/connecting-to-github-with-ssh/) to be able to use SSH!)
 $ git clone git@github.com:sfu-ireceptor/turnkey-service.git
 
-# ...OR clone with HTTPS
+# ...OR clone with HTTPS (for this option, you need to [configure access using a Github account with user name and password](https://help.github.com/articles/cloning-a-repository/))
 $ git clone https://github.com/sfu-ireceptor/turnkey-service.git 
 
 cd turnkey-service
