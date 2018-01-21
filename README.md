@@ -464,8 +464,25 @@ Don't fret. We haven't loaded any data yet! We look at the task of data loading 
 This project directly links into a ['dataloader-mongo' submodule](https://github.com/sfu-ireceptor/dataloading-mongo)
 which is currently under active development and has a README providing details documenting available data loading scripts.
 
-The data loading is a "service" user operation hence you should use the "service" user plus secret set in dbsetup.js (above). Note that the environment variables "MONGODB_SERVICE_USER" and "MONGODB_SERVICE_SECRET" may be set to these values
+Generally speaking, there is a strict ordering to how data should be loaded: 
+
+1. Always first load the 'sample metadata' associated with a study that has generated sequence data, then
+2. Load the available sequence annotation. You may load available annotation (of any format, i.e. --imgt, --mixcr  etc) in any order you wish, as long as the associated sample metadata is already loaded first.
+
+Note again that the data loading is a "service" operation hence you should specify the Mongo database credentials of
+ the "service" user account - username plus secret - as is specified in dbsetup.js (above). 
+ 
+ Note that the environment variables "MONGODB_SERVICE_USER" and "MONGODB_SERVICE_SECRET" may also be used to set to these values
 for convenience in data loading (these are the default credentials read from the environment).
+
+Once you have loaded some 'sample' metadata, you can retry the above curl command to see it. If you continue to load the associated
+sequence annotation data, then the full iReceptor application programming interface (API) may be used to query it, for example:
+
+```
+$ curl -X POST -H "accept: application/json" -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/v2/sequences/summary"
+```
+
+
 
 # Managing the software environment #
 
