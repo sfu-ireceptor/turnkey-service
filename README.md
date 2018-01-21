@@ -506,10 +506,14 @@ Then, another developer who wants to have submodule_directory changed to that ta
 
 ```
 git pull
-git submodule update
+git submodule update --recursive
 
 ```
-git pull changes which commit their submodule directory points to.  git submodule update actually merges in the new code.
+
+The *git pull* command changes the git *commit* to which their submodule directory points.
+
+The *git submodule update --recursive* actually updates all the submodules (recursively in this case) 
+with the most up-to-date submodule code branches that the project uses.
 
 Note that after you complete the update of the code tree, you'll need to rebuild your Docker images 
 and restart any Docker containers you have running, that is (run from the root project directory):
