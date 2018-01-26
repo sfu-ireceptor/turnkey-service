@@ -479,10 +479,8 @@ Once you have loaded some 'sample' metadata, you can retry the above curl comman
 sequence annotation data, then the full iReceptor application programming interface (API) may be used to query it, for example:
 
 ```
-$ curl -X POST -H "accept: application/json" -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/v2/sequences/summary"
+$ curl -H 'Content-Type:application/x-www-form-urlencoded'  --data-urlencode 'ir_project_sample_id_list=1' http://locahost:8080/v2/sequences_summary
 ```
-
-
 
 # Managing the software environment #
 
