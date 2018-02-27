@@ -1,4 +1,4 @@
-#Manual Configuration of an iReceptor Turnkey Data Node
+# Manual Configuration of an iReceptor Turnkey Data Node
 
 If you decide not to simply run the **setup.sh** configuration script (or want to better understand the configuration process) then this document outlines the manual configuration steps which may be followed.
 

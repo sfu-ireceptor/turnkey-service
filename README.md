@@ -73,9 +73,9 @@ $ git clone https://github.com/sfu-ireceptor/turnkey-service.git
 
 Once you've downloaded the software to your system (using git cloning), you are now ready to configure it. For this, you have two options:
 
-1. Use the provided *setup.sh* script, which provides a significant degree of automation of the installation.
+1. Use the provided *setup.sh* script, mentioned below, which provides a significant degree of automation of the installation.
 
-2. Follow the classical manual recipe for turnkey configuration document [here](./MANUAL_CONFIGURATION.md).
+2. Follow the [classical manual recipe for turnkey configuration instructions](./MANUAL_CONFIGURATION.md).
 
 ## Configuration using setup.sh
 
