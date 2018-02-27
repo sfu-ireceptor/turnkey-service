@@ -6,7 +6,7 @@ SERVICE="service-js-mongodb"
 # Path to database submodule
 DATABASE="repository-mongodb"
 # Path to dataloading submodule
-DATALOADING="dataloading"
+DATALOADING="dataloading-mongo"
 CURL="curl"
 DOCKER="docker"
 DOCKER_COMPOSE="docker-compose"
