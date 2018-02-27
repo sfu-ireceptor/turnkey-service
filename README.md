@@ -65,7 +65,22 @@ To start, you need to create your hosting folder location and properly set its a
 
 ```
 $ sudo mkdir -p /opt/ireceptor
-$ sudo chown mygroup:myusername /opt/ireceptor . # where mygroup and myusername are your Linux default group and username
+
+# Substitute your actual Linux group and username for mygroup and myusername below 
+$ sudo chown mygroup:myusername /opt/ireceptor 
+```
+
+Next, ensure that you have a recent version of git installed.
+
+```
+$ git --version
+The program 'git' is currently not installed. You can install it by typing:
+sudo apt install git
+```
+
+Oops! Better install git first!
+```
+$ sudo apt install git  # note: some Linux flavors use 'yum' not 'apt' to install software
 ```
 
 For git cloning of the code, you have two Github access options (see the github doc links provided for configuration details):
