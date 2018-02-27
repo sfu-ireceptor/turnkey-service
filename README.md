@@ -1,8 +1,8 @@
 # Turnkey Package for an iReceptor Data Source Node #
 
-[iReceptor](http://ireceptor.org) is a data management system and scientific gateway for mining newly available Next Generation sequence data of Acquired Immunity Receptor Repertoires (AIRR). The iReceptor data management system is designed to be a distributed network of data source nodes implementing a common data access Application Programming Interface (API) specification.  The iReceptor data management system is expected to become one public reference implementation of a AIRR-compliant data repository. 
+[iReceptor](http://ireceptor.org) is a data management system and scientific gateway for mining newly available Next Generation sequence data of Acquired Immunity Receptor Repertoires (AIRR). The iReceptor data management system is designed to be a distributed network of data source nodes implementing a [common iReceptor data node Application Programming Interface (API) specification](https://github.com/sfu-ireceptor/api/tree/master).  The iReceptor data management system is expected to become one public reference implementation of a AIRR-compliant data repository. 
 
-This repository contains the software package of a "turnkey" package for the installation, configuration and data loading of a small to medium sized iReceptor data source node running a simple database within a single node. With respect to the iReceptor API, the turnkey package specifically implements the ["AIRR Compliance" branch of the iReceptor public web service API](https://github.com/sfu-ireceptor/api/tree/AIRR-compliance).
+This repository contains the software package of a "turnkey" package for the installation, configuration and data loading of a small to medium sized iReceptor data source node running a simple database within a single node.
 
 The design of this turnkey is deeply inspired and largely adapted from the excellent VDJServer iReceptor Node package developed by **Scott Christley** of the **VDJServer** project at the **University of Texas Southwestern University**.
 
@@ -13,7 +13,7 @@ Here we give an overview of iReceptor node configuration and operation. It is as
 The 'turnkey-service' project is currently composed of [this root project](https://github.com/sfu-ireceptor/turnkey-service) containing some top level resources, three separate submodules, and a set of [Docker](https://www.docker.com) container 'compose' directives. The separate submodules are as follows:
 
  * [repository-mongodb](https://github.com/sfu-ireceptor/repository-mongodb): The Mongo database.
-  * [dataloading-mongodb](https://github.com/sfu-ireceptor/dataloading-mongodb): A submodule with scripts, some test data and documented procedures for iReceptor node data loading.
+  * [dataloading-mongo](https://github.com/sfu-ireceptor/dataloading-mongo): A submodule with scripts, some test data and documented procedures for iReceptor node data loading.
  * [service-js-mongodb](https://github.com/sfu-ireceptor/service-js-mongodb): iReceptor API service with JavaScript implementation for MongoDB repository. You may wish to confirm which branch of this project contains the implementation of the iReceptor data source API you wish to use (normally 'master' is the default release, although 'develop' may contain the latest implementation. As of mid-November 2017, we are have pointed the 'docker-turnkey' branch repository to the 'develop' branch). *Note that this submodule itself includes another embedded submodule, [the AIRR-compliance branch of the iReceptor data node API](https://github.com/sfu-ireceptor/api/tree/AIRR-compliance), the pertinent release for which needs to be be proactively recursively synchronized with the turnkey project after git pull updates of the main code base (i.e. usually by **git submodule update --recursive** command invoked from the root project directory).*
 
 ## Version ## 
