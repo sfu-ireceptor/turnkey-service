@@ -18,7 +18,7 @@ The 'turnkey-service' project is currently composed of [this root project](https
 
 ## Version ## 
 
-0.0.1
+0.0.2
 
 ## First Decision: Where and how will you run the iReceptor node? ##
 
@@ -59,7 +59,16 @@ This nuisance error of cloud instance misconfiguration may be safely ignored as 
 
 **Code Setup**
 
-You will need to clone down this project and all submodules onto your Linux machine in order to set up a local instance of an ireceptor data source node. You have two Github access options:
+You will need to git clone this project and all submodules onto your Linux machine in order to set up a local instance of an ireceptor data source node. You need to decide where to clone it. A convenient recommended location for hosting your turnkey code and database is the folder location **/opt/ireceptor** (if you decide otherwise, modify the configuration instructions below to suit your needs).
+
+To start, you need to create your hosting folder location and properly set its access permissions to your user account, i.e.
+
+```
+$ sudo mkdir -p /opt/ireceptor
+$ sudo chown mygroup:myusername /opt/ireceptor . # where mygroup and myusername are your Linux default group and username
+```
+
+For git cloning of the code, you have two Github access options (see the github doc links provided for configuration details):
 
 1. [Configure, connect and clone the project using SSH](https://help.github.com/articles/connecting-to-github-with-ssh/)
 2. [Configure, connect and clone the project using HTTPS](https://help.github.com/articles/cloning-a-repository/)
@@ -67,10 +76,13 @@ You will need to clone down this project and all submodules onto your Linux mach
 Once you have configured your selected access option, then you do the following:
 
 ```
-# Clone project using SSH...
+# First, set your directory to your hosting folder location
+cd /opt/ireceptor
+
+# Then, either clone project using SSH or...
 $ git clone git@github.com:sfu-ireceptor/turnkey-service.git
 
-# ...OR clone the projecdt with HTTPS
+# ... clone the projecdt with HTTPS
 $ git clone https://github.com/sfu-ireceptor/turnkey-service.git 
 
 cd turnkey-service
