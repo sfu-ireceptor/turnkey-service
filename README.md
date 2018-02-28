@@ -69,6 +69,7 @@ $ git clone git@github.com:sfu-ireceptor/turnkey-service.git
 $ git clone https://github.com/sfu-ireceptor/turnkey-service.git 
 
 ```
+
 # Configuring the Software
 
 Once you've downloaded the software to your system (using git cloning), you are now ready to configure it. For this, you have two options:
