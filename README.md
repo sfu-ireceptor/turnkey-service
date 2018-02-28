@@ -97,6 +97,70 @@ $ ./setup.sh
 
 It is that simple (we hope!)
 
+# Testing the Turnkey Repository
+
+**Testing Database Access in the Node**
+
+Assuming that you have (re)started the containers that manage the database, you should have a Mongo container running.
+
+```
+$ sudo docker ps | grep irdn-mongo
+ff26aab34970        ireceptor/repository-mongo     "docker-entrypoint..."   28 minutes ago      Up 28 minutes       0.0.0.0:27017->27017/tcp   irdn-mongo
+```
+
+You can test access to the Mongo repository using the following command:
+
+```
+$ sudo docker exec -it irdn-mongo mongo --authenticationDatabase admin dbname -u serviceAccount -p serviceSecret
+```
+ 
+Where the *dbname*, *serviceAccount* and *serviceSecret* are as you set them above in the *dbsetup.js* configuration file (e.g. dbname is probably 'ireceptor').
+
+That will give you a command line access to mongo. Assuming this succeeds, you can then try simple commands like
+
+```
+> db.getName()
+ireceptor
+> db.stats()
+{
+        "db" : "ireceptor",
+        "collections" : 0,
+        "views" : 0,
+        "objects" : 0,
+        "avgObjSize" : 0,
+        "dataSize" : 0,
+        "storageSize" : 0,
+        "numExtents" : 0,
+        "indexes" : 0,
+        "indexSize" : 0,
+        "fileSize" : 0,
+        "fsUsedSize" : 0,
+        "fsTotalSize" : 0,
+        "ok" : 1
+}
+> exit
+```
+
+**Testing the iReceptor Web Service**
+
+You should also have a docker container running the iReceptor web service. 
+
+```
+$ sudo docker ps | grep irdn-api
+sudo: unable to resolve host ireceptor-turnkey-test-2
+c4f87f0749a5        ireceptor/service-js-mongodb   "node --harmony /s..."   30 minutes ago      Up 30 minutes       0.0.0.0:8080->8080/tcp     irdn-api
+```
+
+In order to confirm that the iReceptor Repository Service is running, issue the following command:
+
+```
+$ curl -X POST -H "accept: application/json" -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/v2/samples"
+```
+
+This only gives back an empty array **[ ]** as a result, you say?  
+
+Don't fret. We haven't loaded any data yet! Refer back to the [main README file](./README.md) for guidance on how to load data into your new baby iReceptor node!
+
 # Loading Data into the Node
 
 This project directly links into a ['dataloader-mongo' submodule](https://github.com/sfu-ireceptor/dataloading-mongo)
@@ -135,12 +199,12 @@ docker-compose -f run/docker-compose.yml -f docker-compose.prod-override.yml bui
 docker-compose -f run/ocker-compose.yml -f run/docker-compose.prod-override.yml up
 ```
 
-**How to Run Tests**
+**Testing**
 
-At the moment, we don't yet have a single formal test suite for testing your node. Your best option
-for the moment is to review the API docs and compose suitable API calls using your browser.
-We to plan to review this issue and develop a formal testing protocol 
-for the turnkey, as time and resources permit.
+At the moment, aside from the above basic tests noted in the section *Testing the Turnkey Repository* above, 
+we don't yet have a single formal test suite for testing your node. Your best option for the moment 
+is to review the API docs and compose suitable API calls using your browser.
+We to plan to review this issue and develop a formal testing protocol for the turnkey, as time and resources permit.
 
 **Updating the project database or service submodules to a specified Git branch**
 
