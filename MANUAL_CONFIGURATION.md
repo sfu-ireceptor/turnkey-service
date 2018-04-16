@@ -177,7 +177,7 @@ in the .gitignore to protect against this...).
 ## Configuring and Building your Docker Containers
 
 Simply cloning the project,  installing Docker and applying the above 
-configuration detailsdoes not automatically build Docker images to run. 
+configuration details does not automatically build Docker images to run. 
 Rather, you need to explicitly create them using a suitable docker-compose.yml 
 specification.  A default file is provided in the 'run' subdirectory. 
 However, note that this file assumes that you've already created a directory 
