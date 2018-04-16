@@ -43,7 +43,7 @@ One possible disadvantage is that some organizations discourage the use of Docke
 
 However, note that all configuration procedures are the same for dockerized and non-dockerized versions of the application and its submodules.
 
-##Installation of Docker
+## Installation of Docker
 
 If you choose to run the dockerized versions of the applications, you'll obviously need to [install Docker first](https://docs.docker.com/engine/installation/) in your target Linux operating environment (bare metal server or virtual machine running Linux).
 
@@ -56,7 +56,7 @@ $ sudo apt-get install curl
 
 For other installations, please find instructions specific to your choice of Linux variant, on the Docker site.
 
-**Testing Docker**
+## Testing Docker
 
 In order to ensure that docker is working correctly, run the following command:
 
@@ -94,13 +94,13 @@ For more examples and ideas, visit:
  https://docs.docker.com/engine/userguide/
 ```
 
-**Installing Docker Compose**
+## Installing Docker Compose
 
 You will then also need to [install Docker Compose](https://docs.docker.com/compose/install/) alongside Docker on your target Linux operating environment.
 
 Note that under Ubuntu, you need to run docker (and docker-compose) as 'sudo'. 
 
-**Testing Docker Compose**
+## Testing Docker Compose
 
 In order to ensure Docker Compose is working correctly, issue the following command:
 ```
@@ -109,11 +109,11 @@ docker-compose version 1.18.0, build 8dd22a9
 ```
 Note that your particular version and build number may be different than what is shown here. We don't currently expect that docker-compose version differences should have a significant impact on the build, but if in doubt, refer to the release notes of the docker-compose site for advice.
 
-**Configuring the iReceptor Turnkey system**
+# Configuring the iReceptor Turnkey system
 
 From this point onward, it is assumed that you are logged an active command shell session within whichever Linux server environment you are running, and have your Docker engine installed, so you can further configure the application components on your server (as specified below) and run the Docker Compose to fire up the system.
 
-**Configuring service-js-mongodb**
+## Configuring service-js-mongodb
 
 There is one '.env' configuration file that needs to be set up before the Docker image can be built. 
 
@@ -145,7 +145,7 @@ MONGODB_GUEST_USER=
 MONGODB_GUEST_SECRET=
 ```
 
-**Configuring repository-mongodb**
+## Configuring repository-mongodb
 
 The default docker-compose setup starts mongo with authentication on,
 and no users exists in the default image. To setup the database, need
@@ -174,7 +174,7 @@ Make sure not to accidently commit the dbsetup file with usernames and
 passwords into the git repository (Note that *dbsetup.js* is included
 in the .gitignore to protect against this...).
 
-**Configuring and Building your Docker Containers**
+## Configuring and Building your Docker Containers
 
 Simply cloning the project,  installing Docker and applying the above 
 configuration detailsdoes not automatically build Docker images to run. 
@@ -218,7 +218,7 @@ services:
 Note that should (re-)build your Docker images whenever the underlying submodule code or environment 
 (*.env*) parameters change, or you wish to make docker-compose level changes to their configuration.
 
-**Initializing the repository-mongodb Docker instance**
+## Initializing the repository-mongodb Docker instance
 
 After building your Docker images, you can proceed to initialize your Mongodb database.
 Making sure that you are back in the repository-mongo submodule folder
@@ -251,7 +251,7 @@ collection-4-8341968993270290234.wt  index-3-8341968993270290234.wt  index-9-834
 collection-7-8341968993270290234.wt  index-5-8341968993270290234.wt  journal                         storage.bson     WiredTiger.turtle
 ```
 
-**Configuring systemd**
+## Configuring systemd
 
 You will need to set up the 'ireceptor' systemd service file
 on your Linux machine running Docker, in order to have the infrastructure automatically
@@ -273,7 +273,7 @@ sudo systemctl enable docker
 sudo systemctl enable ireceptor
 ```
 
-**SSL**
+## SSL
 
 The iReceptor-Repository does not handle SSL certificates directly, and is
 currently configured to run HTTP internally on port 8080. It must be
@@ -283,9 +283,9 @@ We don't (yet) tell you how to do this (here).
 For now, please consult with your local system administrator or
 suitable documentation about your web server platform of choice (e.g. Apache, NGINX, etc).
 
-## Deployment Procedure ##
+# Deployment Procedure
 
-**Managing dockerized instances**
+## Managing dockerized instances
 
 Dockerized instances may be started/stopped/restarted using the
 supplied systemd script *host/systemd/ireceptor.service*.
@@ -328,7 +328,7 @@ $ sudo docker-compose down irdn-api
 $ sudo docker-compose down irdn-mongo
 ```
 
-**Changing the configuration and using a new codebase**
+## Changing the configuration and using a new codebase
 
 If you have followed this turnkey recipe, you should already have 
 a set of docker containers to use.  However, if you change your codebase, 
