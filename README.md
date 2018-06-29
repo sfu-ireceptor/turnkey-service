@@ -101,11 +101,21 @@ It is that simple (we hope!)
 
 **Testing Database Access in the Node**
 
-Assuming that you have (re)started the containers that manage the database, you should have a Mongo container running.
+Check to see if you have a Mongo container already running:
 
 ```
 $ sudo docker ps | grep irdn-mongo
 ff26aab34970        ireceptor/repository-mongo     "docker-entrypoint..."   28 minutes ago      Up 28 minutes       0.0.0.0:27017->27017/tcp   irdn-mongo
+```
+- If not, try to **restart** the service as follow:
+```
+ $ sudo systemctl restart ireceptor
+```
+
+- To **stop** the service, use:
+
+```
+$ sudo systemctl stop ireceptor
 ```
 
 You can test access to the Mongo repository using the following command:
@@ -114,9 +124,15 @@ You can test access to the Mongo repository using the following command:
 $ sudo docker exec -it irdn-mongo mongo --authenticationDatabase admin dbname -u serviceAccount -p serviceSecret
 ```
  
-Where the *dbname*, *serviceAccount* and *serviceSecret* are as you set them above in the *dbsetup.js* configuration file (e.g. dbname is probably 'ireceptor').
+Where the values for `dbname`, `serviceAccount`, and `serviceSecret` are as you have set them during the setup step (e.g. the default value for `dbname` is 'ireceptor'). 
 
-That will give you a command line access to mongo. Assuming this succeeds, you can then try simple commands like
+- If can't remember, you can always check the *dbsetup.js* file inside the *repository-mongodb* directory to check what you have configured previously. For example, you can display the content of the file in the terminal by typing:
+
+```
+$ less repository-mongodb/dbsetup.js
+```
+
+After successfully accessing the Mongo database, you can then try simple commands like
 
 ```
 > db.getName()
