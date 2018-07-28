@@ -54,6 +54,7 @@ bold() {
 readInstall() {
     while true; do
         read -p "Would you like to install the package now? ($(underline y)es/$(underline n)o) " INSTALL
+        echo
         case $INSTALL in
             [yY]* ) INSTALL="yes"; break;;
             [nN]* ) INSTALL=""; break;;
@@ -89,7 +90,7 @@ installPackage() {
             sudo docker run hello-world
             ;;
         $DOCKER_COMPOSE) #https://docs.docker.com/compose/install/#install-compose
-            sudo curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+            sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
             sudo chmod +x /usr/local/bin/docker-compose
             docker-compose --version
             ;;
@@ -99,7 +100,7 @@ installPackage() {
 # Checks if a package is installed or not
 checkPackage() { 
     if ! [ -x "$(command -v $1)" ]; then
-        echo "$(color $YELLOW $1) is not detected on your system. "
+        echo -e "\n$(color $YELLOW $1) is not detected on your system. "
         readInstall
         if [ -n "$INSTALL" ]; then
             installPackage $1
@@ -262,5 +263,5 @@ sudo cp host/systemd/ireceptor.service /etc/systemd/system/ireceptor.service
 sudo systemctl daemon-reload
 sudo systemctl enable docker
 sudo systemctl enable ireceptor
-
+sudo systemctl restart ireceptor
 echo -e "\n---setup completed---\n"
