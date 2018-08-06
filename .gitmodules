@@ -4,6 +4,7 @@
 [submodule "service-js-mongodb"]
 	path = service-js-mongodb
 	url = https://github.com/sfu-ireceptor/service-js-mongodb.git
+	branch = turnkey-develop
 [submodule "dataloading-mongo"]
 	path = dataloading-mongo
 	url = https://github.com/sfu-ireceptor/dataloading-mongo.git
