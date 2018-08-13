@@ -66,12 +66,12 @@ readInstall() {
 installPackage() {
     case $1 in
         $CURL) 
-            sudo apt install $CURL
+            sudo apt install -y $CURL
             ;;
         $DOCKER) #https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-repository
             # Set up the repository
             sudo apt-get update
-            sudo apt-get install \
+            sudo apt-get install -y \
                 apt-transport-https \
                 ca-certificates \
                 curl \
@@ -90,7 +90,7 @@ installPackage() {
             sudo docker run hello-world
             ;;
         $DOCKER_COMPOSE) #https://docs.docker.com/compose/install/#install-compose
-            sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+            sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
             sudo chmod +x /usr/local/bin/docker-compose
             docker-compose --version
             ;;
@@ -210,6 +210,10 @@ writeConfig() {
     sed -i "s/guestSecret = ''/guestSecret = '${ACCOUNTS[GUEST_SECRETI]}'/" $SETUP_FILE
     sed -i "s/guestSecret = ''/guestSecret = '${ACCOUNTS[GUEST_SECRETI]}'/" $SETUP_FILE
     sed -i "s/dbname = 'ireceptor'/dbname = '${DB_NAME}'/" $SETUP_FILE
+
+    export MONGODB_DB=${DB_NAME}
+    export MONGODB_SERVICE_USER=${ACCOUNTS[SERVICE_NAMEI]}
+    export MONGODB_SERVICE_SECRET=${ACCOUNTS[SERVICE_SECRETI]}
 }
 
 setUpConfig() {
@@ -251,7 +255,7 @@ sudo ln -sf $PWD /opt/ireceptor
 
 # --- initialize database ---
 cdDb
-sudo docker run -d --rm -v /opt/ireceptor/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
+sudo docker run -d --rm -v /data:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
 echo -e "\n---initilializing database---\n"
 sleep 3s # need to pause here to let database finish initializing itself 
 sudo docker exec -it irdn-mongo mongo admin /dbsetup/dbsetup.js
