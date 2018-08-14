@@ -98,6 +98,27 @@ It is that simple (we hope)!
 
 Follow the [classical manual recipe for turnkey configuration instructions](./MANUAL_CONFIGURATION.md).
 
+## Don't Worry... Be Happy
+
+When using a cloud instance, you *may* see a funny error crop up as the first line of output, every time you execute a terminal command, something like:
+
+```
+sudo: unable to resolve host <your-local-host-name>
+```
+
+This nuisance error of cloud instance misconfiguration may be safely ignored as harmless to the task at hand...
+
+Otherwises, if you want to [resolve this issue](https://askubuntu.com/questions/811098/when-i-run-a-sudo-command-it-says-unable-to-resolve-host), you must find (or set) your `hostname` and insert next line into `/etc/host`:
+
+```
+127.0.1.1    <your-hostname>
+```
+You can find your `hostname` using the following command:
+
+```
+cat /etc/hostname
+```
+
 ## Testing the Turnkey Repository
 
 ### Testing Database Access in the Node
@@ -182,7 +203,7 @@ Don't fret. That's because we haven't loaded any data yet!
 
 ## Loading Data into the Node
 
-This project directly links into a ['dataloader-mongo' submodule](https://github.com/sfu-ireceptor/dataloading-mongo)
+This project directly links into a [dataloader-mongo](https://github.com/sfu-ireceptor/dataloading-mongo) submodule
 which is currently under active development and has a README providing details documenting available data loading scripts.
 
 Generally speaking, there is a strict ordering to how data should be loaded:

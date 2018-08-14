@@ -2,23 +2,34 @@
 
 If you decide not to simply run the **setup.sh** configuration script (or want to better understand the configuration process) then this document outlines the manual configuration steps which may be followed.
 
-## Don't Worry... Be Happy... ##
+## Don't Worry... Be Happy
 
 When using a cloud instance, you *may* see a funny error crop up as the first line of output, every time you execute a terminal command, something like:
 
 ```
-sudo: unable to resolve host <your-local-host-name> 
+sudo: unable to resolve host <your-local-host-name>
 ```
 
 This nuisance error of cloud instance misconfiguration may be safely ignored as harmless to the task at hand...
 
-## Dependencies ##
+Otherwises, if you want to [resolve this issue](https://askubuntu.com/questions/811098/when-i-run-a-sudo-command-it-says-unable-to-resolve-host), you must find (or set) your `hostname` and insert next line into `/etc/host`:
+
+```
+127.0.1.1    <your-hostname>
+```
+You can find your `hostname` using the following command:
+
+```
+cat /etc/hostname
+```
+
+## Dependencies
 
 The 'turnkey-service' project is currently composed of [this root project](https://github.com/sfu-ireceptor/turnkey-service) containing some top level resources, three separate submodules, and a set of [Docker](https://www.docker.com) container 'compose' directives. The separate submodules are as follows:
 
- * [repository-mongodb](https://github.com/sfu-ireceptor/repository-mongodb): The Mongo database.
-  * [dataloading-mongo](https://github.com/sfu-ireceptor/dataloading-mongo): A submodule with scripts, some test data and documented procedures for iReceptor node data loading.
- * [service-js-mongodb](https://github.com/sfu-ireceptor/service-js-mongodb): iReceptor API service with JavaScript implementation for MongoDB repository. You may wish to confirm which branch of this project contains the implementation of the iReceptor data source API you wish to use (normally 'master' is the default release, although 'develop' may contain the latest implementation. As of mid-November 2017, we are have pointed the 'docker-turnkey' branch repository to the 'develop' branch). *Note that this submodule itself includes another embedded submodule, [the AIRR-compliance branch of the iReceptor data node API](https://github.com/sfu-ireceptor/api/tree/AIRR-compliance), the pertinent release for which needs to be be proactively recursively synchronized with the turnkey project after git pull updates of the main code base (i.e. usually by **git submodule update --recursive** command invoked from the root project directory).*
+* [repository-mongodb](https://github.com/sfu-ireceptor/repository-mongodb): The Mongo database.
+* [dataloading-mongo](https://github.com/sfu-ireceptor/dataloading-mongo): A submodule with scripts, some test data and documented procedures for iReceptor node data loading.
+* [service-js-mongodb](https://github.com/sfu-ireceptor/service-js-mongodb): iReceptor API service with JavaScript implementation for MongoDB repository. You may wish to confirm which branch of this project contains the implementation of the iReceptor data source API you wish to use (normally 'master' is the default release, although 'develop' may contain the latest implementation. As of mid-November 2017, we are have pointed the 'docker-turnkey' branch repository to the 'develop' branch). *Note that this submodule itself includes another embedded submodule, [the AIRR-compliance branch of the iReceptor data node API](https://github.com/sfu-ireceptor/api/tree/AIRR-compliance), the pertinent release for which needs to be be proactively recursively synchronized with the turnkey project after git pull updates of the main code base (i.e. usually by **git submodule update --recursive** command invoked from the root project directory).*
 
 After git cloning the code base (i.e. into **/opt/ireceptor/turnkey**), you need to ensure that the submodules are initialized as well, as follows:
 
@@ -283,9 +294,9 @@ We don't (yet) tell you how to do this (here).
 For now, please consult with your local system administrator or
 suitable documentation about your web server platform of choice (e.g. Apache, NGINX, etc).
 
-# Deployment Procedure
+## Deployment Procedure
 
-## Managing dockerized instances
+### Managing dockerized instances
 
 Dockerized instances may be started/stopped/restarted using the
 supplied systemd script *host/systemd/ireceptor.service*.
@@ -328,7 +339,7 @@ $ sudo docker-compose down irdn-api
 $ sudo docker-compose down irdn-mongo
 ```
 
-## Changing the configuration and using a new codebase
+### Changing the configuration and using a new codebase
 
 If you have followed this turnkey recipe, you should already have 
 a set of docker containers to use.  However, if you change your codebase, 
@@ -357,4 +368,3 @@ running in your Linux environment, by running the docker process viewing command
 ```
 $ sudo docker ps
 ```
-
