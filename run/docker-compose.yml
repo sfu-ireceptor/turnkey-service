@@ -18,8 +18,7 @@ services:
         volumes:
             # It is assumed here that the directory 
             # /opt/ireceptor/mongodb already exists
-            # - /opt/ireceptor/mongodb:/data/db
-            - /data:/data/db
+            - /opt/ireceptor/mongodb:/data/db
         networks:
             - default
         command: mongod --auth
