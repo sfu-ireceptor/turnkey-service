@@ -255,7 +255,7 @@ sudo ln -sf $PWD /opt/ireceptor
 
 # --- initialize database ---
 cdDb
-sudo docker run -d --rm -v /data:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
+sudo docker run -d --rm -v /opt/ireceptor/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
 echo -e "\n---initilializing database---\n"
 sleep 3s # need to pause here to let database finish initializing itself 
 sudo docker exec -it irdn-mongo mongo admin /dbsetup/dbsetup.js
