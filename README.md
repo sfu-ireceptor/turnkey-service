@@ -108,7 +108,7 @@ sudo: unable to resolve host <your-local-host-name>
 
 This nuisance error of cloud instance misconfiguration may be safely ignored as harmless to the task at hand...
 
-Otherwises, if you want to [resolve this issue](https://askubuntu.com/questions/811098/when-i-run-a-sudo-command-it-says-unable-to-resolve-host), you must find (or set) your `hostname` and insert next line into `/etc/host`:
+Otherwise, if you want to [resolve this issue](https://askubuntu.com/questions/811098/when-i-run-a-sudo-command-it-says-unable-to-resolve-host), you must find (or set) your `hostname` and insert next line into `/etc/host`:
 
 ```
 127.0.1.1    <your-hostname>
