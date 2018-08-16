@@ -193,17 +193,15 @@ readDbs() {
 
 # write configurations into the corresponding files
 writeConfig() {
-    # file paths
-    ENV_FILE="${SERVICE}/.env"
-    SETUP_FILE="${DATABASE}/dbsetup.js"
-
     # write to .env file
+    ENV_FILE="${SERVICE}/.env"
     sed -i "s/MONGODB_HOST=[^\n]*$/MONGODB_HOST=${DB_HOST}/" $ENV_FILE
     sed -i "s/MONGODB_DB=[^\n]*$/MONGODB_DB=${DB_NAME}/" $ENV_FILE
     sed -i "s/MONGODB_GUEST_USER=[^\n]*$/MONGODB_GUEST_USER=${ACCOUNTS[GUEST_NAMEI]}/" $ENV_FILE
     sed -i "s/MONGODB_GUEST_SECRET=[^\n]*$/MONGODB_GUEST_SECRET=${ACCOUNTS[GUEST_SECRETI]}/" $ENV_FILE
 
     # write to dbsetup.js file
+    SETUP_FILE="${DATABASE}/dbsetup.js"
     sed -i "s/serviceAccount = ''/serviceAccount = '${ACCOUNTS[SERVICE_NAMEI]}'/" $SETUP_FILE
     sed -i "s/serviceSecret = ''/serviceSecret = '${ACCOUNTS[SERVICE_SECRETI]}'/" $SETUP_FILE
     sed -i "s/guestAccount = ''/guestAccount = '${ACCOUNTS[GUEST_NAMEI]}'/" $SETUP_FILE
@@ -211,9 +209,13 @@ writeConfig() {
     sed -i "s/guestSecret = ''/guestSecret = '${ACCOUNTS[GUEST_SECRETI]}'/" $SETUP_FILE
     sed -i "s/dbname = 'ireceptor'/dbname = '${DB_NAME}'/" $SETUP_FILE
 
-    export MONGODB_DB=${DB_NAME}
-    export MONGODB_SERVICE_USER=${ACCOUNTS[SERVICE_NAMEI]}
-    export MONGODB_SERVICE_SECRET=${ACCOUNTS[SERVICE_SECRETI]}
+    # write to export file
+    EXPORT_FILE="export.sh"
+    sed -i "s/MONGODB_DB=[^\n]*$/MONGODB_DB='${DB_NAME}'/" ./${EXPORT_FILE}
+    sed -i "s/MONGODB_SERVICE_USER=[^\n]*$/MONGODB_SERVICE_USER='${ACCOUNTS[SERVICE_NAMEI]}'/" ./${EXPORT_FILE}
+    sed -i "s/MONGODB_SERVICE_SECRET=[^\n]*$/MONGODB_SERVICE_SECRET='${ACCOUNTS[SERVICE_NAMEI]}'/" ./${EXPORT_FILE}
+    chmod 755 ${EXPORT_FILE}
+    ./${EXPORT_FILE}
 }
 
 setUpConfig() {
