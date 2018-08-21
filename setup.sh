@@ -257,11 +257,13 @@ sudo ln -sf $PWD /opt/ireceptor
 
 # --- initialize database ---
 cdDb
-sudo docker run -d --rm -v /opt/ireceptor/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
+
 echo -e "\n---initilializing database---\n"
+sudo docker run -d --rm -v /opt/ireceptor/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
 sleep 3s # need to pause here to let database finish initializing itself 
 sudo docker exec -it irdn-mongo mongo admin /dbsetup/dbsetup.js
 sudo docker stop irdn-mongo
+
 cdBack
 
 echo -e "\nsetting up ireceptor systemd service...\n"
@@ -270,4 +272,12 @@ sudo systemctl daemon-reload
 sudo systemctl enable docker
 sudo systemctl enable ireceptor
 sudo systemctl restart ireceptor
+
+ # need to pause here to wait for containers to finish setting up
+sleep 5s
+
+# load query plans (restarting service will clear out the cache, so make sure to run this command after each time the service is restarted!)
+sudo chmod 755 ./queryplan.sh
+./queryplan.sh
+
 echo -e "\n---setup completed---\n"

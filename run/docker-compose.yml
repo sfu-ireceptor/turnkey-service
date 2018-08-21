@@ -19,6 +19,7 @@ services:
             # It is assumed here that the directory 
             # /opt/ireceptor/mongodb already exists
             - /opt/ireceptor/mongodb:/data/db
+            - /opt/ireceptor/turnkey-service/repository-mongodb:/dbsetup
         networks:
             - default
         command: mongod --auth
