@@ -176,7 +176,7 @@ promptDb() {
 
 readDb() {
     while true; do
-        echo -n -e "The default value for the database $(color $WHITE $1) is \"$(color $WHITE $2)\", okay?($(underline y)es/$(underline n)o) "
+        echo -n -e "The default value for the database $(color $WHITE $1) is \"$(color $WHITE $2)\", okay? ($(underline y)es/$(underline n)o) "
         read INPUT
         case $INPUT in
             [yY]* ) break;;
@@ -279,5 +279,7 @@ sleep 5s
 # load query plans (restarting service will clear out the cache, so make sure to run this command after each time the service is restarted!)
 sudo chmod 755 ./queryplan.sh
 ./queryplan.sh
+
+sudo chmod 755 ./db_login.sh
 
 echo -e "\n---setup completed---\n"
