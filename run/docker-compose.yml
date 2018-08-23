@@ -20,6 +20,7 @@ services:
             # /opt/ireceptor/mongodb already exists
             - /opt/ireceptor/mongodb:/data/db
             - /opt/ireceptor/turnkey-service/repository-mongodb:/dbsetup
+            - /opt/ireceptor/turnkey-service/dataloading-mongo/testing:/dbtest
         networks:
             - default
         command: mongod --auth
