@@ -188,7 +188,6 @@ readDb() {
 readDbs() {
     readDb $DB_NAME_PARA $DB_NAME
     readDb $DB_HOST_PARA $DB_HOST
-    # echo "dbname: $DB_NAME, dbhost: $DB_HOST"
 }
 
 # write configurations into the corresponding files
@@ -281,5 +280,8 @@ sudo chmod 755 ./queryplan.sh
 ./queryplan.sh
 
 sudo chmod 755 ./db_login.sh
+
+# ignore changes to export.sh
+git update-index --skip-worktree export.sh
 
 echo -e "\n---setup completed---\n"
