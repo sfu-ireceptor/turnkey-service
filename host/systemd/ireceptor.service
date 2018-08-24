@@ -5,7 +5,6 @@ After=docker.service
 Requires=docker.service
 
 [Service]
-Restart=always
 ExecStartPre=/usr/local/bin/docker-compose -f /opt/ireceptor/turnkey-service/run/docker-compose.yml -f /opt/ireceptor/turnkey-service/run/docker-compose.prod-override.yml stop
 ExecStartPre=/usr/local/bin/docker-compose -f /opt/ireceptor/turnkey-service/run/docker-compose.yml -f /opt/ireceptor/turnkey-service/run/docker-compose.prod-override.yml rm --force
 ExecStart=/usr/local/bin/docker-compose -f /opt/ireceptor/turnkey-service/run/docker-compose.yml -f /opt/ireceptor/turnkey-service/run/docker-compose.prod-override.yml up

@@ -145,7 +145,7 @@ $ sudo systemctl stop ireceptor
 You can then test access to the Mongo repository using the following command:
 
 ```
-$ sudo docker exec -it irdn-mongo mongo --authenticationDatabase admin dbname -u serviceAccount -p serviceSecret
+$ sudo docker exec -it irdn-mongo mongo --authenticationDatabase admin <dbname> -u <serviceAccount> -p <serviceSecret>
 ```
 
 Where the values for `dbname`, `serviceAccount`, and `serviceSecret` are as you have set them during the previous setup step (e.g. the default value for `dbname` is 'ireceptor').
