@@ -1,7 +1,7 @@
 #!/bin/bash
 # 
 # Use this script to export the database vairables.
-# To export to into the current shell, do: "source export.sh" from the terminal.
+# To export into the current shell, do: "source export.sh" from the terminal.
 # 
 
 export MONGODB_DB='ireceptor'

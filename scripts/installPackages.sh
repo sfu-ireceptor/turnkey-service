@@ -15,7 +15,6 @@ COLOR_YELLOW=3
 N=0 # number of packages the user has skipped installing
 reset="tput sgr 0" # reset display style
 
-
 bold_underline() {
     echo $(tput bold)$(tput smul)$@$($reset)
 }
@@ -58,7 +57,6 @@ install() {
     esac
 }
 
-
 # Keep prompting the user and set appropriate values into $INSTALL
 promptInstall() {
     while true; do
@@ -100,6 +98,7 @@ checkAllPackages() {
         return 1
     fi
 }
+
 
 ##### Main #####
 checkAllPackages

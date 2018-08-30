@@ -36,12 +36,12 @@ echo -e "\n---setting up database accounts---\n"
 sudo mkdir -p /opt/ireceptor/mongodb
 sudo docker-compose -f run/docker-compose.yml build
 
-
 echo -e "\n---initilializing database---\n"
 
 cd $DATABASE
 
-sudo docker run -d --rm -v /opt/ireceptor/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
+# sudo docker run -d --rm -v /opt/ireceptor/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
+sudo docker run -d --rm
 sleep 3s # need to pause here to let database finish initializing itself 
 sudo docker exec -it irdn-mongo mongo admin /dbsetup/dbsetup.js
 sudo docker stop irdn-mongo

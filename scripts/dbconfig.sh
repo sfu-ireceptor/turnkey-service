@@ -25,7 +25,6 @@ underline=`tput smul`
 colored=`tput setaf 7`
 reset=`tput sgr 0`
 
-
 # writes configurations into the corresponding files
 writeConfig() {
     # write to .env file
