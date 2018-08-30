@@ -15,7 +15,7 @@ DATALOADING="dataloading-mongo"
 
 ##### Main #####
 # update submodules
-git submodule update --recursive --init
+# git submodule update --recursive --init
 
 # check required packages and install them
 ./scripts/installPackages.sh
@@ -40,8 +40,7 @@ echo -e "\n---initilializing database---\n"
 
 cd $DATABASE
 
-# sudo docker run -d --rm -v /opt/ireceptor/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
-sudo docker run -d --rm
+sudo docker run -d --rm -v /opt/ireceptor/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
 sleep 3s # need to pause here to let database finish initializing itself 
 sudo docker exec -it irdn-mongo mongo admin /dbsetup/dbsetup.js
 sudo docker stop irdn-mongo
@@ -60,6 +59,7 @@ sleep 5s
 
 # load query plans 
 # Note: restarting service will clear out the cache, so make sure to run this command after each time the service is restarted!
+source export.sh
 ./queryplan.sh
 
 # ignore changes to export.sh
