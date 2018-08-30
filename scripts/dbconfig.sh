@@ -43,7 +43,7 @@ writeConfig() {
     sed -i "s/dbname[[:space:]]*=[^\n]*;/dbname = '${DB_NAME}';/" $SETUP_FILE
 
     # write to export file
-    EXPORT_FILE="$ROOT/export.sh"
+    EXPORT_FILE="$ROOT/scripts/export.sh"
     sed -i "s/MONGODB_DB=[^\n]*$/MONGODB_DB='${DB_NAME}'/" ${EXPORT_FILE}
     sed -i "s/MONGODB_SERVICE_USER=[^\n]*$/MONGODB_SERVICE_USER='${ACCOUNTS[SERVICE_NAME_I]}'/" ${EXPORT_FILE}
     sed -i "s/MONGODB_SERVICE_SECRET=[^\n]*$/MONGODB_SERVICE_SECRET='${ACCOUNTS[SERVICE_SECRET_I]}'/" ${EXPORT_FILE}

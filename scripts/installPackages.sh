@@ -89,7 +89,7 @@ checkAllPackages() {
         checkPackage $i
     done
 
-    if [ $n -gt 0 ]; then
+    if [ $N -gt 0 ]; then
         echo "The following required package(s) are not installed:"
         for i in ${NOT_INSTALLED[@]}; do
             echo "$(tput setaf $COLOR_YELLOW)$i$($reset)"

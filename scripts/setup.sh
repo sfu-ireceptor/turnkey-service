@@ -54,16 +54,20 @@ sudo systemctl enable docker
 sudo systemctl enable ireceptor
 sudo systemctl restart ireceptor
 
-# need to pause here to wait for containers to finish setting up
-sleep 5s
+# need to pause here to wait for containers to finish setting up (note: tried with 5s and not long enough for docker to finish reloading the containers)
+sleep 10s
+
+source export.sh
 
 # load query plans 
 # Note: restarting service will clear out the cache, so make sure to run this command after each time the service is restarted!
-source export.sh
 ./queryplan.sh
+
+# load indexes
+./dataloader.py -v --build
 
 # ignore changes to export.sh
 # to undo the ignore, use "git update-index --no-skip-worktree <file>"
-git update-index --skip-worktree export.sh
+git update-index --skip-worktree scripts/export.sh
 
 echo -e "\n---setup completed---\n"
