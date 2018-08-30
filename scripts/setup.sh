@@ -12,6 +12,8 @@ SERVICE="service-js-mongodb"
 DATABASE="repository-mongodb"
 DATALOADING="dataloading-mongo"
 
+WAIT_TIME=10
+
 
 ##### Main #####
 # update submodules
@@ -22,12 +24,6 @@ git submodule update --recursive --init
 
 # make sure to make the symbolic link before proceeding with the rest of the commands
 sudo ln -sf $PWD /opt/ireceptor
-
-echo "copying .env file..."
-cp ${SERVICE}/.env.defaults ${SERVICE}/.env
-
-echo "copying dbsetup.js file..."
-cp ${DATABASE}/dbsetup.defaults ${DATABASE}/dbsetup.js
 
 echo -e "\n---setting up database accounts---\n"
 ./scripts/dbconfig.sh
@@ -55,7 +51,8 @@ sudo systemctl enable ireceptor
 sudo systemctl restart ireceptor
 
 # need to pause here to wait for containers to finish setting up (note: tried with 5s and not long enough for docker to finish reloading the containers)
-sleep 10s
+echo "waiting for docker containers to restart... (~${WAIT_TIME}secs)"
+sleep ${WAIT_TIME}s
 
 source export.sh
 

@@ -30,6 +30,7 @@ reset=`tput sgr 0`
 writeConfig() {
     # write to .env file
     ENV_FILE="${SERVICE}/.env"
+    cp ${SERVICE}/.env.defaults ${SERVICE}/.env
     sed -i "s/MONGODB_HOST=[^\n]*$/MONGODB_HOST=${DB_HOST}/" $ENV_FILE
     sed -i "s/MONGODB_DB=[^\n]*$/MONGODB_DB=${DB_NAME}/" $ENV_FILE
     sed -i "s/MONGODB_GUEST_USER=[^\n]*$/MONGODB_GUEST_USER=${ACCOUNTS[GUEST_NAME_I]}/" $ENV_FILE
@@ -37,6 +38,7 @@ writeConfig() {
 
     # write to dbsetup.js file
     SETUP_FILE="${DATABASE}/dbsetup.js"
+    cp ${DATABASE}/dbsetup.defaults $SETUP_FILE
     sed -i "s/guestAccount[[:space:]]*=[^\n]*;/guestAccount = '${ACCOUNTS[GUEST_NAME_I]}';/" $SETUP_FILE
     sed -i "s/guestSecret[[:space:]]*=[^\n]*;/guestSecret = '${ACCOUNTS[GUEST_SECRET_I]}';/" $SETUP_FILE
     sed -i "s/serviceAccount[[:space:]]*=[^\n]*;/serviceAccount = '${ACCOUNTS[SERVICE_NAME_I]}';/" $SETUP_FILE
