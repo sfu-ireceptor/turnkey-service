@@ -15,7 +15,7 @@ DATALOADING="dataloading-mongo"
 
 ##### Main #####
 # update submodules
-# git submodule update --recursive --init
+git submodule update --recursive --init
 
 # check required packages and install them
 ./scripts/installPackages.sh
