@@ -15,7 +15,7 @@ DATALOADING="dataloading-mongo"
 
 ##### Main #####
 # update submodules
-# git submodule update --recursive --init
+git submodule update --recursive --init
 
 # check required packages and install them
 ./scripts/installPackages.sh
@@ -63,6 +63,7 @@ sleep 5s
 ./queryplan.sh
 
 # ignore changes to export.sh
+# to undo the ignore, use "git update-index --no-skip-worktree <file>"
 git update-index --skip-worktree export.sh
 
 echo -e "\n---setup completed---\n"
