@@ -12,6 +12,8 @@ SERVICE="service-js-mongodb"
 DATABASE="repository-mongodb"
 DATALOADING="dataloading-mongo"
 
+WAIT_TIME=10
+
 
 ##### Main #####
 # update submodules
@@ -22,12 +24,6 @@ git submodule update --recursive --init
 
 # make sure to make the symbolic link before proceeding with the rest of the commands
 sudo ln -sf $PWD /opt/ireceptor
-
-echo "copying .env file..."
-cp ${SERVICE}/.env.defaults ${SERVICE}/.env
-
-echo "copying dbsetup.js file..."
-cp ${DATABASE}/dbsetup.defaults ${DATABASE}/dbsetup.js
 
 echo -e "\n---setting up database accounts---\n"
 ./scripts/dbconfig.sh
@@ -54,16 +50,21 @@ sudo systemctl enable docker
 sudo systemctl enable ireceptor
 sudo systemctl restart ireceptor
 
-# need to pause here to wait for containers to finish setting up
-sleep 5s
+# need to pause here to wait for containers to finish setting up (note: tried with 5s and not long enough for docker to finish reloading the containers)
+echo "waiting for docker containers to restart... (~${WAIT_TIME}secs)"
+sleep ${WAIT_TIME}s
+
+source export.sh
 
 # load query plans 
 # Note: restarting service will clear out the cache, so make sure to run this command after each time the service is restarted!
-source export.sh
 ./queryplan.sh
+
+# load indexes
+./dataloader.py -v --build
 
 # ignore changes to export.sh
 # to undo the ignore, use "git update-index --no-skip-worktree <file>"
-git update-index --skip-worktree export.sh
+git update-index --skip-worktree scripts/export.sh
 
 echo -e "\n---setup completed---\n"
