@@ -51,7 +51,7 @@ sudo systemctl enable ireceptor
 sudo systemctl restart ireceptor
 
 # need to pause here to wait for containers to finish setting up (note: tried with 5s and not long enough for docker to finish reloading the containers)
-echo "waiting for docker containers to restart... (~${WAIT_TIME}secs)"
+echo "waiting for docker containers to restart... (~${WAIT_TIME} secs)"
 sleep ${WAIT_TIME}s
 
 source export.sh
@@ -60,11 +60,11 @@ source export.sh
 # Note: restarting service will clear out the cache, so make sure to run this command after each time the service is restarted!
 ./queryplan.sh
 
-# load indexes
-./dataloader.py -v --build
+# setup configurations for dataloading-mongo
+echo "Now setting up dataloading-mongo..."
+${DATALOADING}/setup.sh
 
-# ignore changes to export.sh
-# to undo the ignore, use "git update-index --no-skip-worktree <file>"
-git update-index --skip-worktree scripts/export.sh
+# load indexes
+${DATALOADING}/scripts/dataloader.py -v --build
 
 echo -e "\n---setup completed---\n"
