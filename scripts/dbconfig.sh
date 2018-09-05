@@ -10,7 +10,7 @@ DB_NAME="ireceptor"
 DB_HOST="irdn-mongo"
 
 # directory names
-ROOT="/opt/ireceptor"
+ROOT="/opt/ireceptor/turnkey-service"
 SCRIPTS=$ROOT/scripts
 SERVICE=$ROOT/service-js-mongodb
 DATABASE=$ROOT/repository-mongodb
