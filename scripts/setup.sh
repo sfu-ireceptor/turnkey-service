@@ -23,6 +23,7 @@ git submodule update --recursive --init
 ./scripts/installPackages.sh
 
 # make sure to make the symbolic link before proceeding with the rest of the commands
+sudo mkdir -p /opt/ireceptor
 sudo ln -sf $PWD /opt/ireceptor/turnkey-service
 
 echo -e "\n---setting up database accounts---\n"
