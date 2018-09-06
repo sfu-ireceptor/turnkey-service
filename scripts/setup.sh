@@ -20,14 +20,18 @@ WAIT_TIME=10
 git submodule update --recursive --init
 
 # check required packages and install them
+echo "Running installPackages.sh..."
 ./scripts/installPackages.sh
+echo "installPackages.sh done"
 
 # make sure to make the symbolic link before proceeding with the rest of the commands
 sudo mkdir -p /opt/ireceptor
 sudo ln -sf $PWD /opt/ireceptor/turnkey-service
 
 echo -e "\n---setting up database accounts---\n"
+echo "Running dbconfig.sh..."
 ./scripts/dbconfig.sh
+echo "dbconfig.sh done"
 
 # build the docker containers
 sudo mkdir -p /opt/ireceptor/mongodb
@@ -59,6 +63,7 @@ source export.sh
 
 # load query plans 
 # Note: restarting service will clear out the cache, so make sure to run this command after each time the service is restarted!
+echo "Creating query plans"
 ./queryplan.sh
 
 # setup configurations for dataloading-mongo
@@ -66,6 +71,7 @@ echo "Now setting up dataloading-mongo..."
 ${DATALOADING}/setup.sh
 
 # load indexes
+echo "Creating indexes"
 ${DATALOADING}/scripts/dataloader.py -v --build
 
 echo -e "\n---setup completed---\n"
