@@ -4,7 +4,6 @@
 # https://github.com/sfu-ireceptor/turnkey-service
 #
 
-
 set -e
 
 ##### Configuration #####
@@ -22,26 +21,24 @@ echo "Downloading git submodules.."
 git submodule update --recursive --init
 echo "Done (downloading git submodules)"
 
-echo "Install packages.."
+echo "Installing packages.."
 ./scripts/installPackages.sh
 echo "Done (installing packages)"
 
-echo "Creating /opt/ireceptor"
+echo "Creating /opt/ireceptor directory"
 sudo mkdir -p /opt/ireceptor
+sudo mkdir -p /opt/ireceptor/mongodb
 sudo ln -sf $PWD /opt/ireceptor/turnkey-service
 
-echo "Setting up database"
+echo "Generating database configuration"
 ./scripts/dbconfig.sh
-echo "Done (setting up database)"
+echo "Done (generating database configuration)"
 
 echo "Building docker containers"
-sudo mkdir -p /opt/ireceptor/mongodb
 sudo docker-compose -f run/docker-compose.yml build
 echo "Done (building docker containers)"
 
-
-echo -e "\n---initilializing database---\n"
-
+echo "Initializing database..."
 cd $DATABASE
 
 sudo docker run -d --rm -v /opt/ireceptor/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
@@ -78,3 +75,7 @@ echo "Creating MongoDB indexes.."
 ${DATALOADING}/scripts/dataloader.py -v --build
 echo "Done (creating MongoDB indexes)"
 
+echo "\nDB guest username: guest"
+echo "DB guest password: guest"
+echo "DB admin username: admin"
+echo "DB admin password: admin"
