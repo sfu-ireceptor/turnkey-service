@@ -76,6 +76,9 @@ ${DATALOADING}/scripts/dataloader.py -v --build
 echo "Done (creating MongoDB indexes)"
 
 echo ""
-echo "DB guest password: guest"
-echo "DB admin username: admin"
-echo "DB admin password: admin"
+echo "Setup done."
+echo ""
+echo "Database username: guest"
+echo "Database password: guest"
+echo "Database ADMIN username: admin"
+echo "Database ADMIN password: admin"
