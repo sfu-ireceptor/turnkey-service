@@ -72,14 +72,8 @@ promptInstall() {
 # Check individual package
 checkPackage() { 
     if ! [ -x "$(command -v $1)" ]; then
-        echo -e "\n$(tput setaf $COLOR_YELLOW)$1$($reset) is not detected on your system."
-        promptInstall
-        if [ $INSTALL ]; then
-            install $1
-        else
-            NOT_INSTALLED[N]=$1
-            N=`expr $N + 1` 
-        fi
+        echo "Installing $(tput setaf $COLOR_YELLOW)$1$($reset)..."
+        install $1
     fi
 }
 
@@ -102,4 +96,3 @@ checkAllPackages() {
 
 ##### Main #####
 checkAllPackages
-echo -e "\n---packages checking completed---\n"

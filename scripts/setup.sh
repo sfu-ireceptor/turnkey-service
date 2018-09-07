@@ -7,6 +7,8 @@
 
 set -e
 
+##### Configuration #####
+
 # directory names
 SERVICE="service-js-mongodb"
 DATABASE="repository-mongodb"
@@ -16,13 +18,13 @@ WAIT_TIME=10
 
 
 ##### Main #####
-# update submodules
+echo "Downloading git submodules..."
 git submodule update --recursive --init
+echo "Done (downloading git submodules)"
 
-# check required packages and install them
-echo "Running installPackages.sh..."
+echo "Installing Docker..."
 ./scripts/installPackages.sh
-echo "installPackages.sh done"
+echo "Done (installing Docker)"
 
 # make sure to make the symbolic link before proceeding with the rest of the commands
 sudo mkdir -p /opt/ireceptor
