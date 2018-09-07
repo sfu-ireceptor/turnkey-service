@@ -18,26 +18,27 @@ WAIT_TIME=10
 
 
 ##### Main #####
-echo "Downloading git submodules..."
+echo "Downloading git submodules.."
 git submodule update --recursive --init
 echo "Done (downloading git submodules)"
 
-echo "Installing Docker..."
+echo "Install packages.."
 ./scripts/installPackages.sh
-echo "Done (installing Docker)"
+echo "Done (installing packages)"
 
-# make sure to make the symbolic link before proceeding with the rest of the commands
+echo "Creating /opt/ireceptor"
 sudo mkdir -p /opt/ireceptor
 sudo ln -sf $PWD /opt/ireceptor/turnkey-service
 
-echo -e "\n---setting up database accounts---\n"
-echo "Running dbconfig.sh..."
+echo "Setting up database"
 ./scripts/dbconfig.sh
-echo "dbconfig.sh done"
+echo "Done (setting up database)"
 
-# build the docker containers
+echo "Building docker containers"
 sudo mkdir -p /opt/ireceptor/mongodb
 sudo docker-compose -f run/docker-compose.yml build
+echo "Done (building docker containers)"
+
 
 echo -e "\n---initilializing database---\n"
 
@@ -50,7 +51,7 @@ sudo docker stop irdn-mongo
 
 cd ..
 
-echo -e "\nsetting up ireceptor systemd service...\n"
+echo -e "\nsetting up ireceptor systemd service..\n"
 sudo cp host/systemd/ireceptor.service /etc/systemd/system/ireceptor.service
 sudo systemctl daemon-reload
 sudo systemctl enable docker
@@ -58,22 +59,22 @@ sudo systemctl enable ireceptor
 sudo systemctl restart ireceptor
 
 # need to pause here to wait for containers to finish setting up (note: tried with 5s and not long enough for docker to finish reloading the containers)
-echo "waiting for docker containers to restart... (~${WAIT_TIME} secs)"
+echo "waiting for docker containers to restart.. (~${WAIT_TIME} secs)"
 sleep ${WAIT_TIME}s
 
 source export.sh
 
 # load query plans 
 # Note: restarting service will clear out the cache, so make sure to run this command after each time the service is restarted!
-echo "Creating query plans"
+echo "Creating query plans.."
 ./queryplan.sh
+echo "Done (creating query plans)"
 
-# setup configurations for dataloading-mongo
-echo "Now setting up dataloading-mongo..."
+echo "Setting up dataloading-mongo.."
 ${DATALOADING}/setup.sh
+echo "Done (setting up dataloading-mongo)"
 
-# load indexes
-echo "Creating indexes"
+echo "Creating MongoDB indexes.."
 ${DATALOADING}/scripts/dataloader.py -v --build
+echo "Done (creating MongoDB indexes)"
 
-echo -e "\n---setup completed---\n"
