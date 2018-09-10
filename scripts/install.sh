@@ -82,9 +82,9 @@ source ./scripts/export.sh
 ./scripts/create_db_query_plans.sh
 echo "Done (creating query plans)"
 
-echo "Setting up dataloading-mongo.."
+echo "Installing packages for data loading"
 ${DATALOADING}/setup.sh
-echo "Done (setting up dataloading-mongo)"
+echo "Done (installing packages for data loading)"
 
 echo "Creating MongoDB indexes.."
 ${DATALOADING}/scripts/dataloader.py -v --build
