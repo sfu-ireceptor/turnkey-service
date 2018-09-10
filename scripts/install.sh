@@ -1,54 +1,68 @@
 #!/bin/bash
-# 
-# A script to automating the setup process of the Turnkey project.
-# https://github.com/sfu-ireceptor/turnkey-service
-#
 
-set -e
-
-##### Configuration #####
+###########################################################
+# Configuration 
 
 # directory names
 SERVICE="service-js-mongodb"
 DATABASE="repository-mongodb"
 DATALOADING="dataloading-mongo"
 
+# wait time
 WAIT_TIME=10
 
+###########################################################
+# Main
 
-##### Main #####
+# stop script immediately if a command exits with an error
+set -e
+
 echo "Downloading git submodules.."
 git submodule update --recursive --init
 echo "Done (downloading git submodules)"
 
-echo "Installing packages.."
-./scripts/installPackages.sh
-echo "Done (installing packages)"
+echo
+echo "Installing docker.."
+./scripts/install_docker.sh
+echo "Done (installing docker)"
 
-echo "Creating /opt/ireceptor directory"
+echo
+echo "Creating /opt/ireceptor"
 sudo mkdir -p /opt/ireceptor
 sudo mkdir -p /opt/ireceptor/mongodb
 sudo ln -sf $PWD /opt/ireceptor/turnkey-service
 
-echo "Generating database configuration"
-./scripts/dbconfig.sh
-echo "Done (generating database configuration)"
+echo
+echo "Initialize database authentication information"
+./scripts/init_db_auth.sh
+echo "Done (initializing database authentication information)"
 
-echo "Building docker containers"
+echo
+echo "Building docker images"
 sudo docker-compose -f run/docker-compose.yml build
-echo "Done (building docker containers)"
+echo "Done (building docker images)"
 
-echo "Initializing database..."
+echo
+echo "Starting docker container for database..."
 cd $DATABASE
-
 sudo docker run -d --rm -v /opt/ireceptor/mongodb:/data/db -v $PWD:/dbsetup --name irdn-mongo ireceptor/repository-mongo
-sleep 3s # need to pause here to let database finish initializing itself 
-sudo docker exec -it irdn-mongo mongo admin /dbsetup/dbsetup.js
-sudo docker stop irdn-mongo
+# wait for database to start
+sleep 3s 
+echo "Done (starting docker container for database)"
 
+echo
+echo "Creating database users..."
+sudo docker exec -it irdn-mongo mongo admin /dbsetup/dbsetup.js
+echo "Done"
+
+echo
+echo "Stopping docker container for database..."
+sudo docker stop irdn-mongo
+echo "Done"
 cd ..
 
-echo -e "\nsetting up ireceptor systemd service..\n"
+echo
+echo "Adding and starting 'ireceptor' system service which will run the docker containers..."
 sudo cp host/systemd/ireceptor.service /etc/systemd/system/ireceptor.service
 sudo systemctl daemon-reload
 sudo systemctl enable docker
@@ -56,15 +70,16 @@ sudo systemctl enable ireceptor
 sudo systemctl restart ireceptor
 
 # need to pause here to wait for containers to finish setting up (note: tried with 5s and not long enough for docker to finish reloading the containers)
-echo "waiting for docker containers to restart.. (~${WAIT_TIME} secs)"
+echo
+echo "Waiting for the docker containers to start.. (~${WAIT_TIME} secs)"
 sleep ${WAIT_TIME}s
 
-source export.sh
-
 # load query plans 
-# Note: restarting service will clear out the cache, so make sure to run this command after each time the service is restarted!
+# note: needs to be done each time the service is restarted..
 echo "Creating query plans.."
-./queryplan.sh
+# get database auth info
+source export.sh
+./create_db_query_plans.sh
 echo "Done (creating query plans)"
 
 echo "Setting up dataloading-mongo.."
@@ -76,7 +91,7 @@ ${DATALOADING}/scripts/dataloader.py -v --build
 echo "Done (creating MongoDB indexes)"
 
 echo ""
-echo "Setup done."
+echo "Installation was successful!"
 echo ""
 echo "Database username: guest"
 echo "Database password: guest"

@@ -1,5 +1,5 @@
 #!/bin/bash
-# install required packages
+# install Docker
 
 echo "Updating package info.."
 sudo apt-get update

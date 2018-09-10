@@ -1,13 +1,9 @@
-#!/bin/bash
-# 
-# A script that prompts the user and saves account parameters for the database.
-#
+#!/bin/bash 
+# save database auth info in required configuration files
 
-set -e
+###########################################################
+# Configuration 
 
-##### Configuration #####
-
-# config
 DB_HOST="irdn-mongo"
 
 DB_NAME="ireceptor"
@@ -24,7 +20,11 @@ SCRIPTS=$ROOT/scripts
 SERVICE=$ROOT/service-js-mongodb
 DATABASE=$ROOT/repository-mongodb
 
-##### Main #####
+###########################################################
+# Main
+
+# stop script immediately if a command exits with an error
+set -e
 
 # for web service: .env
 ENV_FILE="${SERVICE}/.env"
