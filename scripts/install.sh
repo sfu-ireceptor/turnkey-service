@@ -79,7 +79,8 @@ sleep ${WAIT_TIME}s
 echo "Creating query plans.."
 # get database auth info
 source export.sh
-./create_db_query_plans.sh
+pwd
+./scripts/create_db_query_plans.sh
 echo "Done (creating query plans)"
 
 echo "Setting up dataloading-mongo.."
