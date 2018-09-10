@@ -63,7 +63,7 @@ cd ..
 
 echo
 echo "Adding and starting 'ireceptor' system service which will run the docker containers..."
-sudo cp host/systemd/ireceptor.service /etc/systemd/system/ireceptor.service
+sudo cp ./host/systemd/ireceptor.service /etc/systemd/system/ireceptor.service
 sudo systemctl daemon-reload
 sudo systemctl enable docker
 sudo systemctl enable ireceptor
@@ -78,8 +78,7 @@ sleep ${WAIT_TIME}s
 # note: needs to be done each time the service is restarted..
 echo "Creating query plans.."
 # get database auth info
-source export.sh
-pwd
+source ./scripts/export.sh
 ./scripts/create_db_query_plans.sh
 echo "Done (creating query plans)"
 

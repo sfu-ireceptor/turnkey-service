@@ -1,1 +1,0 @@
-scripts/login.sh
