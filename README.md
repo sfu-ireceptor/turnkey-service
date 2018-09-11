@@ -12,10 +12,10 @@ Requirements: Ubuntu (tested on 16.04) and a user with sudo permissions.
 
 ###
 ```
-# get the source code:
+# get the source code
 git clone https://github.com/sfu-ireceptor/turnkey-service.git
 
-# launch the installation (which will take 15 min):
+# launch the installation (15 min)
 cd turnkey-service
 scripts/install.sh 
 ```
