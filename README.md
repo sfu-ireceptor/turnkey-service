@@ -26,7 +26,10 @@ Query the /v2/samples API entry point to get the list of samples in the database
 ```
 curl -X POST -H "accept: application/json" -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/v2/samples"
 ```
-This will return an empty array [] because the database is still empty.
+This will return an empty array because the database is still empty.
+```
+[]
+```
 
 ## Import data
 
