@@ -1,123 +1,39 @@
-# Turnkey Package for an iReceptor Data Source Node
+# iReceptor Service Turnkey 
 
-[iReceptor](http://ireceptor.org) is a data management system and scientific gateway for mining newly available Next Generation sequence data of Acquired Immunity Receptor Repertoires (AIRR). The iReceptor data management system is designed to be a distributed network of data source nodes implementing a [common iRecgithub markdown headereptor data node Application Programming Interface (API) specificatigithub markdown headeron](https://github.com/sfu-ireceptor/api/tree/master).  Thegithub markdown header iReceptor data management system is expected to become one public reference implementation of a AIRR-compliant data repository.
+## What is it?
+An easy-to-install package containing:
+- a database
+- a web application exposing that database to the world using the [iReceptor API](https://github.com/sfu-ireceptor/api)
+- command line tools to add data to the database
 
-This repository contains the software package of a "turnkey" package for the installation, configuration and data loading of a small to medium sized iReceptor data source node running a simple database within a single node.
+## Which software? 
+- it's a [node.js](https://nodejs.org/en/about/) web application reading from a [MongoDB](https://www.mongodb.com/what-is-mongodb) database.
+- it will run in [Docker](https://www.docker.com/why-docker) containers: nothing will be installed directly on your system, except for Docker itself and a system service to easily start/stop the Docker containers. 
+
+## Requirements
+- Ubuntu (tested on 16.04)
+- a user with sudo permissions
+
+## Installation
+
+Get the source code:
+```
+git clone https://github.com/sfu-ireceptor/turnkey-service.git
+```
+
+Launch the installation (will take 15 min):
+```
+cd turnkey-service
+scripts/install.sh 
+```
+
+Note: the database data folder and the import tools were installed in /opt/ireceptor
+
+
+
 
 The design of this turnkey is deeply inspired and largely adapted from the excellent VDJServer iReceptor Node package developed by **Scott Christley** of the **VDJServer** project at the **University of Texas Southwestern University**.
 
-Here we give an overview of iReceptor node configuration and operation. It is assumed that you type in these commands and run them within a Linux terminal (the '$' designates the command line prompt... yours may look different!).
-
-## Version
-
-0.0.2
-
-## First Decision: Where and how will you run the iReceptor node?
-
-The following installation instructions assume a Linux operating system as the target operating environment for the iReceptor turnkey. Beyond that, core configuration instructions are applicable for any suitable recent-release Linux system. There are several options for running the turnkey.
-
-The first decision you need to make is where (on what Linux server) to run the application. Your choices generally are:
-
-1) Directly on a Linux "bare metal" server
-
-2) Within a suitably configured Linux Virtual Machine (e.g. VMWare, Parallels, VirtualBox, Amazon Web Services, OpenStack etc.)
-
-    - We use OpenStack internally to provision services (using Compute Canada's OpenStack service). Our internal documentation on setting up an Ubuntu VM within Compute Canada's OpenStack environment is available as [a baseline example](openstack.md) on how to set up a VM. The process will likely vary based on the VM provider and technology you use.
-
-Your choice of Linux operating system is not too critical except that the specific details on how to configure the system may differ between Linux flavors. For the moment, as of November 2017, we are working here with a recent 'latest' release (i.e. 16.04) of Ubuntu server.
-
-## Getting the Software
-
-You will need to git clone this project and all submodules onto your Linux machine in order to set up a local instance of an ireceptor data source node. You need to decide where to clone it. A convenient recommended location for hosting your turnkey code and database is the folder location **/opt/ireceptor** (if you decide otherwise, modify the configuration instructions below to suit your needs).
-
-To start, you need to create your hosting folder location and properly set its access permissions to your user account, i.e.
-
-```
-$ sudo mkdir -p /opt/ireceptor
-
-# Substitute your actual Linux group and username for mygroup and myusername below
-$ sudo chown mygroup:myusername /opt/ireceptor
-```
-
-Next, ensure that you have a recent version of git installed.
-
-```
-$ git --version
-The program 'git' is currently not installed. You can install it by typing:
-sudo apt install git
-```
-
-Oops! Better install git first!
-```
-$ sudo apt install git  # note: some Linux flavors use 'yum' not 'apt' to install software
-```
-
-For git cloning of the code, you have two Github access options (see the github doc links provided for configuration details):
-
-1. [Configure, connect and clone the project using SSH](https://help.github.com/articles/connecting-to-github-with-ssh/)
-2. [Configure, connect and clone the project using HTTPS](https://help.github.com/articles/cloning-a-repository/)
-
-Once you have configured your selected access option, then you do the following:
-
-```
-# First, set your directory to your hosting folder location
-cd /opt/ireceptor
-
-# Then, either clone project using SSH or...
-$ git clone git@github.com:sfu-ireceptor/turnkey-service.git
-
-# ... clone the projecdt with HTTPS
-$ git clone https://github.com/sfu-ireceptor/turnkey-service.git
-
-```
-
-## Configuring the Software
-
-Once you've downloaded the software to your system (using `git clone`), you are now ready to configure it. For this, you have two options:
-
-- ### Configuring using setup.sh
-
-The *setup.sh* script is located in the root directory of the project.
-
-First, change directory into the root and make sure that the script is executable:
-
-```
-$ cd turnkey-service
-$ chmod 755 setup.sh
-```
-
-Next, simply run it and make configuration decisions as requested:
-
-```
-$ ./setup.sh
-```
-
-It is that simple (we hope)!
-
-- ### Configuring manually
-
-Follow the [classical manual recipe for turnkey configuration instructions](./MANUAL_CONFIGURATION.md).
-
-## Don't Worry... Be Happy
-
-When using a cloud instance, you *may* see a funny error crop up as the first line of output, every time you execute a terminal command, something like:
-
-```
-sudo: unable to resolve host <your-local-host-name>
-```
-
-This nuisance error of cloud instance misconfiguration may be safely ignored as harmless to the task at hand...
-
-Otherwise, if you want to [resolve this issue](https://askubuntu.com/questions/811098/when-i-run-a-sudo-command-it-says-unable-to-resolve-host), you must find (or set) your `hostname` and insert next line into `/etc/host`:
-
-```
-127.0.1.1    <your-hostname>
-```
-You can find your `hostname` using the following command:
-
-```
-cat /etc/hostname
-```
 
 ## Testing the Turnkey Repository
 
@@ -315,3 +231,6 @@ Further project guidelies will be presented here as
 - Maintainer of this project is Dr. Richard Bruskiewich (richard *AT* starinformatics *DOT* com), technical subcontractor to the iReceptor project hosted by Simon Fraser University.
 - Principal Investigator of the iReceptor project is Dr. Felix Breden (breden *AT* sfu.ca) of Simon Fraser University
 - The iReceptor development team may also be contacted directly via support *AT* ireceptor.org.
+
+
+The design of this turnkey is deeply inspired and largely adapted from the excellent VDJServer iReceptor Node package developed by **Scott Christley** of the **VDJServer** project at the **University of Texas Southwestern University**.
