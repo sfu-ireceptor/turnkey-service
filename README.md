@@ -8,16 +8,14 @@ An easy-to-install package containing:
 
 
 ## Installation
-Requirements: Ubuntu (tested on 16.04) and a user with sudo permissions
+Requirements: Ubuntu (tested on 16.04) and a user with sudo permissions.
 
 ###
-Get the source code:
 ```
+# get the source code:
 git clone https://github.com/sfu-ireceptor/turnkey-service.git
-```
 
-Launch the installation (which will take 15 min):
-```
+# launch the installation (which will take 15 min):
 cd turnkey-service
 scripts/install.sh 
 ```
