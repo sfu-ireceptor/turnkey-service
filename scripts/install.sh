@@ -79,7 +79,7 @@ sleep ${WAIT_TIME}s
 echo "Creating query plans.."
 # get database auth info
 source ./scripts/export.sh
-./scripts/create_db_query_plans.sh
+sudo docker exec -it irdn-mongo mongo --authenticationDatabase admin $MONGODB_DB -u $MONGODB_SERVICE_USER -p $MONGODB_SERVICE_SECRET /dbsetup/queryplan.js
 echo "Done (creating query plans)"
 
 echo "Installing packages for data loading"
