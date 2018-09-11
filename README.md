@@ -4,18 +4,20 @@
 An easy-to-install package containing:
 - a database
 - a web application exposing that database to the world using the [iReceptor API](https://github.com/sfu-ireceptor/api)
-- command line tools to add data to the database
+- some command line tools to add data to the database
 
-## Which software? 
-- it's a [node.js](https://nodejs.org/en/about/) web application reading from a [MongoDB](https://www.mongodb.com/what-is-mongodb) database.
-- it will run in [Docker](https://www.docker.com/why-docker) containers: nothing will be installed directly on your system, except for Docker itself and a system service to easily start/stop the Docker containers. 
+### Software used 
+- a [node.js](https://nodejs.org/en/about/) web application reading from a [MongoDB](https://www.mongodb.com/what-is-mongodb) database.
+- [Docker](https://www.docker.com/why-docker) containers: nothing will be installed directly on your system, except for Docker itself and a system service to easily start/stop the Docker containers. 
 
-## Requirements
-- Ubuntu (tested on 16.04)
-- a user with sudo permissions
 
 ## Installation
 
+Requirements:
+- Ubuntu (tested on 16.04)
+- a user with sudo permissions
+
+###
 Get the source code:
 ```
 git clone https://github.com/sfu-ireceptor/turnkey-service.git
