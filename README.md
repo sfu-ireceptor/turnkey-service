@@ -16,7 +16,7 @@ Get the source code:
 git clone https://github.com/sfu-ireceptor/turnkey-service.git
 ```
 
-Launch the installation (will take 15 min):
+Launch the installation (which will take 15 min):
 ```
 cd turnkey-service
 scripts/install.sh 
