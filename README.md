@@ -6,16 +6,9 @@ An easy-to-install package containing:
 - a web application exposing that database to the world using the [iReceptor API](https://github.com/sfu-ireceptor/api)
 - some command line tools to add data to the database
 
-### Software used 
-- a [node.js](https://nodejs.org/en/about/) web application reading from a [MongoDB](https://www.mongodb.com/what-is-mongodb) database.
-- [Docker](https://www.docker.com/why-docker) containers: nothing will be installed directly on your system, except for Docker itself and a system service to easily start/stop the Docker containers. 
-
 
 ## Installation
-
-Requirements:
-- Ubuntu (tested on 16.04)
-- a user with sudo permissions
+Requirements: Ubuntu (tested on 16.04) and a user with sudo permissions
 
 ###
 Get the source code:
@@ -30,6 +23,10 @@ scripts/install.sh
 ```
 
 Note: the database data folder and the import tools were installed in /opt/ireceptor
+
+### Software used 
+- a [node.js](https://nodejs.org/en/about/) web application reading from a [MongoDB](https://www.mongodb.com/what-is-mongodb) database.
+- [Docker](https://www.docker.com/why-docker) containers: nothing will be installed directly on your system, except for Docker itself and a system service to easily start/stop the Docker containers. 
 
 
 
