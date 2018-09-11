@@ -20,6 +20,21 @@ cd turnkey-service
 scripts/install.sh 
 ```
 
+
+## Check it's working
+Query the /v2/samples API entry point to get the list of samples in the database:
+```
+curl -X POST -H "accept: application/json" -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/v2/samples"
+```
+This will return an empty array [] because the database is still empty.
+
+## Import data
+
+
+
+
+
+
 Note: the database data folder and the import tools were installed in /opt/ireceptor
 
 ### Software used 
