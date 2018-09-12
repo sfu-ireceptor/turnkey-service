@@ -41,7 +41,7 @@ This will return an empty array because the database is currently empty.
 2. load the available sequence annotations (from imgt, mixcr, etc).
 
 
-### Example: loading the test data (samples + sequence annotations)
+## Example: loading the test data
 Load the samples:
 ```
 dataloading-mongo/scripts/dataloader.py -v --sample -u admin -p admin -d ireceptor -f dataloading-mongo/data/test/imgt/imgt_sample.csv
@@ -62,12 +62,12 @@ Check it worked:
 curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/v2/sequences_summary"
 ```
 
-For more dataloading options:
+To see the different dataloading options:
 ```
 dataloading-mongo/scripts/dataloader.py -h
 ```
 
-## Advanced commands
+## Other information
 
 
 
