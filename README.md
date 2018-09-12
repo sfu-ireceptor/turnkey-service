@@ -62,7 +62,7 @@ Check it worked:
 curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/v2/sequences_summary"
 ```
 
-To see the different dataloading options:
+To see all dataloading options:
 ```
 dataloading-mongo/scripts/dataloader.py -h
 ```
