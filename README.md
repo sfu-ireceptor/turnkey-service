@@ -59,7 +59,7 @@ curl -X POST -H "accept: application/json" -H "Content-Type: application/x-www-f
 
 ### More dataloading options:
 ```
-dataloading-mongo/scripts/dataloader.py  -h
+dataloading-mongo/scripts/dataloader.py -h
 ```
 
 ## Advanced commands
