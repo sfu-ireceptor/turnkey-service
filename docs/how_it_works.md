@@ -1,0 +1,24 @@
+# How it works
+
+## Software stack
+- [MongoDB](https://www.mongodb.com/what-is-mongodb) database.
+- [node.js](https://nodejs.org/en/about/) web application 
+- [Docker](https://www.docker.com/why-docker) to run the database and the web application in contained environments
+
+## Docker
+By using Docker, nothing is installed directly on your system, except for Docker itself and a system service to easily start/stop the Docker containers.
+
+- The database runs in a Docker container. The database data is in a folder shared by the host and the Docker container, so the data is kept when the container is stopped.
+- The web service runs in another Docker container.
+
+## The install script
+- downloaded Docker
+- built two Docker images from a blank Ubuntu Docker image.
+- started two Docker containers using the two Docker images.
+- installed a system service to easily start/stop the two Docker containers.
+- installed the required software to use the data loading script
+
+
+
+
+

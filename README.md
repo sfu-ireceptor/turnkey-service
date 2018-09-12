@@ -68,7 +68,7 @@ dataloading-mongo/scripts/dataloader.py -h
 ```
 
 ## Other information
-
+[How it works](docs/how_it_works.md)
 
 
 
@@ -82,12 +82,10 @@ dataloading-mongo/scripts/dataloader.py -h
 
 
 
-## Software used 
-- a [node.js](https://nodejs.org/en/about/) web application reading from a [MongoDB](https://www.mongodb.com/what-is-mongodb) database.
-- [Docker](https://www.docker.com/why-docker) containers: nothing will be installed directly on your system, except for Docker itself and a system service to easily start/stop the Docker containers. 
+
+
+:  
 Note: the database data folder and the import tools were installed in /opt/ireceptor
-
-
 
 
 The design of this turnkey is deeply inspired and largely adapted from the excellent VDJServer iReceptor Node package developed by **Scott Christley** of the **VDJServer** project at the **University of Texas Southwestern University**.
