@@ -68,8 +68,8 @@ dataloading-mongo/scripts/dataloader.py -h
 ```
 
 ## Other information
-[How it works](docs/how_it_works.md)
-[Troubleshooting](docs/troubleshooting.md)
+- [How it works](docs/how_it_works.md)
+- [Troubleshooting](docs/troubleshooting.md)
 
 
 
