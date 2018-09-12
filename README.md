@@ -4,7 +4,8 @@
 An easy-to-install package containing:
 - a database
 - a web application exposing that database to the world using the [iReceptor API](https://github.com/sfu-ireceptor/api)
-- some command line tools to add data to the database
+- some command line tools to load data into the database
+- some test data
 
 
 ## Installation
@@ -31,18 +32,44 @@ This will return an empty array because the database is still empty.
 []
 ```
 
-## Import data
+## Loading data into the database
+
+First load the 'sample metadata' associated with a study that has generated sequence data, then load the available sequence annotation (from imgt, mixcr, etc).
+
+### Example: loading the test data (samples + sequence annotations)
+Add some samples:
+```
+dataloading-mongo/scripts/dataloader.py -v --sample -u admin -p admin -d ireceptor -f dataloading-mongo/data/test/imgt/imgt_sample.csv
+```
+
+Check it worked:
+```
+curl -X POST -H "accept: application/json" -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/v2/samples"
+```
+
+Add some sequence annotations (answer yes to the warning, it will then take a few minutes):
+```
+dataloading-mongo/scripts/dataloader.py -v --imgt -u admin -p admin -d ireceptor -f dataloading-mongo/data/test/imgt/imgt.zip
+```
+
+Check it worked:
+```
+curl -X POST -H "accept: application/json" -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/v2/sequences_summary"
+```
+
+### More dataloading options:
+```
+dataloading-mongo/scripts/dataloader.py  -h
+```
 
 
 
 
-
-
-Note: the database data folder and the import tools were installed in /opt/ireceptor
 
 ### Software used 
 - a [node.js](https://nodejs.org/en/about/) web application reading from a [MongoDB](https://www.mongodb.com/what-is-mongodb) database.
 - [Docker](https://www.docker.com/why-docker) containers: nothing will be installed directly on your system, except for Docker itself and a system service to easily start/stop the Docker containers. 
+Note: the database data folder and the import tools were installed in /opt/ireceptor
 
 
 
