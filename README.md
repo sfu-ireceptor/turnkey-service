@@ -28,7 +28,7 @@ scripts/install.sh
 ## Check it's working
 Query the web application for /v2/samples to get the list of samples:
 ```
-curl -X POST -H "accept: application/json" -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/v2/samples"
+curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/v2/samples"
 ```
 
 This will return an empty array because the database is currently empty.
@@ -49,7 +49,7 @@ dataloading-mongo/scripts/dataloader.py -v --sample -u admin -p admin -d irecept
 
 Check it worked:
 ```
-curl -X POST -H "accept: application/json" -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/v2/samples"
+curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/v2/samples"
 ```
 
 Add the sequence annotations (answer yes to the warning, it will then take a few minutes):
@@ -59,7 +59,7 @@ dataloading-mongo/scripts/dataloader.py -v --imgt -u admin -p admin -d ireceptor
 
 Check it worked:
 ```
-curl -X POST -H "accept: application/json" -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/v2/sequences_summary"
+curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/v2/sequences_summary"
 ```
 
 ### More dataloading options:
