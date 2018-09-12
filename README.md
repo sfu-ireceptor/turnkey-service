@@ -25,7 +25,7 @@ scripts/install.sh
 ```
 
 
-## Check it's working
+#### Check it's working
 Query the web application for /v2/samples to get the list of samples:
 ```
 curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/v2/samples"
