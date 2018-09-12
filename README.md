@@ -70,6 +70,8 @@ dataloading-mongo/scripts/dataloader.py -h
 ## Other information
 - [How it works](docs/how_it_works.md)
 - [Troubleshooting](docs/troubleshooting.md)
+- [Future improvements](docs/future_improvements.md)
+- [Credits](docs/credits.md)
 
 
 
