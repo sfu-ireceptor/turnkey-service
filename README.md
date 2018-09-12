@@ -37,11 +37,12 @@ This will return an empty array because the database is currently empty.
 ```
 
 ## Loading data into the database
+#### Procedure
 1. load the "sample metadata" associated with a study that has generated sequence data.
 2. load the available sequence annotations (from imgt, mixcr, etc).
 
 
-## Example: loading the test data
+#### Example: loading the test data
 Load the samples:
 ```
 dataloading-mongo/scripts/dataloader.py -v --sample -u admin -p admin -d ireceptor -f dataloading-mongo/data/test/imgt/imgt_sample.csv
