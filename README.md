@@ -37,7 +37,7 @@ This will return an empty array because the database is currently empty.
 ```
 
 ## Loading data into the database
-1. load the 'sample metadata' associated with a study that has generated sequence data
+1. load the "sample metadata" associated with a study that has generated sequence data.
 2. load the available sequence annotations (from imgt, mixcr, etc).
 
 
@@ -62,7 +62,7 @@ Check it worked:
 curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/v2/sequences_summary"
 ```
 
-### More dataloading options:
+For more dataloading options:
 ```
 dataloading-mongo/scripts/dataloader.py -h
 ```
