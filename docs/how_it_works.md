@@ -8,10 +8,11 @@
 ## Docker
 By using Docker, nothing is installed directly on your system, except for Docker itself and a system service to easily start/stop the Docker containers.
 
-- The database runs in a Docker container. The database data is in a folder shared by the host and the Docker container, so the data is kept when the container is stopped.
+- The database runs in a Docker container. The database data is in a folder shared by the host and the Docker container, so the data is preserved when the container is stopped.
 - The web service runs in another Docker container.
 
-## The install script
+## Install script
+What it did:
 - downloaded Docker
 - built two Docker images from a blank Ubuntu Docker image.
 - started two Docker containers using the two Docker images.
