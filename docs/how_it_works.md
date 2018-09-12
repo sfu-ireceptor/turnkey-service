@@ -1,8 +1,8 @@
 # How it works
 
 ## Software stack
-- [MongoDB](https://www.mongodb.com/what-is-mongodb) database.
-- [node.js](https://nodejs.org/en/about/) web application 
+- Database: [MongoDB](https://www.mongodb.com/what-is-mongodb)
+- Web server: [node.js](https://nodejs.org/en/about/)
 - [Docker](https://www.docker.com/why-docker) to run the database and the web application in contained environments
 
 ## Docker
