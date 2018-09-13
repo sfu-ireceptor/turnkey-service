@@ -10,7 +10,7 @@ sudo systemctl stop ireceptor
 ```
 sudo docker ps
 ```
-will return something similart to:
+will return:
 ```
 CONTAINER ID        IMAGE                          COMMAND                  CREATED             STATUS              PORTS                      NAMES
 7bd5da46b2a6        ireceptor/repository-mongo     "docker-entrypoint.s…"   59 seconds ago      Up 59 seconds       0.0.0.0:27017->27017/tcp   irdn-mongo
@@ -28,27 +28,27 @@ sudo docker exec -t -i irdn-mongo /bin/bash
 # log as root into the web application container
 sudo docker exec -t -i irdn-api /bin/bash
 ```
-More generally, `docker exec -t -i <container name> <command>` executes the given command in the given container.
+More generally, `docker exec -t -i <container name> <command>` executes a given command in the given container.
 
 ## Logging into the MongoDB database as an admin user
 
 ```
-# get user credentials
+# load the admin user credentials
 source scripts/export.sh
 
-# execute the mongo command with these user credentials  
+# launch a mongo client using these credentials
 sudo docker exec -it irdn-mongo mongo --authenticationDatabase admin $MONGODB_DB -u $MONGODB_SERVICE_USER -p $MONGODB_SERVICE_SECRET
 ```
 
-You can then execute standard MongoDB commands such as:
+You can then execute standard MongoDB commands:
 ```
 // switch to the "ireceptor" database
 use ireceptor
 
-// show the list of samples
+// show sampless
 db.sample.find()
 
-// show the list of sequences
+// show sequence annotations
 db.sequence.find()
 ```
 
