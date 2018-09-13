@@ -1,141 +1,77 @@
 # Troubleshooting
 
-## 
-
-
-
-
-
-Note: the database data folder and the import tools were installed in /opt/ireceptor
-
-
-
-
-
-
-
-### Testing Database Access in the Node
-
-Check to see if you have a Mongo container already running:
-
+## Starting and stopping the ireceptor system service
 ```
-$ sudo docker ps | grep irdn-mongo
-ff26aab34970        ireceptor/repository-mongo     "docker-entrypoint..."   28 minutes ago      Up 28 minutes       0.0.0.0:27017->27017/tcp   irdn-mongo
+sudo systemctl start ireceptor
+sudo systemctl stop ireceptor
 ```
 
-- If not, try to **restart** the service as follow:
-
+## Checking if the Docker containers are running
 ```
-$ sudo systemctl restart ireceptor
+sudo docker ps
 ```
-
-- To **stop** the service, use:
-
+will return something similart to:
 ```
-$ sudo systemctl stop ireceptor
-```
-
-You can then test access to the Mongo repository using the following command:
-
-```
-$ sudo docker exec -it irdn-mongo mongo --authenticationDatabase admin <dbname> -u <serviceAccount> -p <serviceSecret>
+CONTAINER ID        IMAGE                          COMMAND                  CREATED             STATUS              PORTS                      NAMES
+7bd5da46b2a6        ireceptor/repository-mongo     "docker-entrypoint.s…"   59 seconds ago      Up 59 seconds       0.0.0.0:27017->27017/tcp   irdn-mongo
+469743631ac3        ireceptor/service-js-mongodb   "node --harmony /ser…"   59 seconds ago      Up 58 seconds       0.0.0.0:8080->8080/tcp     irdn-api
 ```
 
-Where the values for `dbname`, `serviceAccount`, and `serviceSecret` are as you have set them during the previous setup step (e.g. the default value for `dbname` is 'ireceptor').
+`irdn-mongo` is the Docker container for the database, `irdn-api` is the one for the web application.
 
-- In case of doubt, you can always double-check the *dbsetup.js* file inside the *repository-mongodb* directory to confirm what you have configured previously. For example, you can display the contents of that file in the terminal by typing the following in the top-level directory of the project:
-
-```
-$ less repository-mongodb/dbsetup.js
-```
-
-After successfully accessing the Mongo database, you can then try simple commands like
+## Logging into the Docker containers
 
 ```
-> db.getName()
-ireceptor
-> db.stats()
-{
-        "db" : "ireceptor",
-        "collections" : 0,
-        "views" : 0,
-        "objects" : 0,
-        "avgObjSize" : 0,
-        "dataSize" : 0,
-        "storageSize" : 0,
-        "numExtents" : 0,
-        "indexes" : 0,
-        "indexSize" : 0,
-        "fileSize" : 0,
-        "fsUsedSize" : 0,
-        "fsTotalSize" : 0,
-        "ok" : 1
-}
-> exit
+# log as root into the database container
+sudo docker exec -t -i irdn-mongo /bin/bash
+
+# log as root into the web application container
+sudo docker exec -t -i irdn-api /bin/bash
 ```
+More generally, `docker exec -t -i <container name> <command>` executes the given command in the given container.
 
-### Testing the iReceptor Web Service
-
-You should also have a docker container running the iReceptor web service.
+## Logging into the MongoDB database as an admin user
 
 ```
-$ sudo docker ps | grep irdn-api
-sudo: unable to resolve host ireceptor-turnkey-test-2
-c4f87f0749a5        ireceptor/service-js-mongodb   "node --harmony /s..."   30 minutes ago      Up 30 minutes       0.0.0.0:8080->8080/tcp     irdn-api
+# get user credentials
+source scripts/export.sh
+
+# execute the mongo command with these user credentials  
+sudo docker exec -it irdn-mongo mongo --authenticationDatabase admin $MONGODB_DB -u $MONGODB_SERVICE_USER -p $MONGODB_SERVICE_SECRET
 ```
 
-
-## Managing the software environment
-
-### Docker Compose Files
-
-There are two docker-compose files: one for general use ("docker-compose.yml"), and one that has been adjusted for use in a production environment ("docker-compose.prod-override.yml"). These files are meant to be overlayed and used together in a production environment: https://docs.docker.com/compose/extends/#different-environments
-
-Using the production config will send all log information to syslog.
-
-Example of using the production overlayed config (run from the root project directory):
-
+You can then execute standard MongoDB commands such as:
 ```
-docker-compose -f run/docker-compose.yml -f docker-compose.prod-override.yml build
-docker-compose -f run/ocker-compose.yml -f run/docker-compose.prod-override.yml up
+// switch to the "ireceptor" database
+use ireceptor
+
+// show the list of samples
+db.sample.find()
+
+// show the list of sequences
+db.sequence.find()
 ```
 
-### Testing
+For more, see the [MongoDB documentation](https://docs.mongodb.com/manual/tutorial/query-documents/)
 
-At the moment, aside from the above basic tests noted in the section *Testing the Turnkey Repository* above,
-we don't yet have a single formal test suite for testing your node. Your best option for the moment is to review the API docs and compose suitable API calls using your browser. We to plan to review this issue and develop a formal testing protocol for the turnkey, as time and resources permit.
-
-### Updating the project database or service submodules to a specified Git branch
-
-If you want to move the repository-mongodb or service-js-mongodb submodules to a particular new branch or tag:
-
+## View the database log
+MongoDB logs to the standard output of the Docker container, which can be accessed with:
 ```
-cd submodule_directory # e.g. service-js-mongodb
-git checkout new_branch_or_tag
-cd ..
-git add submodule_directory
-git commit -m "moved submodule to new_branch_or_tag"
-git push
+sudo docker logs irdn-mongo
 ```
 
-Then, another developer who wants to have submodule_directory changed to that tag, does this:
-
+## View the web application log
+node.js logs to the standard output of the Docker container, which can be accessed with:
 ```
-git pull
-git submodule update --recursive
-```
-
-The *git pull* command changes the git *commit* to which their submodule directory points.
-
-The *git submodule update --recursive* actually updates all the submodules (recursively in this case) 
-with the most up-to-date submodule code branches that the project uses.
-
-Note that after you complete the update of the code tree, you'll need to rebuild your Docker images 
-and restart any Docker containers you have running, that is (run from the root project directory):
-
-```
-$ sudo docker-compose -f run/docker-compose.yml build
-$ sudo systemctl restart ireceptor
+sudo docker logs irdn-api
 ```
 
-or the equivalent build with any overlay docker-compose configuration files (see above)
+## Other useful information
+- the database data folder and the import tools were installed in `/opt/ireceptor`
+
+
+
+
+
+
+

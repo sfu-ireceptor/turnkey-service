@@ -10,13 +10,13 @@ A quick and easy way to build your own AIRR-seq repository.
 
 
 ## Installation
-Requires Ubuntu (tested on 16.04) and a user with sudo permissions. First, get the source code:
+Requires Ubuntu (tested on 16.04) and a user with sudo rights. First, get the source code:
 
 ```
 git clone https://github.com/sfu-ireceptor/turnkey-service.git
 ```
 
-Then launch the installation (15 min):
+Then launch the installation, which will take 15 min:
 ```
 cd turnkey-service
 scripts/install.sh 
@@ -24,7 +24,7 @@ scripts/install.sh
 
 
 #### Check it's working
-Query the web application at `/v2/samples` (POST request) to get the list of samples:
+Query the web application with a POST request at `/v2/samples` to get the list of samples:
 ```
 curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/v2/samples"
 ```
