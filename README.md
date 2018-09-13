@@ -43,9 +43,15 @@ An empty array is returned because the database is empty.
 
 
 #### Example: loading the test data
+
+Load the database admin user credentials:
+```
+source scripts/export.sh
+```
+
 Load the samples:
 ```
-dataloading-mongo/scripts/dataloader.py -v --sample -u admin -p admin -d ireceptor -f dataloading-mongo/data/test/imgt/imgt_sample.csv
+dataloading-mongo/scripts/dataloader.py -v --sample -d $MONGODB_DB -u $MONGODB_SERVICE_USER -p $MONGODB_SERVICE_SECRET -f dataloading-mongo/data/test/imgt/imgt_sample.csv
 ```
 
 Check it worked:
@@ -55,7 +61,7 @@ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localh
 
 Add the sequence annotations (answer yes to the warning, it will then take a few minutes):
 ```
-dataloading-mongo/scripts/dataloader.py -v --imgt -u admin -p admin -d ireceptor -f dataloading-mongo/data/test/imgt/imgt.zip
+dataloading-mongo/scripts/dataloader.py -v --imgt -d $MONGODB_DB -u $MONGODB_SERVICE_USER -p $MONGODB_SERVICE_SECRET -f dataloading-mongo/data/test/imgt/imgt.zip
 ```
 
 Check it worked:
