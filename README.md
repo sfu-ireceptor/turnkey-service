@@ -82,6 +82,6 @@ dataloading-mongo/scripts/dataloader.py -h
 Contact: <support@ireceptor.org>
 
 ## Reference
-- [iReceptor official page](http://ireceptor.org)
+- <http://ireceptor.org>
 - [Future improvements](docs/future_improvements.md)
 - [Credits](docs/credits.md)
