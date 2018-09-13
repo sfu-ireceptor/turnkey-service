@@ -79,6 +79,7 @@ dataloading-mongo/scripts/dataloader.py -h
 - [How it works](docs/how_it_works.md)
 - [Troubleshooting](docs/troubleshooting.md)
 
+Contact us at [support@ireceptor.org](support@ireceptor.org).
 
 ## Reference
 - [iReceptor official page](http://ireceptor.org)
