@@ -1,11 +1,10 @@
 # iReceptor Service Turnkey 
 
-Build your own AIRR-seq repository. Then we will add it to the [iReceptor gateway](https://gateway.ireceptor.org/).
+A quick and easy way to build your own AIRR-seq repository.
 
 ## What is it?
-An easy-to-install package containing:
 - a database
-- a web application exposing that database using the [iReceptor API](https://github.com/sfu-ireceptor/api)
+- a web application exposing that database through the [iReceptor API](https://github.com/sfu-ireceptor/api)
 - a script to load data into the database
 - some test data
 
@@ -25,20 +24,20 @@ scripts/install.sh
 
 
 #### Check it's working
-Query the web application for /v2/samples to get the list of samples:
+Query the web application at `/v2/samples` (POST request) to get the list of samples:
 ```
 curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost:8080/v2/samples"
 ```
 
-This will return an empty array because the database is currently empty.
+An empty array is returned because the database is empty.
 ```
 []
 ```
 
 
-## Loading data into the database
+## Loading data
 
-#### Procedure
+#### General procedure
 1. load the "sample metadata" associated with a study that has generated sequence data.
 2. load the available sequence annotations (from imgt, mixcr, etc).
 

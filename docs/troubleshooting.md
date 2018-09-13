@@ -1,5 +1,10 @@
 # Troubleshooting
 
+## 
+
+
+
+
 
 Note: the database data folder and the import tools were installed in /opt/ireceptor
 
