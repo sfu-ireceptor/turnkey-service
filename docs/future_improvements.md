@@ -6,6 +6,7 @@
 - add simpler command to load data (without having to manually load db user credentials)
 - add number prefix to install scripts to make the install process clearer
 - allow connection to MongoDB only from locally and the other Docker container. It's accessible from outside at the moment.. Should be achievable with custom MongoDB config file when creating Docker image. 
+- fix install script so it can be run multiple times. At the moment it fails if Docker containers are already running. It probably should stop them, and rebuild the images.
 
 ## Less simple
 - install dataloading packages in database Docker image
