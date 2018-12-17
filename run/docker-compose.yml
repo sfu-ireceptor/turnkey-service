@@ -9,11 +9,7 @@ services:
         expose: 
             - "27017"
         ports:
-            # For the first iteration of data loading
-            # we directly expose the Mongodb port; however
-            # TODO: to make a proper project 'admin' application 
-            # implemented as a Docker web application for data loading? 
-            - "27017:27017"
+            - "127.0.0.1:27017:27017"
         image: ireceptor/repository-mongo
         volumes:
             # It is assumed here that the directory 
