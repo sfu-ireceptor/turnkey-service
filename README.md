@@ -1,3 +1,7 @@
+# Deprecated - This repository is no longer used
+
+Please refer to the new Turnkey repository: https://github.com/sfu-ireceptor/turnkey-service-php
+
 # iReceptor Service Turnkey 
 
 A quick and easy way to build your own AIRR-seq repository.
