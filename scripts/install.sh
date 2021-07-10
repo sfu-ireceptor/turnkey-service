@@ -90,10 +90,9 @@ echo "Creating MongoDB indexes.."
 ${DATALOADING}/scripts/dataloader.py -v --build
 echo "Done (creating MongoDB indexes)"
 
-echo ""
+echo
 echo "Installation was successful!"
-echo ""
-echo "Database username: guest"
-echo "Database password: guest"
-echo "Database ADMIN username: admin"
-echo "Database ADMIN password: admin"
+echo
+echo "Database ADMIN username: $MONGODB_SERVICE_USER"
+echo "Database ADMIN password: $MONGODB_SERVICE_SECRET"
+echo

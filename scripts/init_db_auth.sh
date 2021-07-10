@@ -9,10 +9,10 @@ DB_HOST="irdn-mongo"
 DB_NAME="ireceptor"
 
 DB_GUEST_USERNAME=guest
-DB_GUEST_PASSWORD=guest
+DB_GUEST_PASSWORD=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo ''`
 
 DB_ADMIN_USERNAME=admin
-DB_ADMIN_PASSWORD=admin
+DB_ADMIN_PASSWORD=`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo ''`
 
 # directory names
 ROOT="/opt/ireceptor/turnkey-service"
